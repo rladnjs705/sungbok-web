@@ -21,7 +21,7 @@
 **Backend**
 - Spring Boot 4.0.2
 - PostgreSQL 18.1
-- Docker
+- Podman
 - REST API
 
 **Deployment**
@@ -45,7 +45,7 @@ sungbok-web/
 │   ├── src/
 │   │   ├── main/java/
 │   │   └── test/java/
-│   └── docker/           # Docker 설정
+│   └── docker/           # Podman 설정
 │
 └── docs/                 # PDCA 문서
     ├── 01-plan/
@@ -61,7 +61,7 @@ sungbok-web/
 - Node.js 20+
 - Java 21
 - Maven 3.9+
-- Docker & Docker Compose
+- Podman & Podman Compose
 - PostgreSQL 18.1
 
 ### Frontend 실행
@@ -76,11 +76,11 @@ Frontend는 http://localhost:3000에서 실행됩니다.
 
 ### Backend 실행
 
-**Option 1: Docker Compose 사용 (권장)**
+**Option 1: Podman Compose 사용 (권장)**
 
 ```bash
 cd backend/docker
-docker-compose up
+podman-compose up
 ```
 
 **Option 2: 로컬 실행**
@@ -104,7 +104,7 @@ NEXT_PUBLIC_SITE_URL=https://sungbok-church.com
 ```
 
 **Backend** (`backend/src/main/resources/application.yml`)
-- Docker Compose 사용 시 자동 설정
+- Podman Compose 사용 시 자동 설정
 - 로컬 실행 시 PostgreSQL 접속 정보 확인
 
 ## 개발 워크플로우
