@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>영아부 - 성복교회</title>
+  <link rel="stylesheet" href="../css/hero-modern.css">
+  <style>
+    .breadcrumb {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 2rem;
+      font-size: 0.875rem;
+      color: var(--church-text-light);
+    }
+    .breadcrumb a {
+      color: var(--church-primary);
+      text-decoration: none;
+    }
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+    .detail-hero {
+      background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
+      padding: 4rem 2rem;
+      text-align: center;
+      color: white;
+    }
+    .detail-hero h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    .detail-hero p {
+      font-size: 1.25rem;
+      opacity: 0.95;
+    }
+    .detail-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+    .detail-card {
+      background: white;
+      border: 1px solid var(--church-border);
+      border-radius: 8px;
+      padding: 3rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+    .detail-card h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--church-primary);
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid var(--church-border);
+    }
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+    .info-item {
+      background: var(--church-bg-light);
+      padding: 1.5rem;
+      border-radius: 8px;
+    }
+    .info-item strong {
+      display: block;
+      font-size: 0.9375rem;
+      color: var(--church-primary);
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+    .info-item span {
+      font-size: 1.125rem;
+      color: var(--church-text);
+    }
+    .image-gallery {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+    .gallery-image {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+    .staff-profile {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      background: var(--church-bg-light);
+      padding: 2rem;
+      border-radius: 8px;
+    }
+    .staff-photo {
+      width: 150px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+    .staff-info h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .staff-info p {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--church-text);
+    }
+    @media (max-width: 768px) {
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+      .image-gallery {
+        grid-template-columns: 1fr;
+      }
+      .staff-profile {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-container">
+      <a href="../index.html" class="logo">
+        <img src="../images/main_logo.png" alt="성복교회" class="logo-image">
+      </a>
+      <nav class="main-nav">
+        <a href="../church-intro.html" class="nav-link">교회소개</a>
+        <a href="../worship.html" class="nav-link">예배안내</a>
+        <a href="../ministries.html" class="nav-link">다음세대</a>
+        <a href="../news.html" class="nav-link">교회소식</a>
+        <a href="../mission.html" class="nav-link">선교·사역</a>
+      </nav>
+      <div class="header-actions">
+        <a href="#" class="btn-login">로그인</a>
+        <a href="#" class="btn-register">회원가입</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    <a href="../index.html">홈</a> &gt;
+    <a href="../ministries.html">다음세대</a> &gt;
+    <strong>영아부</strong>
+  </div>
+
+  <!-- Detail Hero -->
+  <section class="detail-hero">
+    <h1>영아부</h1>
+    <p>1세부터 4세까지의 영아에게 믿음의 씨앗을 심는 곳입니다</p>
+  </section>
+
+  <!-- Detail Content -->
+  <div class="detail-section">
+    <!-- 부서 소개 -->
+    <div class="detail-card">
+      <h2>부서 소개</h2>
+      <p style="font-size: 1.125rem; line-height: 1.8; margin-bottom: 2rem;">
+        성복교회 영아부는 1세부터 4세까지의 영아들이 하나님의 사랑을 배우고
+        생애 첫 신앙의 씨앗을 심는 소중한 공간입니다.
+        찬양과 놀이를 통해 자연스럽게 하나님을 만나고,
+        사랑하는 선생님들과 함께 즐거운 예배 시간을 보냅니다.
+      </p>
+
+      <!-- 예배 정보 -->
+      <div class="info-grid">
+        <div class="info-item">
+          <strong>예배 시간</strong>
+          <span>주일 오전 11:00</span>
+        </div>
+        <div class="info-item">
+          <strong>예배 장소</strong>
+          <span>사랑성전 [1F]</span>
+        </div>
+        <div class="info-item">
+          <strong>대상 연령</strong>
+          <span>1세 ~ 4세</span>
+        </div>
+        <div class="info-item">
+          <strong>담당 교역자</strong>
+          <span>이진희 간사</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 담당 교역자 -->
+    <div class="detail-card">
+      <h2>담당 교역자</h2>
+      <div class="staff-profile">
+        <img src="../images/pro_c14.jpg" alt="이진희 간사" class="staff-photo">
+        <div class="staff-info">
+          <h3>이진희 간사</h3>
+          <p>
+            영아부를 섬기며 어린 영혼들에게 하나님의 사랑을 전하고 있습니다.
+            한 명 한 명의 아이들이 하나님의 은혜 안에서 건강하게 자라나기를 소망하며,
+            부모님들과 함께 신앙 교육에 최선을 다하고 있습니다.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 주요 프로그램 -->
+    <div class="detail-card">
+      <h2>주요 프로그램</h2>
+      <ul style="font-size: 1.0625rem; line-height: 2; color: var(--church-text);">
+        <li><strong>주일 예배:</strong> 매주 주일 오전 11:00, 찬양과 성경 이야기</li>
+        <li><strong>생일잔치:</strong> 짝수 달 셋째 주 주일, 생일을 맞은 아이들 축하</li>
+        <li><strong>성경학교:</strong> 여름(7월), 특별 프로그램과 신나는 활동</li>
+        <li><strong>부모 교육:</strong> 분기별, 자녀 신앙 교육을 위한 부모 교육</li>
+        <li><strong>가족 예배:</strong> 반기별, 가족이 함께하는 특별 예배</li>
+      </ul>
+    </div>
+
+    <!-- 활동 사진 -->
+    <div class="detail-card">
+      <h2>활동 사진</h2>
+      <div class="image-gallery">
+        <img src="../images/0301_2.jpg" alt="영아부 활동 1" class="gallery-image">
+        <img src="../images/0301_3.jpg" alt="영아부 활동 2" class="gallery-image">
+      </div>
+    </div>
+
+    <!-- 오시는 길 -->
+    <div class="detail-card">
+      <h2>오시는 길</h2>
+      <p style="font-size: 1.0625rem; line-height: 1.8; margin-bottom: 1rem;">
+        <strong>위치:</strong> 성복교회 본관 1층 사랑성전<br>
+        <strong>찾아오시는 방법:</strong> 교회 정문으로 들어오시면 1층 왼쪽에 위치해 있습니다.<br>
+        <strong>문의:</strong> 교회 사무실 02-1234-5678 (영아부)
+      </p>
+    </div>
+
+    <!-- 뒤로 가기 버튼 -->
+    <div style="text-align: center; margin-top: 3rem;">
+      <a href="../ministries.html" style="display: inline-block; padding: 1rem 3rem; background: var(--church-primary); color: white; text-decoration: none; border-radius: 4px; font-weight: 600; transition: all 0.3s ease;">
+        다음세대 목록으로 돌아가기
+      </a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-content">
+        <div class="footer-about">
+          <h3>성복교회</h3>
+          <p>주소: 서울특별시 강남구 테헤란로 123</p>
+          <p>전화: 02-1234-5678</p>
+          <p>팩스: 02-1234-5679</p>
+          <p>이메일: info@sungbok.church</p>
+        </div>
+        <div class="footer-links">
+          <h4>바로가기</h4>
+          <ul>
+            <li><a href="../church-intro.html">교회소개</a></li>
+            <li><a href="../worship.html">예배안내</a></li>
+            <li><a href="../ministries.html">다음세대</a></li>
+            <li><a href="../news.html">교회소식</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>관련 사이트</h4>
+          <ul>
+            <li><a href="#">장로회신학대학교</a></li>
+            <li><a href="#">한국기독교총연합회</a></li>
+            <li><a href="#">세계선교회</a></li>
+            <li><a href="#">기독교방송</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 성복교회. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

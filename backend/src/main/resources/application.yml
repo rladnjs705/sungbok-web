@@ -1,0 +1,76 @@
+spring:
+  application:
+    name: sungbok-church-backend
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/sungbok_church
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    open-in-view: false
+
+  # Redis Cache Configuration
+  data:
+    redis:
+      host: ${SPRING_DATA_REDIS_HOST:localhost}
+      port: ${SPRING_DATA_REDIS_PORT:6379}
+
+  cache:
+    type: redis
+    redis:
+      time-to-live: 10m
+
+server:
+  port: 8080
+
+logging:
+  level:
+    com.sungbok.church: DEBUG
+    org.springframework.web: INFO
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+
+# JWT Configuration
+jwt:
+  secret: ${JWT_SECRET}
+  expiration: 86400000  # 24 hours in milliseconds
+
+# YouTube API Configuration
+youtube:
+  api:
+    key: ${YOUTUBE_API_KEY}
+    channel-id: ${YOUTUBE_CHANNEL_ID}
+    base-url: https://www.googleapis.com/youtube/v3
+    max-results: 50
+  sync:
+    enabled: true
+    live-check-interval: 60000  # 1분
+    video-sync-cron: "0 0 * * * *"  # 매시간
+    playlist-sync-cron: "0 0 */6 * * *"  # 6시간마다
+  quota:
+    daily-limit: 10000
+    warning-threshold: 8000  # 80%
+
+# SpringDoc OpenAPI Configuration
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+    enabled: true
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
+    operations-sorter: alpha
+    tags-sorter: alpha
+    doc-expansion: none
+    display-request-duration: true
+    display-operation-id: false
+  show-actuator: false

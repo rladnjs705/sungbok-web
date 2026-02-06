@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>공지사항 검색 - 성복교회</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/reset.css">
+  <link rel="stylesheet" href="/css/variables.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/navigation.css">
+  <link rel="stylesheet" href="/css/pages.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+  <nav class="navbar" role="banner"><div class="container navbar-container"><a href="/" class="navbar-logo"><span>성복교회</span></a><ul class="navbar-menu"><li><a href="/pages/notices/list.html" class="navbar-link">교회 소식</a></li><li><a href="/pages/sermons/list.html" class="navbar-link">설교 말씀</a></li><li><a href="/pages/worship/schedule.html" class="navbar-link">예배 안내</a></li><li><a href="/pages/galleries/image-list.html" class="navbar-link">갤러리</a></li><li><a href="/pages/about/church.html" class="navbar-link">교회 소개</a></li></ul><button class="navbar-toggle" aria-label="메뉴 열기" aria-expanded="false"><span></span><span></span><span></span></button></div></nav>
+  <div class="mobile-menu"><div class="mobile-menu-header"><span>성복교회</span><button class="mobile-menu-close" aria-label="메뉴 닫기">×</button></div><nav class="mobile-menu-nav"><a href="/pages/notices/list.html">교회 소식</a><a href="/pages/sermons/list.html">설교 말씀</a><a href="/pages/worship/schedule.html">예배 안내</a><a href="/pages/galleries/image-list.html">갤러리</a><a href="/pages/about/church.html">교회 소개</a><a href="/pages/community/testimonies.html">간증</a><a href="/pages/community/prayer-requests.html">기도 제목</a></nav></div>
+
+  <div class="page-header">
+    <div class="container">
+      <h1 class="page-title">공지사항 검색</h1>
+      <p class="page-description">원하시는 공지사항을 검색하세요</p>
+    </div>
+  </div>
+
+  <main id="main-content" class="page-content">
+    <div class="container">
+      <form class="search-form" data-validate>
+        <div class="search-input-group">
+          <input type="search" class="form-input" placeholder="검색어를 입력하세요" aria-label="검색어" required>
+          <button type="submit" class="btn btn-primary">검색</button>
+        </div>
+        <div class="search-filters">
+          <label class="form-checkbox">
+            <input type="checkbox" checked>
+            <span>제목</span>
+          </label>
+          <label class="form-checkbox">
+            <input type="checkbox">
+            <span>내용</span>
+          </label>
+          <label class="form-checkbox">
+            <input type="checkbox">
+            <span>작성자</span>
+          </label>
+        </div>
+      </form>
+
+      <div class="search-results">
+        <p class="search-result-count">총 <strong>3</strong>건의 검색 결과</p>
+
+        <div class="grid-3">
+          <article class="card" data-category="notice">
+            <div class="card-header">
+              <span class="badge badge-primary">일반</span>
+              <time class="card-date">2026.02.04</time>
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">주일예배 시간 변경 안내</h3>
+              <p class="card-description">2월 둘째 주부터 주일예배 시간이 오전 11시로 변경됩니다.</p>
+            </div>
+            <div class="card-footer">
+              <span class="card-meta">👁 123</span>
+              <a href="/pages/notices/detail.html" class="card-link">자세히 보기 →</a>
+            </div>
+          </article>
+
+          <article class="card" data-category="important">
+            <div class="card-header">
+              <span class="badge badge-warning">중요</span>
+              <time class="card-date">2026.02.03</time>
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">새벽기도회 일정</h3>
+              <p class="card-description">매주 금요일 오전 5시 30분 새벽기도회 진행</p>
+            </div>
+            <div class="card-footer">
+              <span class="card-meta">👁 89</span>
+              <a href="/pages/notices/detail.html" class="card-link">자세히 보기 →</a>
+            </div>
+          </article>
+
+          <article class="card" data-category="event">
+            <div class="card-header">
+              <span class="badge badge-primary">행사</span>
+              <time class="card-date">2026.02.02</time>
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">2월 전교인 수련회</h3>
+              <p class="card-description">2월 15일-17일 전교인 수련회 개최</p>
+            </div>
+            <div class="card-footer">
+              <span class="card-meta">👁 245</span>
+              <a href="/pages/notices/detail.html" class="card-link">자세히 보기 →</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer" role="contentinfo"><div class="container"><div class="footer-content"><div class="footer-section"><h3>성복교회</h3><p>주소: 서울시 성북구 성북동 123-45</p><p>전화: 02-1234-5678</p><p>이메일: info@sungbok.church</p></div><div class="footer-section"><h4>바로가기</h4><ul><li><a href="/pages/about/church.html">교회 소개</a></li><li><a href="/pages/about/pastors.html">목회자 소개</a></li><li><a href="/pages/about/ministries.html">사역 안내</a></li><li><a href="/pages/about/bulletins.html">주보 다운로드</a></li></ul></div><div class="footer-section"><h4>소셜 미디어</h4><div class="footer-social"><a href="#" aria-label="YouTube">▶</a><a href="#" aria-label="Facebook">f</a><a href="#" aria-label="Instagram">📷</a></div></div></div><div class="footer-bottom"><p>&copy; 2026 성복교회. All rights reserved.</p></div></div></footer>
+
+  <script src="/js/utils.js"></script>
+  <script src="/js/navigation.js"></script>
+  <script src="/js/form-validation.js"></script>
+</body>
+</html>

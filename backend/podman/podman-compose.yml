@@ -1,0 +1,88 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:18.1
+    container_name: sungbok-postgres
+    environment:
+      POSTGRES_DB: sungbok_church
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      PGDATA: /var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql
+    networks:
+      - sungbok-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  valkey:
+    image: bitnami/valkey:latest
+    container_name: sungbok-valkey
+    environment:
+      ALLOW_EMPTY_PASSWORD: "yes"
+    ports:
+      - "6379:6379"
+    networks:
+      - sungbok-network
+    healthcheck:
+      test: ["CMD-SHELL", "valkey-cli ping | grep PONG"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  backend:
+    build:
+      context: ..
+      dockerfile: podman/Containerfile
+    container_name: sungbok-backend
+    depends_on:
+      postgres:
+        condition: service_healthy
+      valkey:
+        condition: service_healthy
+    environment:
+      # Database
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/sungbok_church
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+
+      # JWT (32+ characters required)
+      JWT_SECRET: test-jwt-secret-key-for-development-minimum-32-characters-required
+
+      # YouTube API (optional for testing)
+      YOUTUBE_API_KEY: ${YOUTUBE_API_KEY:-dummy-api-key}
+      YOUTUBE_CHANNEL_ID: ${YOUTUBE_CHANNEL_ID:-dummy-channel-id}
+
+      # Valkey (Redis-compatible)
+      SPRING_DATA_REDIS_HOST: valkey
+      SPRING_DATA_REDIS_PORT: 6379
+      SPRING_CACHE_TYPE: redis
+
+      # Logging
+      LOGGING_LEVEL_ROOT: INFO
+      LOGGING_LEVEL_COM_SUNGBOK_CHURCH: DEBUG
+      LOGGING_PATTERN_CONSOLE: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
+    ports:
+      - "8080:8080"
+    networks:
+      - sungbok-network
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8080/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+volumes:
+  postgres_data:
+
+networks:
+  sungbok-network:
+    driver: bridge

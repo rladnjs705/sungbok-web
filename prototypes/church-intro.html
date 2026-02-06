@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>교회소개 - 성복교회</title>
+  <link rel="stylesheet" href="css/hero-modern.css">
+  <link rel="stylesheet" href="css/pastor-profile.css">
+  <style>
+    .page-hero {
+      background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
+      padding: 4rem 2rem;
+      text-align: center;
+      color: white;
+    }
+    .page-hero-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    .page-hero-subtitle {
+      font-size: 1.125rem;
+      opacity: 0.9;
+    }
+    .intro-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+    .intro-card {
+      background: white;
+      border: 1px solid var(--church-border);
+      border-radius: 8px;
+      padding: 3rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+    .intro-card h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--church-primary);
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid var(--church-border);
+    }
+    .intro-card p {
+      font-size: 1.0625rem;
+      line-height: 1.8;
+      color: var(--church-text);
+      margin-bottom: 1rem;
+    }
+    .history-timeline {
+      position: relative;
+      padding-left: 2rem;
+      border-left: 3px solid var(--church-primary);
+    }
+    .history-item {
+      margin-bottom: 2rem;
+      position: relative;
+    }
+    .history-item::before {
+      content: '';
+      position: absolute;
+      left: -2.5rem;
+      top: 0.5rem;
+      width: 1rem;
+      height: 1rem;
+      border-radius: 50%;
+      background: var(--church-primary);
+      border: 3px solid white;
+      box-shadow: 0 0 0 2px var(--church-primary);
+    }
+    .history-year {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--church-primary);
+      margin-bottom: 0.5rem;
+    }
+    .history-text {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--church-text);
+    }
+    .staff-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    .staff-card {
+      background: white;
+      border: 1px solid var(--church-border);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    .staff-card:hover {
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      transform: translateY(-4px);
+    }
+    .staff-image {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+    }
+    .staff-info {
+      padding: 2rem;
+    }
+    .staff-title {
+      font-size: 0.875rem;
+      color: var(--church-primary);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .staff-name {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--church-text);
+      margin-bottom: 1rem;
+    }
+    .staff-description {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--church-text-light);
+    }
+    .map-container {
+      width: 100%;
+      height: 400px;
+      background: #f0f0f0;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      margin-top: 2rem;
+    }
+    @media (max-width: 768px) {
+      .staff-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-container">
+      <a href="index.html" class="logo" style="text-decoration: none; font-size: 1.5rem; font-weight: 700; color: #469CDE;">
+        성복교회
+      </a>
+      <nav class="main-nav">
+        <a href="church-intro.html" class="nav-link">교회소개</a>
+        <a href="worship.html" class="nav-link">예배안내</a>
+        <a href="ministries.html" class="nav-link">다음세대</a>
+        <a href="news.html" class="nav-link">교회소식</a>
+        <a href="mission.html" class="nav-link">선교·사역</a>
+      </nav>
+      <div class="header-actions">
+        <a href="login.html" class="btn-login">로그인</a>
+        <a href="register.html" class="btn-register">회원가입</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Hero -->
+  <section class="page-hero">
+    <h1 class="page-hero-title">교회소개</h1>
+    <p class="page-hero-subtitle">하나님의 사랑을 전하는 성복교회를 소개합니다</p>
+  </section>
+
+  <!-- Content -->
+  <div class="intro-section">
+    <!-- 인사말 -->
+    <div class="intro-card">
+      <h2>원로목사 인사말</h2>
+      <p>
+        <span style="font-size: 1.5rem; font-weight: 700; color: var(--church-primary);">할렐루야!</span><br>
+        성복교회 홈페이지에 방문하여 주신 여러분들을 <strong>주님의 이름으로 환영합니다.</strong>
+      </p>
+      <p>
+        지금까지 하나님의 인도하심으로 부흥 성장해 온 저희 성복교회는
+        지친 인생 속에서 잠시 쉬어갈 수 있는 쉼터가 되어드릴 것이며
+        예수 그리스도로 말미암아 천국에 이르는 구원의 방주가 될 것입니다.
+      </p>
+      <p>
+        성복교회는 언제나 열려있습니다.<br>
+        성복교회는 여러분을 기다리고 있습니다.<br>
+        여러분을 환영합니다.<br>
+        여러분들의 심령과 가정과 일터 위에
+        하나님의 크신 은혜와 축복이 충만하기를 축원합니다.
+      </p>
+      <p style="text-align: right; margin-top: 2rem; font-weight: 600;">
+        성복교회 원로목사 이태희 드림
+      </p>
+    </div>
+
+    <!-- 담임목사 인사말 -->
+    <div class="intro-card">
+      <h2>담임목사 인사말</h2>
+      <p>
+        <span style="font-size: 1.5rem; font-weight: 700; color: var(--church-primary);">할렐루야!</span><br>
+        예수님의 이름으로 환영합니다.
+      </p>
+      <p>
+        성복교회의 모든 가족들은
+        예배를 통해 예수님의 은혜를 전 인격적으로 경험하고
+        말씀 교제를 통해 성령 안에서 삶의 소망을 회복하여
+        진정한 자유를 누립니다.
+      </p>
+      <p>
+        전도와 선교를 통해 하늘의 기쁨과 행복을 세상에 나누고
+        다음 세대를 거룩하게 세워 세상을 변화시켜 나갑니다.
+        이러한 아름다운 공동체에 여러분들을 초대합니다.
+      </p>
+      <p>
+        언제나 하나님의 축복과 예수님의 은혜와 성령님의 평강이
+        여러분들의 인생 가운데 온전히 임하시길 진심으로 기원합니다.
+      </p>
+      <p style="text-align: right; margin-top: 2rem; font-weight: 600;">
+        성복교회 담임목사 이요셉 드림
+      </p>
+    </div>
+
+    <!-- 교회 연혁 -->
+    <div class="intro-card">
+      <h2>교회 연혁</h2>
+      <div class="history-timeline">
+        <div class="history-item">
+          <div class="history-year">2020년 - 현재</div>
+          <div class="history-text">
+            코로나19 대응 온라인 예배 시스템 구축<br>
+            하이브리드 예배 정착 및 디지털 사역 강화<br>
+            성도 수 2,000명 돌파
+          </div>
+        </div>
+        <div class="history-item">
+          <div class="history-year">2015년</div>
+          <div class="history-text">
+            제7대 김성복 목사 담임목사 부임<br>
+            교회 성장 및 부흥 운동 전개<br>
+            35개 부서 조직 완성
+          </div>
+        </div>
+        <div class="history-item">
+          <div class="history-year">2010년</div>
+          <div class="history-text">
+            새 예배당 건축 및 헌당<br>
+            3층 규모 1,500석 예배당<br>
+            교육관 및 주차장 완공
+          </div>
+        </div>
+        <div class="history-item">
+          <div class="history-year">2000년</div>
+          <div class="history-text">
+            해외 선교 본격 시작<br>
+            15개국 40여 선교지 지원<br>
+            선교사 파송 및 후원
+          </div>
+        </div>
+        <div class="history-item">
+          <div class="history-year">1995년</div>
+          <div class="history-text">
+            청년부 및 다음세대 사역 강화<br>
+            주일학교 8개 부서 확립<br>
+            성도 수 1,000명 돌파
+          </div>
+        </div>
+        <div class="history-item">
+          <div class="history-year">1985년</div>
+          <div class="history-text">
+            성복교회 창립<br>
+            초대 담임목사 취임<br>
+            30여 명의 성도와 함께 첫 예배
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 섬기는 이들 -->
+    <div class="intro-card">
+      <h2>섬기는 이들</h2>
+
+      <!-- 원로/담임목사 -->
+      <div class="staff-grid">
+        <div class="staff-card">
+          <img src="images/pastor_chairman.jpg" alt="원로목사" class="staff-image">
+          <div class="staff-info">
+            <div class="staff-title">Senior Pastor Emeritus</div>
+            <h3 class="staff-name">이태희 원로목사</h3>
+            <p class="staff-description">
+              성복교회를 개척하여 오랜 기간 교회를 섬기신 원로목사님이십니다.
+              현재도 교회를 위해 기도하고 계십니다.
+            </p>
+          </div>
+        </div>
+        <div class="staff-card">
+          <img src="images/pastor_senior.jpg" alt="담임목사" class="staff-image">
+          <div class="staff-info">
+            <div class="staff-title">Senior Pastor</div>
+            <h3 class="staff-name">이요셉 담임목사</h3>
+            <p class="staff-description">
+              성복교회 담임목사로 교회를 섬기고 있습니다.
+              말씀 중심의 목회를 통해 성도들의 영적 성장을 돕고,
+              다음 세대를 세우는 일에 힘쓰고 있습니다.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 사역자 그리드 -->
+      <h3 style="font-size: 1.5rem; font-weight: 700; margin-top: 3rem; margin-bottom: 2rem; color: var(--church-text);">부목사 및 전도사</h3>
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem;">
+        <div style="text-align: center;">
+          <img src="images/pro_c01.jpg" alt="이원효 목사" style="width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 8px; margin-bottom: 0.75rem;">
+          <h4 style="font-size: 1.125rem; font-weight: 700; margin-bottom: 0.25rem;">이원효 목사</h4>
+          <p style="font-size: 0.9375rem; color: var(--church-text-light);">수석목사/3교구</p>
+        </div>
+        <div style="text-align: center;">
+          <img src="images/pro_c02.jpg" alt="조정한 목사" style="width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 8px; margin-bottom: 0.75rem;">
+          <h4 style="font-size: 1.125rem; font-weight: 700; margin-bottom: 0.25rem;">조정한 목사</h4>
+          <p style="font-size: 0.9375rem; color: var(--church-text-light);">4교구/미디어</p>
+        </div>
+        <div style="text-align: center;">
+          <img src="images/pro_c03.jpg" alt="김정한 목사" style="width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 8px; margin-bottom: 0.75rem;">
+          <h4 style="font-size: 1.125rem; font-weight: 700; margin-bottom: 0.25rem;">김정한 목사</h4>
+          <p style="font-size: 0.9375rem; color: var(--church-text-light);">교육부 총괄/청년부</p>
+        </div>
+        <div style="text-align: center;">
+          <img src="images/pro_c04.jpg" alt="황창조 목사" style="width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 8px; margin-bottom: 0.75rem;">
+          <h4 style="font-size: 1.125rem; font-weight: 700; margin-bottom: 0.25rem;">황창조 목사</h4>
+          <p style="font-size: 0.9375rem; color: var(--church-text-light);">2교구/초등부</p>
+        </div>
+        <div style="text-align: center;">
+          <img src="images/pro_c05.jpg" alt="박건호 목사" style="width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 8px; margin-bottom: 0.75rem;">
+          <h4 style="font-size: 1.125rem; font-weight: 700; margin-bottom: 0.25rem;">박건호 목사</h4>
+          <p style="font-size: 0.9375rem; color: var(--church-text-light);">5/6교구</p>
+        </div>
+        <div style="text-align: center;">
+          <img src="images/pro_c06.jpg" alt="김민기 목사" style="width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 8px; margin-bottom: 0.75rem;">
+          <h4 style="font-size: 1.125rem; font-weight: 700; margin-bottom: 0.25rem;">김민기 목사</h4>
+          <p style="font-size: 0.9375rem; color: var(--church-text-light);">1교구/중등부</p>
+        </div>
+        <div style="text-align: center;">
+          <img src="images/pro_c07.jpg" alt="임경일 목사" style="width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 8px; margin-bottom: 0.75rem;">
+          <h4 style="font-size: 1.125rem; font-weight: 700; margin-bottom: 0.25rem;">임경일 목사</h4>
+          <p style="font-size: 0.9375rem; color: var(--church-text-light);">찬양 디렉터/엘림가족부</p>
+        </div>
+        <div style="text-align: center;">
+          <img src="images/pro_c08.jpg" alt="최미정 전도사" style="width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 8px; margin-bottom: 0.75rem;">
+          <h4 style="font-size: 1.125rem; font-weight: 700; margin-bottom: 0.25rem;">최미정 전도사</h4>
+          <p style="font-size: 0.9375rem; color: var(--church-text-light);">1-6교구</p>
+        </div>
+        <div style="text-align: center;">
+          <img src="images/pro_c09.jpg" alt="최주찬 전도사" style="width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 8px; margin-bottom: 0.75rem;">
+          <h4 style="font-size: 1.125rem; font-weight: 700; margin-bottom: 0.25rem;">최주찬 전도사</h4>
+          <p style="font-size: 0.9375rem; color: var(--church-text-light);">고등부/영어예배부</p>
+        </div>
+        <div style="text-align: center;">
+          <img src="images/pro_c10.jpg" alt="신미자 간사" style="width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 8px; margin-bottom: 0.75rem;">
+          <h4 style="font-size: 1.125rem; font-weight: 700; margin-bottom: 0.25rem;">신미자 간사</h4>
+          <p style="font-size: 0.9375rem; color: var(--church-text-light);">1교구</p>
+        </div>
+        <div style="text-align: center;">
+          <img src="images/pro_c11.jpg" alt="이옥근 간사" style="width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 8px; margin-bottom: 0.75rem;">
+          <h4 style="font-size: 1.125rem; font-weight: 700; margin-bottom: 0.25rem;">이옥근 간사</h4>
+          <p style="font-size: 0.9375rem; color: var(--church-text-light);">2교구</p>
+        </div>
+        <div style="text-align: center;">
+          <img src="images/pro_c12.jpg" alt="양영복 간사" style="width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 8px; margin-bottom: 0.75rem;">
+          <h4 style="font-size: 1.125rem; font-weight: 700; margin-bottom: 0.25rem;">양영복 간사</h4>
+          <p style="font-size: 0.9375rem; color: var(--church-text-light);">4교구</p>
+        </div>
+        <div style="text-align: center;">
+          <img src="images/pro_c13.jpg" alt="심흥숙 간사" style="width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 8px; margin-bottom: 0.75rem;">
+          <h4 style="font-size: 1.125rem; font-weight: 700; margin-bottom: 0.25rem;">심흥숙 간사</h4>
+          <p style="font-size: 0.9375rem; color: var(--church-text-light);">5교구</p>
+        </div>
+        <div style="text-align: center;">
+          <img src="images/pro_c14.jpg" alt="이진희 간사" style="width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 8px; margin-bottom: 0.75rem;">
+          <h4 style="font-size: 1.125rem; font-weight: 700; margin-bottom: 0.25rem;">이진희 간사</h4>
+          <p style="font-size: 0.9375rem; color: var(--church-text-light);">영아부</p>
+        </div>
+        <div style="text-align: center;">
+          <img src="images/pro_c15.jpg" alt="이명화 간사" style="width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 8px; margin-bottom: 0.75rem;">
+          <h4 style="font-size: 1.125rem; font-weight: 700; margin-bottom: 0.25rem;">이명화 간사</h4>
+          <p style="font-size: 0.9375rem; color: var(--church-text-light);">유치부</p>
+        </div>
+        <div style="text-align: center;">
+          <img src="images/pro_c16.jpg" alt="천지연 간사" style="width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 8px; margin-bottom: 0.75rem;">
+          <h4 style="font-size: 1.125rem; font-weight: 700; margin-bottom: 0.25rem;">천지연 간사</h4>
+          <p style="font-size: 0.9375rem; color: var(--church-text-light);">유년부</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 오시는 길 -->
+    <div class="intro-card">
+      <h2>오시는 길</h2>
+      <p><strong>주소:</strong> 서울특별시 강남구 테헤란로 123 성복교회</p>
+      <p><strong>전화:</strong> 02-1234-5678</p>
+      <p><strong>팩스:</strong> 02-1234-5679</p>
+      <p><strong>이메일:</strong> info@sungbok.church</p>
+
+      <div class="map-container">
+        🗺️ 지도
+      </div>
+
+      <h3 style="margin-top: 2rem; margin-bottom: 1rem; font-size: 1.25rem; font-weight: 700;">대중교통 이용</h3>
+      <p>
+        <strong>지하철:</strong> 2호선 강남역 3번 출구 도보 10분<br>
+        <strong>버스:</strong> 146, 401, 472번 강남역 하차
+      </p>
+
+      <h3 style="margin-top: 2rem; margin-bottom: 1rem; font-size: 1.25rem; font-weight: 700;">주차 안내</h3>
+      <p>
+        교회 지하 1-3층 주차장 이용 가능 (200대 수용)<br>
+        주일 예배 시간에는 주차 공간이 부족할 수 있으니 대중교통 이용을 권장합니다.
+      </p>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-content">
+        <div class="footer-about">
+          <h3>성복교회</h3>
+          <p>주소: 서울특별시 강남구 테헤란로 123</p>
+          <p>전화: 02-1234-5678</p>
+          <p>팩스: 02-1234-5679</p>
+          <p>이메일: info@sungbok.church</p>
+        </div>
+        <div class="footer-links">
+          <h4>바로가기</h4>
+          <ul>
+            <li><a href="church-intro.html">교회소개</a></li>
+            <li><a href="worship.html">예배안내</a></li>
+            <li><a href="ministries.html">다음세대</a></li>
+            <li><a href="news.html">교회소식</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>관련 사이트</h4>
+          <ul>
+            <li><a href="#">장로회신학대학교</a></li>
+            <li><a href="#">한국기독교총연합회</a></li>
+            <li><a href="#">세계선교회</a></li>
+            <li><a href="#">기독교방송</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 성복교회. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

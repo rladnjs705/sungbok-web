@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>선교·사역 - 성복교회</title>
+  <link rel="stylesheet" href="css/hero-modern.css">
+  <style>
+    .page-hero {
+      background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);
+      padding: 4rem 2rem;
+      text-align: center;
+      color: white;
+    }
+    .page-hero-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    .mission-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+    .mission-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      margin-bottom: 4rem;
+    }
+    .stat-card {
+      background: white;
+      border: 2px solid var(--church-border);
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    .stat-card:hover {
+      border-color: var(--church-primary);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    }
+    .stat-number {
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--church-primary);
+      margin-bottom: 0.5rem;
+    }
+    .stat-label {
+      font-size: 1rem;
+      color: var(--church-text);
+      font-weight: 600;
+    }
+    .mission-category {
+      margin-bottom: 4rem;
+    }
+    .mission-category h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--church-text);
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid var(--church-primary);
+    }
+    .mission-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+    .mission-card {
+      background: white;
+      border: 1px solid var(--church-border);
+      border-radius: 8px;
+      padding: 2rem;
+      transition: all 0.3s ease;
+    }
+    .mission-card:hover {
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      transform: translateY(-4px);
+    }
+    .mission-card-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .mission-icon {
+      font-size: 2.5rem;
+    }
+    .mission-card-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--church-text);
+    }
+    .mission-card-description {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--church-text-light);
+      margin-bottom: 1rem;
+    }
+    .mission-card-meta {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--church-border);
+      font-size: 0.875rem;
+      color: var(--church-text-light);
+    }
+    .mission-list {
+      background: var(--church-bg-light);
+      border-radius: 8px;
+      padding: 2rem;
+    }
+    .mission-list-item {
+      padding: 1rem;
+      border-bottom: 1px solid var(--church-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .mission-list-item:last-child {
+      border-bottom: none;
+    }
+    .mission-country {
+      font-weight: 600;
+      color: var(--church-text);
+    }
+    .mission-missionaries {
+      color: var(--church-primary);
+      font-weight: 600;
+    }
+    @media (max-width: 1024px) {
+      .mission-stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .mission-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    @media (max-width: 768px) {
+      .mission-stats {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-container">
+      <a href="index.html" class="logo" style="text-decoration: none; font-size: 1.5rem; font-weight: 700; color: #469CDE;">
+        성복교회
+      </a>
+      <nav class="main-nav">
+        <a href="church-intro.html" class="nav-link">교회소개</a>
+        <a href="worship.html" class="nav-link">예배안내</a>
+        <a href="ministries.html" class="nav-link">다음세대</a>
+        <a href="news.html" class="nav-link">교회소식</a>
+        <a href="mission.html" class="nav-link">선교·사역</a>
+      </nav>
+      <div class="header-actions">
+        <a href="login.html" class="btn-login">로그인</a>
+        <a href="register.html" class="btn-register">회원가입</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Hero -->
+  <section class="page-hero">
+    <h1 class="page-hero-title">선교·사역</h1>
+    <p style="font-size: 1.125rem; opacity: 0.9;">땅끝까지 복음을 전하는 성복교회</p>
+  </section>
+
+  <!-- Content -->
+  <div class="mission-section">
+    <!-- 통계 -->
+    <div class="mission-stats">
+      <div class="stat-card">
+        <div class="stat-number">52</div>
+        <div class="stat-label">파송 선교사</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">40+</div>
+        <div class="stat-label">선교지</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">15</div>
+        <div class="stat-label">선교 국가</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">25</div>
+        <div class="stat-label">협력 단체</div>
+      </div>
+    </div>
+
+    <!-- 해외 선교 -->
+    <div class="mission-category">
+      <h2>🌍 해외 선교</h2>
+      <div class="mission-grid">
+        <div class="mission-card" onclick="location.href='mission/cambodia.html'" style="cursor: pointer;">
+          <div class="mission-card-header">
+            <div class="mission-icon">🇰🇭</div>
+            <h3 class="mission-card-title">캄보디아 선교</h3>
+          </div>
+          <p class="mission-card-description">
+            프놈펜과 시엠립 지역에서 어린이 교육 센터와 교회 개척 사역을 진행하고 있습니다.
+            현지 교회와 협력하여 복음을 전하고 있습니다.
+          </p>
+          <div class="mission-card-meta">
+            <span>👨‍👩‍👧‍👦 선교사 3가정</span>
+            <span>⛪ 교회 5곳</span>
+            <span>🏫 학교 2곳</span>
+          </div>
+        </div>
+
+        <div class="mission-card" onclick="location.href='mission/philippines.html'" style="cursor: pointer;">
+          <div class="mission-card-header">
+            <div class="mission-icon">🇵🇭</div>
+            <h3 class="mission-card-title">필리핀 선교</h3>
+          </div>
+          <p class="mission-card-description">
+            마닐라와 세부 지역에서 빈민 지역 아동 교육과 의료 선교를 진행하고 있습니다.
+            현지 목회자 양성 프로그램도 운영 중입니다.
+          </p>
+          <div class="mission-card-meta">
+            <span>👨‍👩‍👧‍👦 선교사 4가정</span>
+            <span>⛪ 교회 7곳</span>
+            <span>🏥 진료소 2곳</span>
+          </div>
+        </div>
+
+        <div class="mission-card" onclick="location.href='mission/thailand.html'" style="cursor: pointer;">
+          <div class="mission-card-header">
+            <div class="mission-icon">🇹🇭</div>
+            <h3 class="mission-card-title">태국 선교</h3>
+          </div>
+          <p class="mission-card-description">
+            방콕과 치앙마이 지역에서 태국어 성경 번역 사역과 신학교 사역을 진행하고 있습니다.
+            현지 교회 개척과 제자 양육에 힘쓰고 있습니다.
+          </p>
+          <div class="mission-card-meta">
+            <span>👨‍👩‍👧‍👦 선교사 2가정</span>
+            <span>⛪ 교회 4곳</span>
+            <span>📚 신학교 1곳</span>
+          </div>
+        </div>
+
+        <div class="mission-card" onclick="location.href='mission/mongolia.html'" style="cursor: pointer;">
+          <div class="mission-card-header">
+            <div class="mission-icon">🇲🇳</div>
+            <h3 class="mission-card-title">몽골 선교</h3>
+          </div>
+          <p class="mission-card-description">
+            울란바토르 지역에서 청소년 선교와 직업 훈련 센터를 운영하고 있습니다.
+            한국어 교육과 함께 복음을 전하고 있습니다.
+          </p>
+          <div class="mission-card-meta">
+            <span>👨‍👩‍👧‍👦 선교사 2가정</span>
+            <span>⛪ 교회 3곳</span>
+            <span>🎓 훈련센터 1곳</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 선교지 목록 -->
+      <div style="margin-top: 2rem;">
+        <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">전체 선교지 현황</h3>
+        <div class="mission-list">
+          <div class="mission-list-item">
+            <span class="mission-country">🇰🇭 캄보디아</span>
+            <span class="mission-missionaries">3가정 6명</span>
+          </div>
+          <div class="mission-list-item">
+            <span class="mission-country">🇵🇭 필리핀</span>
+            <span class="mission-missionaries">4가정 8명</span>
+          </div>
+          <div class="mission-list-item">
+            <span class="mission-country">🇹🇭 태국</span>
+            <span class="mission-missionaries">2가정 5명</span>
+          </div>
+          <div class="mission-list-item">
+            <span class="mission-country">🇲🇳 몽골</span>
+            <span class="mission-missionaries">2가정 4명</span>
+          </div>
+          <div class="mission-list-item">
+            <span class="mission-country">🇻🇳 베트남</span>
+            <span class="mission-missionaries">3가정 6명</span>
+          </div>
+          <div class="mission-list-item">
+            <span class="mission-country">🇮🇩 인도네시아</span>
+            <span class="mission-missionaries">2가정 4명</span>
+          </div>
+          <div class="mission-list-item">
+            <span class="mission-country">🇮🇳 인도</span>
+            <span class="mission-missionaries">1가정 3명</span>
+          </div>
+          <div class="mission-list-item">
+            <span class="mission-country">🇳🇵 네팔</span>
+            <span class="mission-missionaries">1가정 2명</span>
+          </div>
+          <div class="mission-list-item">
+            <span class="mission-country">🇰🇿 카자흐스탄</span>
+            <span class="mission-missionaries">1가정 3명</span>
+          </div>
+          <div class="mission-list-item">
+            <span class="mission-country">🇺🇿 우즈베키스탄</span>
+            <span class="mission-missionaries">1가정 2명</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 국내 선교 -->
+    <div class="mission-category">
+      <h2>🇰🇷 국내 선교</h2>
+      <div class="mission-grid">
+        <div class="mission-card">
+          <div class="mission-card-header">
+            <div class="mission-icon">🏠</div>
+            <h3 class="mission-card-title">지역 교회 개척</h3>
+          </div>
+          <p class="mission-card-description">
+            복음이 필요한 지역에 교회를 개척하여 지역 사회를 섬기고 있습니다.
+            현재 수도권과 지방 5개 지역에서 개척 교회를 후원하고 있습니다.
+          </p>
+        </div>
+
+        <div class="mission-card">
+          <div class="mission-card-header">
+            <div class="mission-icon">👴</div>
+            <h3 class="mission-card-title">실버 선교</h3>
+          </div>
+          <p class="mission-card-description">
+            노인 요양원과 실버타운을 방문하여 예배와 찬양, 말씀 나눔의 시간을 갖고 있습니다.
+            매월 정기적으로 방문하여 어르신들을 섬기고 있습니다.
+          </p>
+        </div>
+
+        <div class="mission-card">
+          <div class="mission-card-header">
+            <div class="mission-icon">👶</div>
+            <h3 class="mission-card-title">미혼모 지원</h3>
+          </div>
+          <p class="mission-card-description">
+            미혼모 시설과 협력하여 생활 지원과 영적 돌봄을 제공하고 있습니다.
+            출산 후 자립을 위한 직업 교육도 함께 지원하고 있습니다.
+          </p>
+        </div>
+
+        <div class="mission-card">
+          <div class="mission-card-header">
+            <div class="mission-icon">🏥</div>
+            <h3 class="mission-card-title">병원 선교</h3>
+          </div>
+          <p class="mission-card-description">
+            지역 병원과 요양 병원을 정기적으로 방문하여 환자들과 보호자들에게
+            위로와 소망의 메시지를 전하고 있습니다.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 사회 봉사 -->
+    <div class="mission-category">
+      <h2>❤️ 사회 봉사</h2>
+      <div class="mission-grid">
+        <div class="mission-card">
+          <div class="mission-card-header">
+            <div class="mission-icon">🍚</div>
+            <h3 class="mission-card-title">무료 급식 봉사</h3>
+          </div>
+          <p class="mission-card-description">
+            매주 토요일 지역 무료 급식소에서 식사 준비와 배식 봉사를 진행하고 있습니다.
+            월 평균 500여 명에게 따뜻한 식사를 제공하고 있습니다.
+          </p>
+        </div>
+
+        <div class="mission-card">
+          <div class="mission-card-header">
+            <div class="mission-icon">📚</div>
+            <h3 class="mission-card-title">교육 봉사</h3>
+          </div>
+          <p class="mission-card-description">
+            지역 아동 센터와 협력하여 무료 학습 지도와 멘토링을 제공하고 있습니다.
+            대학생 청년들이 주축이 되어 매주 진행하고 있습니다.
+          </p>
+        </div>
+
+        <div class="mission-card">
+          <div class="mission-card-header">
+            <div class="mission-icon">🎄</div>
+            <h3 class="mission-card-title">명절 사랑 나눔</h3>
+          </div>
+          <p class="mission-card-description">
+            설날과 추석에 지역 저소득층 가정에 생필품과 식료품을 전달하고 있습니다.
+            연 2회 100여 가정을 방문하여 사랑을 나누고 있습니다.
+          </p>
+        </div>
+
+        <div class="mission-card">
+          <div class="mission-card-header">
+            <div class="mission-icon">🏘️</div>
+            <h3 class="mission-card-title">지역 환경 정화</h3>
+          </div>
+          <p class="mission-card-description">
+            매월 첫째 주 토요일 지역 거리와 공원 청소 봉사를 진행하고 있습니다.
+            깨끗한 지역 사회를 만들기 위해 함께 노력하고 있습니다.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 후원 안내 -->
+    <div style="background: var(--church-bg-light); border: 2px solid var(--church-primary); border-radius: 12px; padding: 3rem; text-align: center; margin-top: 4rem;">
+      <h2 style="font-size: 2rem; font-weight: 700; color: var(--church-primary); margin-bottom: 1rem;">선교 후원</h2>
+      <p style="font-size: 1.125rem; line-height: 1.8; color: var(--church-text); margin-bottom: 2rem;">
+        성복교회의 선교 사역에 동참하여 주시기 바랍니다.<br>
+        여러분의 기도와 후원이 땅끝까지 복음을 전하는 힘이 됩니다.
+      </p>
+      <div style="display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;">
+        <div style="background: white; padding: 1.5rem 2rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+          <div style="font-size: 0.875rem; color: var(--church-text-light); margin-bottom: 0.5rem;">선교 헌금 계좌</div>
+          <div style="font-size: 1.25rem; font-weight: 700; color: var(--church-text);">신한은행 110-123-456789</div>
+        </div>
+        <a href="#" style="display: inline-block; padding: 1rem 3rem; background: var(--church-primary); color: white; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 1.125rem; transition: all 0.3s ease;">
+          온라인 후원하기
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-content">
+        <div class="footer-about">
+          <h3>성복교회</h3>
+          <p>주소: 서울특별시 강남구 테헤란로 123</p>
+          <p>전화: 02-1234-5678</p>
+          <p>팩스: 02-1234-5679</p>
+          <p>이메일: info@sungbok.church</p>
+        </div>
+        <div class="footer-links">
+          <h4>바로가기</h4>
+          <ul>
+            <li><a href="church-intro.html">교회소개</a></li>
+            <li><a href="worship.html">예배안내</a></li>
+            <li><a href="ministries.html">다음세대</a></li>
+            <li><a href="news.html">교회소식</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>관련 사이트</h4>
+          <ul>
+            <li><a href="#">장로회신학대학교</a></li>
+            <li><a href="#">한국기독교총연합회</a></li>
+            <li><a href="#">세계선교회</a></li>
+            <li><a href="#">기독교방송</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 성복교회. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

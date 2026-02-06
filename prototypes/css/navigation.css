@@ -1,0 +1,227 @@
+/* Navbar */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--color-bg-primary);
+  border-bottom: 1px solid var(--color-border-light);
+  box-shadow: var(--shadow-sm);
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+}
+
+.navbar-logo {
+  font-size: var(--text-xl);
+  font-weight: var(--font-bold);
+  color: var(--color-primary-700);
+  transition: color 0.2s;
+}
+
+.navbar-logo:hover {
+  color: var(--color-primary-800);
+}
+
+.navbar-menu {
+  display: none;
+  gap: var(--space-8);
+}
+
+@media (min-width: 768px) {
+  .navbar-menu {
+    display: flex;
+  }
+}
+
+.navbar-link {
+  font-size: var(--text-base);
+  font-weight: var(--font-medium);
+  color: var(--color-text-secondary);
+  transition: color 0.2s;
+}
+
+.navbar-link:hover {
+  color: var(--color-primary-700);
+}
+
+/* Mobile Toggle */
+.navbar-toggle {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-2);
+}
+
+@media (min-width: 768px) {
+  .navbar-toggle {
+    display: none;
+  }
+}
+
+.navbar-toggle span {
+  width: 24px;
+  height: 3px;
+  background: var(--color-text-primary);
+  border-radius: var(--radius-sm);
+  transition: all 0.3s;
+}
+
+/* Mobile Menu */
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
+}
+
+.mobile-menu.active {
+  display: block;
+}
+
+.mobile-menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-6);
+  background: var(--color-bg-primary);
+  border-bottom: 1px solid var(--color-border);
+  font-size: var(--text-xl);
+  font-weight: var(--font-bold);
+  color: var(--color-primary-700);
+}
+
+.mobile-menu-close {
+  font-size: 2rem;
+  line-height: 1;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-text-tertiary);
+  transition: color 0.2s;
+}
+
+.mobile-menu-close:hover {
+  color: var(--color-text-primary);
+}
+
+.mobile-menu-nav {
+  background: var(--color-bg-primary);
+  height: calc(100vh - 80px);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  overflow-y: auto;
+}
+
+.mobile-menu-nav a {
+  padding: var(--space-4);
+  font-size: var(--text-lg);
+  font-weight: var(--font-medium);
+  color: var(--color-text-primary);
+  border-radius: var(--radius-md);
+  transition: background 0.2s;
+}
+
+.mobile-menu-nav a:hover {
+  background: var(--color-bg-secondary);
+}
+
+/* Footer */
+.footer {
+  background: var(--color-gray-900);
+  color: var(--color-gray-300);
+  padding: var(--space-16) 0 var(--space-8);
+  margin-top: var(--space-20);
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-8);
+  margin-bottom: var(--space-8);
+}
+
+@media (min-width: 768px) {
+  .footer-content {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .footer-content {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.footer-section h3 {
+  font-size: var(--text-xl);
+  font-weight: var(--font-bold);
+  color: white;
+  margin-bottom: var(--space-4);
+}
+
+.footer-section h4 {
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  color: white;
+  margin-bottom: var(--space-3);
+}
+
+.footer-section p {
+  margin-bottom: var(--space-2);
+  color: var(--color-gray-400);
+}
+
+.footer-section ul {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.footer-section a {
+  color: var(--color-gray-400);
+  transition: color 0.2s;
+}
+
+.footer-section a:hover {
+  color: white;
+}
+
+.footer-social {
+  display: flex;
+  gap: var(--space-4);
+}
+
+.footer-social a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: var(--color-gray-800);
+  border-radius: var(--radius-full);
+  color: var(--color-gray-400);
+  transition: all 0.2s;
+}
+
+.footer-social a:hover {
+  background: var(--color-primary-700);
+  color: white;
+}
+
+.footer-bottom {
+  padding-top: var(--space-8);
+  border-top: 1px solid var(--color-gray-800);
+  text-align: center;
+  color: var(--color-gray-500);
+  font-size: var(--text-sm);
+}

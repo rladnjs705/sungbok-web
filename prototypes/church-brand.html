@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>브랜드 가이드 - 성복교회</title>
+  <link rel="stylesheet" href="css/hero-modern.css">
+  <style>
+    .brand-hero {
+      background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
+      padding: 4rem 2rem;
+      text-align: center;
+      color: white;
+    }
+    .brand-hero h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    .brand-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+    .brand-section {
+      margin-bottom: 4rem;
+    }
+    .brand-section h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--church-primary);
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid var(--church-border);
+    }
+    .logo-showcase {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+    .logo-box {
+      background: white;
+      border: 1px solid var(--church-border);
+      border-radius: 12px;
+      padding: 3rem;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+    .logo-box.dark {
+      background: #2c2c2c;
+    }
+    .logo-box img {
+      max-width: 300px;
+      height: auto;
+      margin-bottom: 1.5rem;
+    }
+    .logo-box h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--church-text);
+    }
+    .logo-box.dark h3 {
+      color: white;
+    }
+    .logo-box p {
+      font-size: 0.9375rem;
+      color: var(--church-text-light);
+      line-height: 1.7;
+    }
+    .logo-box.dark p {
+      color: rgba(255, 255, 255, 0.8);
+    }
+    .color-palette {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+    .color-card {
+      text-align: center;
+    }
+    .color-swatch {
+      height: 150px;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    .color-info {
+      background: white;
+      border: 1px solid var(--church-border);
+      border-radius: 8px;
+      padding: 1.5rem;
+    }
+    .color-name {
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: var(--church-text);
+      margin-bottom: 0.5rem;
+    }
+    .color-values {
+      font-size: 0.875rem;
+      color: var(--church-text-light);
+      line-height: 1.8;
+    }
+    .typography-sample {
+      background: white;
+      border: 1px solid var(--church-border);
+      border-radius: 12px;
+      padding: 3rem;
+      margin-bottom: 2rem;
+    }
+    .font-showcase h3 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--church-text);
+    }
+    .font-showcase p {
+      font-size: 1.125rem;
+      line-height: 1.8;
+      color: var(--church-text-light);
+    }
+    .usage-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+    .usage-card {
+      background: white;
+      border: 1px solid var(--church-border);
+      border-radius: 12px;
+      padding: 2rem;
+    }
+    .usage-card h4 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--church-text);
+      margin-bottom: 1rem;
+    }
+    .usage-card ul {
+      list-style: none;
+      padding: 0;
+    }
+    .usage-card ul li {
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--church-border);
+      font-size: 0.9375rem;
+      color: var(--church-text-light);
+    }
+    .usage-card ul li:last-child {
+      border-bottom: none;
+    }
+    .usage-card.do {
+      border-left: 4px solid #22c55e;
+    }
+    .usage-card.dont {
+      border-left: 4px solid #ef4444;
+    }
+    @media (max-width: 768px) {
+      .logo-showcase, .color-palette, .usage-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-container">
+      <a href="index.html" class="logo" style="text-decoration: none; font-size: 1.5rem; font-weight: 700; color: #469CDE;">
+        성복교회
+      </a>
+      <nav class="main-nav">
+        <a href="church-intro.html" class="nav-link">교회소개</a>
+        <a href="worship.html" class="nav-link">예배안내</a>
+        <a href="ministries.html" class="nav-link">다음세대</a>
+        <a href="news.html" class="nav-link">교회소식</a>
+        <a href="mission.html" class="nav-link">선교·사역</a>
+      </nav>
+      <div class="header-actions">
+        <a href="login.html" class="btn-login">로그인</a>
+        <a href="register.html" class="btn-register">회원가입</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="brand-hero">
+    <h1>성복교회 브랜드 가이드</h1>
+    <p style="font-size: 1.25rem; opacity: 0.95;">Church Brand Guidelines</p>
+  </section>
+
+  <!-- Content -->
+  <div class="brand-container">
+    <!-- 로고 -->
+    <div class="brand-section">
+      <h2>로고 (Logo)</h2>
+      <div class="logo-showcase">
+        <div class="logo-box">
+          <img src="images/main_logo.png" alt="성복교회 기본 로고">
+          <h3>기본 로고</h3>
+          <p>밝은 배경에서 사용하는 기본 로고입니다.<br>명확한 가독성을 위해 충분한 여백을 유지해주세요.</p>
+        </div>
+        <div class="logo-box dark">
+          <img src="images/main_logo.png" alt="성복교회 화이트 로고">
+          <h3>화이트 로고</h3>
+          <p>어두운 배경에서 사용하는 화이트 로고입니다.<br>배경과의 대비를 고려하여 사용해주세요.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 컬러 팔레트 -->
+    <div class="brand-section">
+      <h2>컬러 팔레트 (Color Palette)</h2>
+      <div class="color-palette">
+        <div class="color-card">
+          <div class="color-swatch" style="background: #f96319;"></div>
+          <div class="color-info">
+            <div class="color-name">Primary Orange</div>
+            <div class="color-values">
+              HEX: #f96319<br>
+              RGB: 249, 99, 25<br>
+              용도: 주요 버튼, 강조
+            </div>
+          </div>
+        </div>
+        <div class="color-card">
+          <div class="color-swatch" style="background: #2c2c2c;"></div>
+          <div class="color-info">
+            <div class="color-name">Text Dark</div>
+            <div class="color-values">
+              HEX: #2c2c2c<br>
+              RGB: 44, 44, 44<br>
+              용도: 본문 텍스트
+            </div>
+          </div>
+        </div>
+        <div class="color-card">
+          <div class="color-swatch" style="background: #666666;"></div>
+          <div class="color-info">
+            <div class="color-name">Text Light</div>
+            <div class="color-values">
+              HEX: #666666<br>
+              RGB: 102, 102, 102<br>
+              용도: 보조 텍스트
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 타이포그래피 -->
+    <div class="brand-section">
+      <h2>타이포그래피 (Typography)</h2>
+      <div class="typography-sample">
+        <div class="font-showcase">
+          <h3>Noto Sans KR</h3>
+          <p style="font-weight: 700;">Bold 700 - 제목 및 강조 텍스트</p>
+          <p style="font-weight: 600;">SemiBold 600 - 소제목</p>
+          <p style="font-weight: 400;">Regular 400 - 본문 텍스트</p>
+          <p style="font-weight: 300;">Light 300 - 보조 텍스트</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 사용 가이드 -->
+    <div class="brand-section">
+      <h2>사용 가이드 (Usage Guidelines)</h2>
+      <div class="usage-grid">
+        <div class="usage-card do">
+          <h4>✅ Do - 권장사항</h4>
+          <ul>
+            <li>로고 주변에 충분한 여백 유지</li>
+            <li>지정된 컬러 사용</li>
+            <li>명확한 배경에서 사용</li>
+            <li>비율 유지하여 확대/축소</li>
+            <li>고해상도 이미지 사용</li>
+          </ul>
+        </div>
+        <div class="usage-card dont">
+          <h4>❌ Don't - 금지사항</h4>
+          <ul>
+            <li>로고 색상 임의 변경 금지</li>
+            <li>로고 비율 왜곡 금지</li>
+            <li>로고에 효과 추가 금지</li>
+            <li>복잡한 배경에 사용 금지</li>
+            <li>저해상도 이미지 사용 금지</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-bottom">
+        <p>&copy; 2024 성복교회. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

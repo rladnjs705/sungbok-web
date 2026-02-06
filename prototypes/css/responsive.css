@@ -1,0 +1,227 @@
+/* Responsive Design - Mobile First Approach */
+
+/* Extra Small (Mobile) - Default (320px+) */
+/* Base styles are already mobile-first */
+
+/* Small (Large Mobile) */
+@media (min-width: 480px) {
+  .container {
+    padding: 0 var(--space-6);
+  }
+}
+
+/* Medium (Tablet) */
+@media (min-width: 768px) {
+  .container {
+    padding: 0 var(--space-8);
+  }
+
+  /* Navigation */
+  .navbar-menu {
+    display: flex;
+  }
+
+  .navbar-toggle {
+    display: none;
+  }
+
+  /* Grid adjustments */
+  .grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Large (Desktop) */
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1200px;
+  }
+
+  /* Grid adjustments */
+  .grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Extra Large (Wide Desktop) */
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1400px;
+  }
+}
+
+/* Mobile Optimizations */
+@media (max-width: 767px) {
+  /* Touch Target Size (minimum 44x44px) */
+  .btn,
+  .navbar-link,
+  .card-link,
+  .tab {
+    min-height: 44px;
+    min-width: 44px;
+    padding: var(--space-3) var(--space-4);
+  }
+
+  /* Font Size Boost */
+  body {
+    font-size: 16px; /* Prevent iOS auto-zoom */
+  }
+
+  /* Stacking */
+  .sermon-meta,
+  .worship-schedule {
+    flex-direction: column;
+  }
+
+  /* Full Width Cards */
+  .card {
+    margin-bottom: var(--space-4);
+  }
+
+  /* Mobile-Specific Padding */
+  .section {
+    padding: var(--space-8) 0;
+  }
+
+  .page-header {
+    padding: var(--space-8) 0 var(--space-6);
+  }
+
+  /* Hero Mobile */
+  .hero {
+    min-height: 400px;
+    padding: var(--space-12) 0;
+  }
+
+  .hero-title {
+    font-size: var(--text-3xl);
+  }
+
+  .hero-subtitle {
+    font-size: var(--text-lg);
+  }
+
+  /* Audio Player Mobile */
+  .audio-player-controls {
+    flex-wrap: wrap;
+  }
+
+  .audio-actions {
+    width: 100%;
+    justify-content: center;
+    margin-top: var(--space-4);
+  }
+
+  /* Lightbox Mobile */
+  .lightbox-prev,
+  .lightbox-next {
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
+  }
+
+  .lightbox-prev {
+    left: var(--space-2);
+  }
+
+  .lightbox-next {
+    right: var(--space-2);
+  }
+
+  /* Tabs Mobile */
+  .tabs {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .tab {
+    white-space: nowrap;
+  }
+
+  /* Footer Mobile */
+  .footer-content {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .navbar,
+  .mobile-menu,
+  .footer,
+  .quick-links,
+  .btn,
+  .audio-player,
+  .lightbox {
+    display: none !important;
+  }
+
+  body {
+    background: white;
+    color: black;
+  }
+
+  .page-content {
+    padding: 0;
+  }
+
+  a {
+    text-decoration: underline;
+  }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  :root {
+    --color-text-primary: #000000;
+    --color-bg-primary: #FFFFFF;
+    --color-border: #000000;
+  }
+
+  .btn,
+  .card,
+  .form-input {
+    border: 2px solid #000000;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Dark Mode (Optional) */
+@media (prefers-color-scheme: dark) {
+  /* Uncomment to enable dark mode */
+  /*
+  :root {
+    --color-bg-primary: #1F2937;
+    --color-bg-secondary: #111827;
+    --color-text-primary: #F9FAFB;
+    --color-text-secondary: #E5E7EB;
+    --color-border: #374151;
+  }
+  */
+}

@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>성복교회 - 부서 소개</title>
+  <meta name="description" content="성복교회 부서별 소개 페이지">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/reset.css">
+  <link rel="stylesheet" href="/css/variables.css">
+  <link rel="stylesheet" href="/css/ministry-cards.css">
+
+  <style>
+    /* Demo Banner */
+    .demo-banner {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.9);
+      color: white;
+      padding: 0.5rem 1rem;
+      text-align: center;
+      font-size: 0.875rem;
+      z-index: 9999;
+    }
+
+    .demo-banner a {
+      color: #60a5fa;
+      text-decoration: underline;
+      margin: 0 0.5rem;
+    }
+
+    body {
+      margin: 0;
+      padding-top: 2.5rem;
+      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Demo Banner -->
+  <div class="demo-banner">
+    📐 <strong>Phase 3 Mockup</strong> - Ministry Cards (고유성 톤) |
+    <a href="/video-player.html">← Video Player</a> |
+    <a href="/pastor-profile.html">Pastor Profile →</a>
+  </div>
+
+  <!-- Ministry Page -->
+  <div class="ministry-page">
+    <!-- Hero -->
+    <section class="ministry-hero">
+      <h1>⛪ 부서 안내</h1>
+      <p>각 부서의 고유한 특색과 사역을 소개합니다</p>
+    </section>
+
+    <!-- Container -->
+    <div class="ministry-container">
+      <div class="ministry-grid">
+        <!-- Sunday School Card -->
+        <article class="ministry-card sunday-school">
+          <div class="ministry-card-header">
+            <div class="ministry-card-icon">🎨</div>
+            <h2 class="ministry-card-title">주일학교</h2>
+          </div>
+          <div class="ministry-card-body">
+            <p class="ministry-card-description">
+              영유아부터 중고등부까지, 다음 세대를 위한 신앙 교육과 즐거운 활동으로
+              하나님의 사랑을 배우고 성장합니다.
+            </p>
+            <div class="ministry-card-stats">
+              <div class="ministry-card-stat">
+                <div class="ministry-card-stat-value">350+</div>
+                <div class="ministry-card-stat-label">학생</div>
+              </div>
+              <div class="ministry-card-stat">
+                <div class="ministry-card-stat-value">25+</div>
+                <div class="ministry-card-stat-label">교사</div>
+              </div>
+              <div class="ministry-card-stat">
+                <div class="ministry-card-stat-value">8</div>
+                <div class="ministry-card-stat-label">부서</div>
+              </div>
+            </div>
+            <div class="ministry-card-activities">
+              <h4>주요 활동</h4>
+              <ul>
+                <li>말씀 암송 대회</li>
+                <li>여름/겨울 성경학교</li>
+                <li>어린이 찬양제</li>
+                <li>부모님과 함께하는 예배</li>
+              </ul>
+            </div>
+            <button class="ministry-card-cta">
+              <span>자세히 보기</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </button>
+          </div>
+        </article>
+
+        <!-- Youth Card -->
+        <article class="ministry-card youth">
+          <div class="ministry-card-header">
+            <div class="ministry-card-icon">🎸</div>
+            <h2 class="ministry-card-title">청년부</h2>
+          </div>
+          <div class="ministry-card-body">
+            <p class="ministry-card-description">
+              대학생과 직장인 청년들이 함께 예배하고 교제하며,
+              현대 사회 속에서 그리스도인으로 살아가는 길을 모색합니다.
+            </p>
+            <div class="ministry-card-stats">
+              <div class="ministry-card-stat">
+                <div class="ministry-card-stat-value">180+</div>
+                <div class="ministry-card-stat-label">청년</div>
+              </div>
+              <div class="ministry-card-stat">
+                <div class="ministry-card-stat-value">12</div>
+                <div class="ministry-card-stat-label">소그룹</div>
+              </div>
+              <div class="ministry-card-stat">
+                <div class="ministry-card-stat-value">주 2회</div>
+                <div class="ministry-card-stat-label">모임</div>
+              </div>
+            </div>
+            <div class="ministry-card-activities">
+              <h4>주요 활동</h4>
+              <ul>
+                <li>주일 청년예배</li>
+                <li>금요 큐티 나눔</li>
+                <li>청년 수련회</li>
+                <li>사회봉사 프로젝트</li>
+              </ul>
+            </div>
+            <button class="ministry-card-cta">
+              <span>자세히 보기</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </button>
+          </div>
+        </article>
+
+        <!-- Adult Card -->
+        <article class="ministry-card adult">
+          <div class="ministry-card-header">
+            <div class="ministry-card-icon">📖</div>
+            <h2 class="ministry-card-title">장년부</h2>
+          </div>
+          <div class="ministry-card-body">
+            <p class="ministry-card-description">
+              장년 성도들이 깊이 있는 말씀 묵상과 교제를 통해
+              성숙한 신앙으로 다음 세대를 섬기는 믿음의 본이 됩니다.
+            </p>
+            <div class="ministry-card-stats">
+              <div class="ministry-card-stat">
+                <div class="ministry-card-stat-value">850+</div>
+                <div class="ministry-card-stat-label">성도</div>
+              </div>
+              <div class="ministry-card-stat">
+                <div class="ministry-card-stat-value">35</div>
+                <div class="ministry-card-stat-label">구역</div>
+              </div>
+              <div class="ministry-card-stat">
+                <div class="ministry-card-stat-value">주 3회</div>
+                <div class="ministry-card-stat-label">예배</div>
+              </div>
+            </div>
+            <div class="ministry-card-activities">
+              <h4>주요 활동</h4>
+              <ul>
+                <li>구역 예배 및 심방</li>
+                <li>성경 통독 모임</li>
+                <li>새가족 교육</li>
+                <li>전도 훈련</li>
+              </ul>
+            </div>
+            <button class="ministry-card-cta">
+              <span>자세히 보기</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </button>
+          </div>
+        </article>
+
+        <!-- Worship Card -->
+        <article class="ministry-card worship">
+          <div class="ministry-card-header">
+            <div class="ministry-card-icon">🎵</div>
+            <h2 class="ministry-card-title">찬양부</h2>
+          </div>
+          <div class="ministry-card-body">
+            <p class="ministry-card-description">
+              하나님께 영광 돌리는 찬양과 경배를 통해
+              예배의 기쁨을 나누고 성도들의 신앙을 돕습니다.
+            </p>
+            <div class="ministry-card-stats">
+              <div class="ministry-card-stat">
+                <div class="ministry-card-stat-value">60+</div>
+                <div class="ministry-card-stat-label">단원</div>
+              </div>
+              <div class="ministry-card-stat">
+                <div class="ministry-card-stat-value">4</div>
+                <div class="ministry-card-stat-label">팀</div>
+              </div>
+              <div class="ministry-card-stat">
+                <div class="ministry-card-stat-value">주 2회</div>
+                <div class="ministry-card-stat-label">연습</div>
+              </div>
+            </div>
+            <div class="ministry-card-activities">
+              <h4>주요 활동</h4>
+              <ul>
+                <li>주일 및 수요 예배 찬양</li>
+                <li>특송 및 찬양제</li>
+                <li>찬양 콘서트</li>
+                <li>찬양 세미나</li>
+              </ul>
+            </div>
+            <button class="ministry-card-cta">
+              <span>자세히 보기</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </button>
+          </div>
+        </article>
+
+        <!-- Mission Card -->
+        <article class="ministry-card mission">
+          <div class="ministry-card-header">
+            <div class="ministry-card-icon">🌍</div>
+            <h2 class="ministry-card-title">선교부</h2>
+          </div>
+          <div class="ministry-card-body">
+            <p class="ministry-card-description">
+              땅끝까지 복음을 전하는 사명을 감당하며,
+              국내외 선교사를 지원하고 선교 사역에 동참합니다.
+            </p>
+            <div class="ministry-card-stats">
+              <div class="ministry-card-stat">
+                <div class="ministry-card-stat-value">40+</div>
+                <div class="ministry-card-stat-label">선교지</div>
+              </div>
+              <div class="ministry-card-stat">
+                <div class="ministry-card-stat-value">52</div>
+                <div class="ministry-card-stat-label">선교사</div>
+              </div>
+              <div class="ministry-card-stat">
+                <div class="ministry-card-stat-value">15</div>
+                <div class="ministry-card-stat-label">국가</div>
+              </div>
+            </div>
+            <div class="ministry-card-activities">
+              <h4>주요 활동</h4>
+              <ul>
+                <li>선교사 파송 및 지원</li>
+                <li>단기 선교 팀 파송</li>
+                <li>선교 기도회</li>
+                <li>선교 후원</li>
+              </ul>
+            </div>
+            <button class="ministry-card-cta">
+              <span>자세히 보기</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </button>
+          </div>
+        </article>
+
+        <!-- Prayer Card -->
+        <article class="ministry-card prayer">
+          <div class="ministry-card-header">
+            <div class="ministry-card-icon">🙏</div>
+            <h2 class="ministry-card-title">기도부</h2>
+          </div>
+          <div class="ministry-card-body">
+            <p class="ministry-card-description">
+              교회와 성도, 나라와 민족을 위해 쉬지 않고 기도하며,
+              기도의 응답을 체험하는 은혜의 통로가 됩니다.
+            </p>
+            <div class="ministry-card-stats">
+              <div class="ministry-card-stat">
+                <div class="ministry-card-stat-value">150+</div>
+                <div class="ministry-card-stat-label">중보자</div>
+              </div>
+              <div class="ministry-card-stat">
+                <div class="ministry-card-stat-value">매일</div>
+                <div class="ministry-card-stat-label">새벽기도</div>
+              </div>
+              <div class="ministry-card-stat">
+                <div class="ministry-card-stat-value">주 1회</div>
+                <div class="ministry-card-stat-label">철야기도</div>
+              </div>
+            </div>
+            <div class="ministry-card-activities">
+              <h4>주요 활동</h4>
+              <ul>
+                <li>새벽 기도회</li>
+                <li>금요 철야 기도회</li>
+                <li>중보 기도 모임</li>
+                <li>금식 기도</li>
+              </ul>
+            </div>
+            <button class="ministry-card-cta">
+              <span>자세히 보기</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </button>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    // CTA buttons
+    document.querySelectorAll('.ministry-card-cta').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const card = e.target.closest('.ministry-card');
+        const title = card.querySelector('.ministry-card-title').textContent;
+        console.log('Navigate to:', title);
+      });
+    });
+
+    // Card hover
+    document.querySelectorAll('.ministry-card').forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        console.log('Hover:', card.querySelector('.ministry-card-title').textContent);
+      });
+    });
+
+    console.log('📐 Phase 3 Mockup: Ministry Cards loaded');
+    console.log('✅ 고유성 톤 - 각 부서별 독특한 디자인');
+  </script>
+</body>
+
+</html>

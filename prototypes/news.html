@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>교회소식 - 성복교회</title>
+  <link rel="stylesheet" href="css/hero-modern.css">
+  <style>
+    .page-hero {
+      background: linear-gradient(135deg, #ff9a56 0%, #ff6a88 100%);
+      padding: 4rem 2rem;
+      text-align: center;
+      color: white;
+    }
+    .page-hero-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    .news-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+    .news-tabs {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 3rem;
+      border-bottom: 2px solid var(--church-border);
+    }
+    .news-tab {
+      padding: 1rem 2rem;
+      background: none;
+      border: none;
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--church-text-light);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+    }
+    .news-tab:hover {
+      color: var(--church-primary);
+    }
+    .news-tab.active {
+      color: var(--church-primary);
+      border-bottom-color: var(--church-primary);
+    }
+    .news-list {
+      background: white;
+      border: 1px solid var(--church-border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .news-item {
+      padding: 1.5rem 2rem;
+      border-bottom: 1px solid var(--church-border);
+      transition: all 0.2s ease;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    .news-item:last-child {
+      border-bottom: none;
+    }
+    .news-item:hover {
+      background: var(--church-bg-light);
+    }
+    .news-item-badge {
+      padding: 0.25rem 0.75rem;
+      background: var(--church-primary);
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 600;
+      border-radius: 12px;
+      white-space: nowrap;
+    }
+    .news-item-content {
+      flex: 1;
+    }
+    .news-item-title {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--church-text);
+      margin-bottom: 0.5rem;
+    }
+    .news-item-meta {
+      font-size: 0.875rem;
+      color: var(--church-text-light);
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+    .gallery-item {
+      position: relative;
+      aspect-ratio: 4/3;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .gallery-item:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    }
+    .gallery-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .gallery-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+      padding: 1.5rem 1rem;
+      color: white;
+    }
+    .gallery-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+    .gallery-date {
+      font-size: 0.875rem;
+      opacity: 0.9;
+    }
+    @media (max-width: 768px) {
+      .news-tabs {
+        flex-wrap: wrap;
+      }
+      .news-tab {
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
+      }
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-container">
+      <a href="index.html" class="logo" style="text-decoration: none; font-size: 1.5rem; font-weight: 700; color: #469CDE;">
+        성복교회
+      </a>
+      <nav class="main-nav">
+        <a href="church-intro.html" class="nav-link">교회소개</a>
+        <a href="worship.html" class="nav-link">예배안내</a>
+        <a href="ministries.html" class="nav-link">다음세대</a>
+        <a href="news.html" class="nav-link">교회소식</a>
+        <a href="mission.html" class="nav-link">선교·사역</a>
+      </nav>
+      <div class="header-actions">
+        <a href="login.html" class="btn-login">로그인</a>
+        <a href="register.html" class="btn-register">회원가입</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Hero -->
+  <section class="page-hero">
+    <h1 class="page-hero-title">교회소식</h1>
+    <p style="font-size: 1.125rem; opacity: 0.9;">성복교회의 다양한 소식을 전합니다</p>
+  </section>
+
+  <!-- Content -->
+  <div class="news-section">
+    <!-- Tabs -->
+    <div class="news-tabs">
+      <button class="news-tab active">공지사항</button>
+      <button class="news-tab">주보</button>
+      <button class="news-tab">행사일정</button>
+      <button class="news-tab">사진갤러리</button>
+    </div>
+
+    <!-- 공지사항 -->
+    <div class="news-list" id="notice-list">
+      <div class="news-item" onclick="location.href='news/easter-worship.html'" style="cursor: pointer;">
+        <span class="news-item-badge">NEW</span>
+        <div class="news-item-content">
+          <div class="news-item-title">2024년 부활절 연합예배 안내</div>
+          <div class="news-item-meta">2024.03.15 | 조회 256</div>
+        </div>
+      </div>
+      <div class="news-item" onclick="location.href='news/youth-retreat.html'" style="cursor: pointer;">
+        <span class="news-item-badge">NEW</span>
+        <div class="news-item-content">
+          <div class="news-item-title">청년부 겨울 수련회 참가자 모집</div>
+          <div class="news-item-meta">2024.03.10 | 조회 189</div>
+        </div>
+      </div>
+      <div class="news-item" onclick="location.href='news/newcomer-welcome.html'" style="cursor: pointer;">
+        <div class="news-item-content">
+          <div class="news-item-title">3월 새가족 환영 안내</div>
+          <div class="news-item-meta">2024.03.05 | 조회 342</div>
+        </div>
+      </div>
+      <div class="news-item" style="cursor: pointer;">
+        <div class="news-item-content">
+          <div class="news-item-title">2024년 1분기 구역장 모임 공지</div>
+          <div class="news-item-meta">2024.03.01 | 조회 215</div>
+        </div>
+      </div>
+      <div class="news-item" style="cursor: pointer;">
+        <div class="news-item-content">
+          <div class="news-item-title">교회학교 교사 모집 안내</div>
+          <div class="news-item-meta">2024.02.28 | 조회 178</div>
+        </div>
+      </div>
+      <div class="news-item" style="cursor: pointer;">
+        <div class="news-item-content">
+          <div class="news-item-title">온라인 헌금 계좌 안내</div>
+          <div class="news-item-meta">2024.02.25 | 조회 456</div>
+        </div>
+      </div>
+      <div class="news-item" style="cursor: pointer;">
+        <div class="news-item-content">
+          <div class="news-item-title">주차장 이용 안내 사항</div>
+          <div class="news-item-meta">2024.02.20 | 조회 312</div>
+        </div>
+      </div>
+      <div class="news-item" style="cursor: pointer;">
+        <div class="news-item-content">
+          <div class="news-item-title">새벽기도회 시간 변경 안내</div>
+          <div class="news-item-meta">2024.02.15 | 조회 289</div>
+        </div>
+      </div>
+      <div class="news-item" style="cursor: pointer;">
+        <div class="news-item-content">
+          <div class="news-item-title">선교 헌금 감사 보고</div>
+          <div class="news-item-meta">2024.02.10 | 조회 234</div>
+        </div>
+      </div>
+      <div class="news-item" style="cursor: pointer;">
+        <div class="news-item-content">
+          <div class="news-item-title">교회 홈페이지 리뉴얼 안내</div>
+          <div class="news-item-meta">2024.02.05 | 조회 567</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 주보 -->
+    <div class="news-list" id="bulletin-list" style="display: none;">
+      <div class="news-item" style="cursor: pointer;">
+        <div class="news-item-content">
+          <div class="news-item-title">2024년 3월 17일 주보</div>
+          <div class="news-item-meta">2024.03.17 | 다운로드 145</div>
+        </div>
+      </div>
+      <div class="news-item" style="cursor: pointer;">
+        <div class="news-item-content">
+          <div class="news-item-title">2024년 3월 10일 주보</div>
+          <div class="news-item-meta">2024.03.10 | 다운로드 238</div>
+        </div>
+      </div>
+      <div class="news-item" style="cursor: pointer;">
+        <div class="news-item-content">
+          <div class="news-item-title">2024년 3월 3일 주보</div>
+          <div class="news-item-meta">2024.03.03 | 다운로드 312</div>
+        </div>
+      </div>
+      <div class="news-item" style="cursor: pointer;">
+        <div class="news-item-content">
+          <div class="news-item-title">2024년 2월 25일 주보</div>
+          <div class="news-item-meta">2024.02.25 | 다운로드 289</div>
+        </div>
+      </div>
+      <div class="news-item" style="cursor: pointer;">
+        <div class="news-item-content">
+          <div class="news-item-title">2024년 2월 18일 주보</div>
+          <div class="news-item-meta">2024.02.18 | 다운로드 267</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 행사일정 -->
+    <div class="news-list" id="event-list" style="display: none;">
+      <div class="news-item" style="cursor: pointer;">
+        <span class="news-item-badge">예정</span>
+        <div class="news-item-content">
+          <div class="news-item-title">부활절 연합예배</div>
+          <div class="news-item-meta">2024.03.31 (주일) 오전 10:00 | 예루살렘성전</div>
+        </div>
+      </div>
+      <div class="news-item" style="cursor: pointer;">
+        <span class="news-item-badge">예정</span>
+        <div class="news-item-content">
+          <div class="news-item-title">청년부 겨울 수련회</div>
+          <div class="news-item-meta">2024.03.22-24 | 강원도 평창</div>
+        </div>
+      </div>
+      <div class="news-item" style="cursor: pointer;">
+        <div class="news-item-content">
+          <div class="news-item-title">사순절 특별새벽기도회</div>
+          <div class="news-item-meta">2024.02.14-03.30 | 매일 오전 5:30</div>
+        </div>
+      </div>
+      <div class="news-item" style="cursor: pointer;">
+        <div class="news-item-content">
+          <div class="news-item-title">구역장 리더십 세미나</div>
+          <div class="news-item-meta">2024.03.15 (금) 오후 7:30 | 임마누엘성전</div>
+        </div>
+      </div>
+      <div class="news-item" style="cursor: pointer;">
+        <div class="news-item-content">
+          <div class="news-item-title">어린이 찬양제</div>
+          <div class="news-item-meta">2024.04.07 (주일) 오후 2:00 | 예루살렘성전</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 사진갤러리 -->
+    <div id="gallery-list" style="display: none;">
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <img src="images/news01.jpg" alt="부활절 연합예배" class="gallery-image">
+          <div class="gallery-overlay">
+            <div class="gallery-title">부활절 연합예배</div>
+            <div class="gallery-date">2024.03.17</div>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img src="images/news02.jpg" alt="청년부 수련회" class="gallery-image">
+          <div class="gallery-overlay">
+            <div class="gallery-title">청년부 수련회</div>
+            <div class="gallery-date">2024.03.10</div>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img src="images/news03.jpg" alt="새가족 환영식" class="gallery-image">
+          <div class="gallery-overlay">
+            <div class="gallery-title">새가족 환영식</div>
+            <div class="gallery-date">2024.03.05</div>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img src="images/dept_youth.jpg" alt="청년부 예배" class="gallery-image">
+          <div class="gallery-overlay">
+            <div class="gallery-title">청년부 주일예배</div>
+            <div class="gallery-date">2024.03.03</div>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img src="images/dept_middleschool.jpg" alt="중등부 수련회" class="gallery-image">
+          <div class="gallery-overlay">
+            <div class="gallery-title">중등부 겨울수련회</div>
+            <div class="gallery-date">2024.02.20</div>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img src="images/dept_elementary.jpg" alt="초등부 성경학교" class="gallery-image">
+          <div class="gallery-overlay">
+            <div class="gallery-title">초등부 성경학교</div>
+            <div class="gallery-date">2024.02.15</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pagination -->
+    <div style="display: flex; justify-content: center; gap: 0.5rem; margin-top: 2rem;">
+      <button style="padding: 0.5rem 1rem; border: 1px solid var(--church-border); background: white; border-radius: 4px; cursor: pointer; font-weight: 600; color: white; background: var(--church-primary);">1</button>
+      <button style="padding: 0.5rem 1rem; border: 1px solid var(--church-border); background: white; border-radius: 4px; cursor: pointer;">2</button>
+      <button style="padding: 0.5rem 1rem; border: 1px solid var(--church-border); background: white; border-radius: 4px; cursor: pointer;">3</button>
+      <button style="padding: 0.5rem 1rem; border: 1px solid var(--church-border); background: white; border-radius: 4px; cursor: pointer;">4</button>
+      <button style="padding: 0.5rem 1rem; border: 1px solid var(--church-border); background: white; border-radius: 4px; cursor: pointer;">5</button>
+    </div>
+
+    <!-- 사진 갤러리 섹션 (예시) -->
+    <div style="margin-top: 4rem;">
+      <h2 style="font-size: 2rem; font-weight: 700; margin-bottom: 2rem;">최근 사진</h2>
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <img src="images/news01.jpg" alt="부활절 연합예배" class="gallery-image">
+          <div class="gallery-overlay">
+            <div class="gallery-title">부활절 연합예배</div>
+            <div class="gallery-date">2024.03.17</div>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img src="images/news02.jpg" alt="청년부 수련회" class="gallery-image">
+          <div class="gallery-overlay">
+            <div class="gallery-title">청년부 수련회</div>
+            <div class="gallery-date">2024.03.10</div>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img src="images/news03.jpg" alt="새가족 환영식" class="gallery-image">
+          <div class="gallery-overlay">
+            <div class="gallery-title">새가족 환영식</div>
+            <div class="gallery-date">2024.03.05</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-content">
+        <div class="footer-about">
+          <h3>성복교회</h3>
+          <p>주소: 서울특별시 강남구 테헤란로 123</p>
+          <p>전화: 02-1234-5678</p>
+          <p>팩스: 02-1234-5679</p>
+          <p>이메일: info@sungbok.church</p>
+        </div>
+        <div class="footer-links">
+          <h4>바로가기</h4>
+          <ul>
+            <li><a href="church-intro.html">교회소개</a></li>
+            <li><a href="worship.html">예배안내</a></li>
+            <li><a href="ministries.html">다음세대</a></li>
+            <li><a href="news.html">교회소식</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>관련 사이트</h4>
+          <ul>
+            <li><a href="#">장로회신학대학교</a></li>
+            <li><a href="#">한국기독교총연합회</a></li>
+            <li><a href="#">세계선교회</a></li>
+            <li><a href="#">기독교방송</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 성복교회. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // DOM 로드 후 실행
+    document.addEventListener('DOMContentLoaded', function() {
+      // 탭 전환 기능
+      const tabs = document.querySelectorAll('.news-tab');
+      const noticeList = document.getElementById('notice-list');
+      const bulletinList = document.getElementById('bulletin-list');
+      const eventList = document.getElementById('event-list');
+      const galleryList = document.getElementById('gallery-list');
+
+      console.log('✅ 탭 개수:', tabs.length);
+      console.log('✅ notice-list:', noticeList);
+      console.log('✅ bulletin-list:', bulletinList);
+      console.log('✅ event-list:', eventList);
+      console.log('✅ gallery-list:', galleryList);
+
+      tabs.forEach((tab, index) => {
+        tab.addEventListener('click', function() {
+          console.log('탭 클릭:', index, tab.textContent);
+
+          // 모든 탭에서 active 제거
+          tabs.forEach(t => t.classList.remove('active'));
+          // 클릭된 탭에 active 추가
+          this.classList.add('active');
+
+          // 모든 콘텐츠 숨기기
+          if (noticeList) noticeList.style.display = 'none';
+          if (bulletinList) bulletinList.style.display = 'none';
+          if (eventList) eventList.style.display = 'none';
+          if (galleryList) galleryList.style.display = 'none';
+
+          // 선택된 탭의 콘텐츠 표시
+          switch(index) {
+            case 0: // 공지사항
+              if (noticeList) noticeList.style.display = 'block';
+              break;
+            case 1: // 주보
+              if (bulletinList) bulletinList.style.display = 'block';
+              break;
+            case 2: // 행사일정
+              if (eventList) eventList.style.display = 'block';
+              break;
+            case 3: // 사진갤러리
+              if (galleryList) galleryList.style.display = 'block';
+              break;
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '4.0.2'
+    id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'com.sungbok'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(25)
+    }
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Spring Boot Web
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    // Spring Data JPA
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    // PostgreSQL Driver (최신 버전)
+    runtimeOnly 'org.postgresql:postgresql'
+
+    // Spring Boot Validation
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    // Spring Boot Data Redis (for Valkey)
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+
+    // Spring Boot Cache (Redis Cache Manager)
+    implementation 'org.springframework.boot:spring-boot-starter-cache'
+
+    // Spring Security
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+
+    // Spring Boot Actuator (Health Checks, Metrics, Monitoring)
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+    // SpringDoc OpenAPI (Swagger UI) - Latest version for Spring Boot 3.x
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:3.0.1'
+
+    // JWT (0.13.0 - Latest version released 2025-08-20)
+    implementation 'io.jsonwebtoken:jjwt-api:0.13.0'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.13.0'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.13.0'
+
+    // Lombok (Spring Boot BOM 버전 사용)
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    // Spring Boot DevTools
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+    // Spring Boot Test
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>성복교회 - 테스트</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      background: #f9fafb;
+    }
+
+    /* 헤더 */
+    .header {
+      background: white;
+      border-bottom: 1px solid #e5e7eb;
+      padding: 1rem 2rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo img {
+      height: 50px;
+    }
+
+    .nav {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav a {
+      color: #1f2937;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav a:hover {
+      color: #3b82f6;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .btn {
+      padding: 0.625rem 1.25rem;
+      border-radius: 6px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s;
+      display: inline-block;
+    }
+
+    .btn-login {
+      color: #1f2937;
+      border: 1px solid #e5e7eb;
+      background: white;
+    }
+
+    .btn-login:hover {
+      background: #f9fafb;
+      border-color: #3b82f6;
+      color: #3b82f6;
+    }
+
+    .btn-register {
+      background: #3b82f6;
+      color: white;
+      border: none;
+    }
+
+    .btn-register:hover {
+      background: #2563eb;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+    }
+
+    /* 컨텐츠 */
+    .content {
+      max-width: 1200px;
+      margin: 4rem auto;
+      padding: 0 2rem;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 3rem;
+      color: #1f2937;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1.125rem;
+      color: #6b7280;
+      margin-bottom: 2rem;
+    }
+
+    .test-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- 헤더 -->
+  <header class="header">
+    <div class="header-container">
+      <a href="test-main.html" class="logo">
+        <img src="images/main_logo.png" alt="성복교회">
+      </a>
+      <nav class="nav">
+        <a href="church-intro.html">교회소개</a>
+        <a href="worship.html">예배안내</a>
+        <a href="ministries.html">다음세대</a>
+        <a href="news.html">교회소식</a>
+        <a href="mission.html">선교·사역</a>
+      </nav>
+      <div class="header-actions">
+        <a href="login.html" class="btn btn-login">로그인</a>
+        <a href="register.html" class="btn btn-register">회원가입</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 컨텐츠 -->
+  <div class="content">
+    <h1>✅ 버튼 테스트 페이지</h1>
+    <p>로그인/회원가입 버튼이 제대로 작동하는지 확인하세요</p>
+
+    <div class="test-buttons">
+      <a href="login.html" class="btn btn-login">로그인 테스트</a>
+      <a href="register.html" class="btn btn-register">회원가입 테스트</a>
+      <a href="church-brand.html" class="btn btn-register">브랜드 가이드</a>
+    </div>
+
+    <div style="margin-top: 3rem; padding: 2rem; background: white; border-radius: 8px; text-align: left;">
+      <h2 style="margin-bottom: 1rem; color: #3b82f6;">✅ 수정 완료 사항</h2>
+      <ul style="list-style: none; padding: 0;">
+        <li style="padding: 0.5rem 0; border-bottom: 1px solid #e5e7eb;">1. 색상 변경: 주황색(#f96319) → 파란색(#3b82f6)</li>
+        <li style="padding: 0.5rem 0; border-bottom: 1px solid #e5e7eb;">2. 로그인 버튼: login.html 연결 확인</li>
+        <li style="padding: 0.5rem 0; border-bottom: 1px solid #e5e7eb;">3. 회원가입 버튼: register.html 연결 확인</li>
+        <li style="padding: 0.5rem 0; border-bottom: 1px solid #e5e7eb;">4. 로고: 클릭 시 메인 페이지(index.html) 이동</li>
+        <li style="padding: 0.5rem 0;">5. news.html 탭 기능: 주보/행사일정/사진갤러리 전환</li>
+      </ul>
+    </div>
+
+    <div style="margin-top: 2rem; padding: 1.5rem; background: #dbeafe; border-radius: 8px;">
+      <p style="color: #1e40af; font-weight: 600; margin: 0;">
+        ⚠️ 이 페이지(test-main.html)에서 모든 버튼이 작동하면<br>
+        브라우저 캐시를 지우고(Ctrl+Shift+Delete 또는 Cmd+Shift+Delete) index.html을 다시 열어주세요.
+      </p>
+    </div>
+  </div>
+
+  <script>
+    console.log('✅ 페이지 로드 완료');
+    console.log('✅ 로그인 버튼:', document.querySelector('.btn-login').href);
+    console.log('✅ 회원가입 버튼:', document.querySelector('.btn-register').href);
+  </script>
+</body>
+</html>

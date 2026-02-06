@@ -1,0 +1,12 @@
+# *
+User-agent: *
+Allow: /
+Disallow: /login
+Disallow: /register
+Disallow: /api
+
+# Host
+Host: https://sungbok-church.com
+
+# Sitemaps
+Sitemap: https://sungbok-church.com/sitemap.xml

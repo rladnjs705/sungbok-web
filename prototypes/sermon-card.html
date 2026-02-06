@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>성복교회 - Sermon Card Mockup</title>
+  <meta name="description" content="설교 카드 컴포넌트 프로토타입">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/reset.css">
+  <link rel="stylesheet" href="/css/variables.css">
+  <link rel="stylesheet" href="/css/sermon-card.css">
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      background: #f8fafc;
+    }
+
+    /* Demo Container */
+    .demo-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+
+    .demo-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .demo-header h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #1e293b;
+      margin-bottom: 1rem;
+    }
+
+    .demo-header p {
+      font-size: 1.125rem;
+      color: #64748b;
+    }
+
+    /* Demo Grid */
+    .demo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    /* Demo Info */
+    .demo-info {
+      background: white;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    .demo-info h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1e293b;
+      margin-bottom: 1rem;
+    }
+
+    .demo-info ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .demo-info li {
+      padding: 0.5rem 0;
+      color: #64748b;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .demo-info li::before {
+      content: "✓";
+      color: #3b82f6;
+      font-weight: 700;
+    }
+
+    /* Demo Banner */
+    .demo-banner {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.9);
+      color: white;
+      padding: 0.5rem 1rem;
+      text-align: center;
+      font-size: 0.875rem;
+      z-index: 9999;
+    }
+
+    .demo-banner a {
+      color: #60a5fa;
+      text-decoration: underline;
+      margin: 0 0.5rem;
+    }
+
+    .demo-container {
+      margin-top: 3rem;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Demo Banner -->
+  <div class="demo-banner">
+    📐 <strong>Phase 3 Mockup</strong> - Sermon Card Component |
+    <a href="/hero-modern.html">← Hero Section</a> |
+    <a href="/sermon-list.html">Sermon List →</a>
+  </div>
+
+  <!-- Demo Container -->
+  <div class="demo-container">
+    <!-- Header -->
+    <div class="demo-header">
+      <h1>🎬 Sermon Card Component</h1>
+      <p>설교 영상 카드 컴포넌트 - 활동적/역동적 디자인 톤</p>
+    </div>
+
+    <!-- Card Grid -->
+    <div class="demo-grid">
+      <!-- Card 1: 주일 설교 -->
+      <article class="sermon-card">
+        <div class="sermon-card-thumbnail">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=450&fit=crop" alt="은혜와 진리">
+          <div class="sermon-card-play-overlay">
+            <div class="sermon-card-play-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+              </svg>
+            </div>
+          </div>
+          <span class="sermon-card-duration">45:32</span>
+        </div>
+        <div class="sermon-card-content">
+          <span class="sermon-card-category">주일예배</span>
+          <h2 class="sermon-card-title">은혜와 진리가 충만한 삶</h2>
+          <p class="sermon-card-description">
+            요한복음 1장 14절을 중심으로 하나님의 은혜와 진리가 우리 삶에 어떻게 나타나는지 살펴봅니다.
+          </p>
+          <div class="sermon-card-meta">
+            <div class="sermon-card-meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="6"></line>
+                <line x1="8" y1="2" x2="8" y2="6"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+              </svg>
+              <span>2026.02.02</span>
+            </div>
+            <div class="sermon-card-meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+              <span>1,234</span>
+            </div>
+          </div>
+          <div class="sermon-card-preacher">
+            <div class="sermon-card-preacher-avatar">김</div>
+            <div class="sermon-card-preacher-info">
+              <div class="sermon-card-preacher-name">김성복 목사</div>
+              <div class="sermon-card-preacher-title">담임목사</div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 2: 수요 설교 -->
+      <article class="sermon-card">
+        <div class="sermon-card-thumbnail">
+          <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&h=450&fit=crop" alt="기도의 힘">
+          <div class="sermon-card-play-overlay">
+            <div class="sermon-card-play-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+              </svg>
+            </div>
+          </div>
+          <span class="sermon-card-duration">38:15</span>
+        </div>
+        <div class="sermon-card-content">
+          <span class="sermon-card-category">수요예배</span>
+          <h2 class="sermon-card-title">기도의 힘으로 이기는 삶</h2>
+          <p class="sermon-card-description">
+            야고보서 5장 16절 말씀을 통해 의인의 간구가 역사하는 힘이 큼을 배웁니다.
+          </p>
+          <div class="sermon-card-meta">
+            <div class="sermon-card-meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="6"></line>
+                <line x1="8" y1="2" x2="8" y2="6"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+              </svg>
+              <span>2026.01.29</span>
+            </div>
+            <div class="sermon-card-meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+              <span>892</span>
+            </div>
+          </div>
+          <div class="sermon-card-preacher">
+            <div class="sermon-card-preacher-avatar">이</div>
+            <div class="sermon-card-preacher-info">
+              <div class="sermon-card-preacher-name">이은혜 전도사</div>
+              <div class="sermon-card-preacher-title">부목사</div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 3: 특별 설교 -->
+      <article class="sermon-card">
+        <div class="sermon-card-thumbnail">
+          <img src="https://images.unsplash.com/photo-1516733725897-1aa73b87c8e8?w=800&h=450&fit=crop" alt="사랑의 실천">
+          <div class="sermon-card-play-overlay">
+            <div class="sermon-card-play-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+              </svg>
+            </div>
+          </div>
+          <span class="sermon-card-duration">52:08</span>
+        </div>
+        <div class="sermon-card-content">
+          <span class="sermon-card-category">특별예배</span>
+          <h2 class="sermon-card-title">사랑으로 행하는 믿음</h2>
+          <p class="sermon-card-description">
+            고린도전서 13장 말씀을 통해 사랑이 없으면 아무것도 아님을 깨닫습니다.
+          </p>
+          <div class="sermon-card-meta">
+            <div class="sermon-card-meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="6"></line>
+                <line x1="8" y1="2" x2="8" y2="6"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+              </svg>
+              <span>2026.01.26</span>
+            </div>
+            <div class="sermon-card-meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+              <span>2,156</span>
+            </div>
+          </div>
+          <div class="sermon-card-preacher">
+            <div class="sermon-card-preacher-avatar">박</div>
+            <div class="sermon-card-preacher-info">
+              <div class="sermon-card-preacher-name">박진리 목사</div>
+              <div class="sermon-card-preacher-title">초청강사</div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <!-- Demo Info -->
+    <div class="demo-info">
+      <h2>🎨 Design Features</h2>
+      <ul>
+        <li>16:9 Thumbnail with hover scale effect</li>
+        <li>Play button overlay on hover</li>
+        <li>Duration badge overlay</li>
+        <li>Category badge with gradient</li>
+        <li>Title with 2-line clamp</li>
+        <li>Description with 2-line clamp</li>
+        <li>Meta information (date, views)</li>
+        <li>Preacher info with avatar</li>
+        <li>Card elevation with hover animation</li>
+        <li>Gradient hover effect on title</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    // Add click handlers to cards
+    document.querySelectorAll('.sermon-card').forEach(card => {
+      card.addEventListener('click', (e) => {
+        console.log('Sermon card clicked:', card.querySelector('.sermon-card-title').textContent);
+      });
+    });
+
+    console.log('📐 Phase 3 Mockup: Sermon Card loaded');
+    console.log('✅ Pure HTML/CSS/JS - No React, No Next.js');
+    console.log('🎨 Design: Energetic, Card-based, Hover effects');
+  </script>
+</body>
+
+</html>

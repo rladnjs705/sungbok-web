@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>로그인 - 성복교회</title>
+  <link rel="stylesheet" href="css/hero-modern.css">
+  <style>
+    .login-container {
+      max-width: 450px;
+      margin: 6rem auto;
+      padding: 3rem 2rem;
+    }
+    .login-box {
+      background: white;
+      border: 1px solid var(--church-border);
+      border-radius: 12px;
+      padding: 3rem;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    }
+    .login-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .login-logo {
+      width: 120px;
+      margin-bottom: 1.5rem;
+    }
+    .login-title {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--church-text);
+      margin-bottom: 0.5rem;
+    }
+    .login-subtitle {
+      font-size: 0.9375rem;
+      color: var(--church-text-light);
+    }
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    .form-label {
+      display: block;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--church-text);
+      margin-bottom: 0.5rem;
+    }
+    .form-input {
+      width: 100%;
+      padding: 0.875rem 1rem;
+      border: 1px solid var(--church-border);
+      border-radius: 6px;
+      font-size: 1rem;
+      transition: all 0.2s ease;
+    }
+    .form-input:focus {
+      outline: none;
+      border-color: var(--church-primary);
+      box-shadow: 0 0 0 3px rgba(249, 99, 25, 0.1);
+    }
+    .form-options {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      font-size: 0.875rem;
+    }
+    .form-checkbox {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .form-link {
+      color: var(--church-primary);
+      text-decoration: none;
+    }
+    .btn-login {
+      width: 100%;
+      padding: 1rem;
+      background: var(--church-primary);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .btn-login:hover {
+      background: #e65816;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(249, 99, 25, 0.3);
+    }
+    .divider {
+      text-align: center;
+      margin: 2rem 0;
+      position: relative;
+    }
+    .divider::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: var(--church-border);
+    }
+    .divider span {
+      position: relative;
+      background: white;
+      padding: 0 1rem;
+      color: var(--church-text-light);
+      font-size: 0.875rem;
+    }
+    .social-login {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .btn-social {
+      width: 100%;
+      padding: 0.875rem;
+      border: 1px solid var(--church-border);
+      border-radius: 6px;
+      background: white;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+    }
+    .btn-social:hover {
+      background: var(--church-bg-light);
+    }
+    .signup-link {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 0.9375rem;
+      color: var(--church-text-light);
+    }
+    .signup-link a {
+      color: var(--church-primary);
+      font-weight: 600;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header style="background: white; border-bottom: 1px solid #e5e7eb; padding: 1rem 2rem; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+    <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
+      <a href="index.html" style="text-decoration: none; font-size: 1.5rem; font-weight: 700; color: #469CDE;">
+        성복교회
+      </a>
+      <nav style="display: flex; gap: 2rem;">
+        <a href="church-intro.html" style="color: #1f2937; text-decoration: none; font-weight: 500; transition: color 0.3s;">교회소개</a>
+        <a href="worship.html" style="color: #1f2937; text-decoration: none; font-weight: 500; transition: color 0.3s;">예배안내</a>
+        <a href="ministries.html" style="color: #1f2937; text-decoration: none; font-weight: 500; transition: color 0.3s;">다음세대</a>
+        <a href="news.html" style="color: #1f2937; text-decoration: none; font-weight: 500; transition: color 0.3s;">교회소식</a>
+        <a href="mission.html" style="color: #1f2937; text-decoration: none; font-weight: 500; transition: color 0.3s;">선교·사역</a>
+      </nav>
+      <div style="display: flex; gap: 1rem;">
+        <a href="login.html" style="padding: 0.625rem 1.25rem; border: 1px solid #e5e7eb; border-radius: 6px; color: #1f2937; text-decoration: none; font-weight: 600;">로그인</a>
+        <a href="register.html" style="padding: 0.625rem 1.25rem; background: #3b82f6; color: white; border-radius: 6px; text-decoration: none; font-weight: 600;">회원가입</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Login Container -->
+  <div class="login-container">
+    <div class="login-box">
+      <div class="login-header">
+        <img src="images/main_logo.png" alt="성복교회" class="login-logo">
+        <h1 class="login-title">로그인</h1>
+        <p class="login-subtitle">성복교회 온라인 서비스</p>
+      </div>
+
+      <form>
+        <div class="form-group">
+          <label class="form-label">이메일</label>
+          <input type="email" class="form-input" placeholder="example@email.com" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">비밀번호</label>
+          <input type="password" class="form-input" placeholder="비밀번호를 입력하세요" required>
+        </div>
+
+        <div class="form-options">
+          <label class="form-checkbox">
+            <input type="checkbox">
+            <span>로그인 상태 유지</span>
+          </label>
+          <a href="#" class="form-link">비밀번호 찾기</a>
+        </div>
+
+        <button type="submit" class="btn-login">로그인</button>
+      </form>
+
+      <div class="divider">
+        <span>또는</span>
+      </div>
+
+      <div class="social-login">
+        <button class="btn-social">
+          <span>🔵</span> 네이버로 시작하기
+        </button>
+        <button class="btn-social">
+          <span>💬</span> 카카오로 시작하기
+        </button>
+        <button class="btn-social">
+          <span>🌐</span> Google로 시작하기
+        </button>
+      </div>
+
+      <div class="signup-link">
+        아직 계정이 없으신가요? <a href="register.html">회원가입</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer" style="margin-top: 6rem;">
+    <div class="footer-container">
+      <div class="footer-bottom">
+        <p>&copy; 2024 성복교회. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

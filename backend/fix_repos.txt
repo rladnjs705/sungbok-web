@@ -1,0 +1,6 @@
+# Missing repository methods to add:
+# PastorRepository: existsByEmail
+# PrayerRequestRepository: findByCategory (lines 50, 113)
+# VideoGalleryRepository: searchByKeyword (line 84)
+# YouTubeLiveRepository: methods at lines 43, 57, 89, 126
+# YouTubeApiClient: line 329 (Spring Web issue, not repository)

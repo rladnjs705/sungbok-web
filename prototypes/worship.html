@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>예배안내 - 성복교회</title>
+  <link rel="stylesheet" href="css/hero-modern.css">
+  <style>
+    .page-hero {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      padding: 4rem 2rem;
+      text-align: center;
+      color: white;
+    }
+    .page-hero-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    .page-hero-subtitle {
+      font-size: 1.125rem;
+      opacity: 0.9;
+    }
+    .worship-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+    .schedule-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-bottom: 4rem;
+    }
+    .schedule-card {
+      background: white;
+      border: 2px solid var(--church-border);
+      border-radius: 8px;
+      padding: 2rem;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    .schedule-card:hover {
+      border-color: var(--church-primary);
+      box-shadow: 0 8px 24px rgba(249, 99, 25, 0.15);
+      transform: translateY(-4px);
+    }
+    .schedule-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    .schedule-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--church-text);
+      margin-bottom: 0.5rem;
+    }
+    .schedule-time {
+      font-size: 1.125rem;
+      color: var(--church-primary);
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    .schedule-location {
+      font-size: 0.9375rem;
+      color: var(--church-text-light);
+    }
+    .sermon-list-section {
+      margin-top: 4rem;
+    }
+    .sermon-list-section h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--church-text);
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    .sermon-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+    .sermon-card {
+      background: white;
+      border: 1px solid var(--church-border);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    .sermon-card:hover {
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    }
+    .sermon-thumbnail {
+      width: 100%;
+      height: 200px;
+      background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      position: relative;
+    }
+    .sermon-play-btn {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: var(--church-primary);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .sermon-play-btn:hover {
+      background: white;
+      transform: scale(1.1);
+    }
+    .sermon-content {
+      padding: 1.5rem;
+    }
+    .sermon-date {
+      font-size: 0.875rem;
+      color: var(--church-primary);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .sermon-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--church-text);
+      margin-bottom: 0.5rem;
+    }
+    .sermon-pastor {
+      font-size: 0.9375rem;
+      color: var(--church-text-light);
+      margin-bottom: 0.5rem;
+    }
+    .sermon-verse {
+      font-size: 0.875rem;
+      color: var(--church-text-light);
+      font-style: italic;
+    }
+    @media (max-width: 1024px) {
+      .schedule-grid {
+        grid-template-columns: 1fr;
+      }
+      .sermon-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-container">
+      <a href="index.html" class="logo" style="text-decoration: none; font-size: 1.5rem; font-weight: 700; color: #469CDE;">
+        성복교회
+      </a>
+      <nav class="main-nav">
+        <a href="church-intro.html" class="nav-link">교회소개</a>
+        <a href="worship.html" class="nav-link">예배안내</a>
+        <a href="ministries.html" class="nav-link">다음세대</a>
+        <a href="news.html" class="nav-link">교회소식</a>
+        <a href="mission.html" class="nav-link">선교·사역</a>
+      </nav>
+      <div class="header-actions">
+        <a href="login.html" class="btn-login">로그인</a>
+        <a href="register.html" class="btn-register">회원가입</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Hero -->
+  <section class="page-hero">
+    <h1 class="page-hero-title">예배안내</h1>
+    <p class="page-hero-subtitle">말씀과 찬양으로 하나님을 경배합니다</p>
+  </section>
+
+  <!-- Content -->
+  <div class="worship-section">
+    <!-- 장년 예배 시간표 -->
+    <h2 style="font-size: 2rem; font-weight: 700; color: var(--church-text); margin-bottom: 2rem;">장년예배</h2>
+    <div class="schedule-grid">
+      <div class="schedule-card">
+        <div class="schedule-icon">🌅</div>
+        <h3 class="schedule-title">새벽예배</h3>
+        <p class="schedule-time">월~금 오전 5:30</p>
+        <p class="schedule-location">임마누엘성전 [3F]</p>
+      </div>
+
+      <div class="schedule-card">
+        <div class="schedule-icon">☀️</div>
+        <h3 class="schedule-title">주일 1부 예배</h3>
+        <p class="schedule-time">매주 일요일 오전 7:00</p>
+        <p class="schedule-location">예루살렘성전 [3F]</p>
+      </div>
+
+      <div class="schedule-card">
+        <div class="schedule-icon">☀️</div>
+        <h3 class="schedule-title">주일 2부 예배</h3>
+        <p class="schedule-time">매주 일요일 오전 9:00</p>
+        <p class="schedule-location">예루살렘성전 [3F]</p>
+      </div>
+
+      <div class="schedule-card">
+        <div class="schedule-icon">⛪</div>
+        <h3 class="schedule-title">주일 3부 예배</h3>
+        <p class="schedule-time">매주 일요일 오전 11:00</p>
+        <p class="schedule-location">예루살렘성전 [3F]</p>
+      </div>
+
+      <div class="schedule-card">
+        <div class="schedule-icon">⛪</div>
+        <h3 class="schedule-title">주일 4부 예배</h3>
+        <p class="schedule-time">매주 일요일 오후 1:00</p>
+        <p class="schedule-location">예루살렘성전 [3F]</p>
+      </div>
+
+      <div class="schedule-card">
+        <div class="schedule-icon">⛪</div>
+        <h3 class="schedule-title">주일 5부 예배</h3>
+        <p class="schedule-time">매주 일요일 오후 3:00</p>
+        <p class="schedule-location">예루살렘성전 [3F]</p>
+      </div>
+
+      <div class="schedule-card">
+        <div class="schedule-icon">🕯️</div>
+        <h3 class="schedule-title">수요예배</h3>
+        <p class="schedule-time">매주 수요일 오후 7:20</p>
+        <p class="schedule-location">임마누엘성전 [3F]</p>
+      </div>
+
+      <div class="schedule-card">
+        <div class="schedule-icon">🙏</div>
+        <h3 class="schedule-title">금요생수의강</h3>
+        <p class="schedule-time">매주 금요일 오후 8:30</p>
+        <p class="schedule-location">예루살렘성전 [3F]</p>
+      </div>
+    </div>
+
+    <!-- 다음세대 예배 시간표 -->
+    <h2 style="font-size: 2rem; font-weight: 700; color: var(--church-text); margin-top: 4rem; margin-bottom: 2rem;">다음세대예배</h2>
+    <div class="schedule-grid">
+      <div class="schedule-card">
+        <div class="schedule-icon">👶</div>
+        <h3 class="schedule-title">영아부</h3>
+        <p class="schedule-time">주일 오전 11:00</p>
+        <p class="schedule-location">사랑성전 [1F]</p>
+      </div>
+
+      <div class="schedule-card">
+        <div class="schedule-icon">🧒</div>
+        <h3 class="schedule-title">유치부</h3>
+        <p class="schedule-time">주일 오전 11:00</p>
+        <p class="schedule-location">믿음성전 [2F]</p>
+      </div>
+
+      <div class="schedule-card">
+        <div class="schedule-icon">👦</div>
+        <h3 class="schedule-title">유년부</h3>
+        <p class="schedule-time">주일 오전 11:00</p>
+        <p class="schedule-location">소망성전 [2F]</p>
+      </div>
+
+      <div class="schedule-card">
+        <div class="schedule-icon">👧</div>
+        <h3 class="schedule-title">초등부</h3>
+        <p class="schedule-time">주일 오전 11:00</p>
+        <p class="schedule-location">화평성전 [4F]</p>
+      </div>
+
+      <div class="schedule-card">
+        <div class="schedule-icon">🎓</div>
+        <h3 class="schedule-title">중등부</h3>
+        <p class="schedule-time">주일 오전 11:00</p>
+        <p class="schedule-location">벧엘성전 [4F]</p>
+      </div>
+
+      <div class="schedule-card">
+        <div class="schedule-icon">📚</div>
+        <h3 class="schedule-title">고등부</h3>
+        <p class="schedule-time">주일 오전 9:00</p>
+        <p class="schedule-location">벧엘성전 [4F]</p>
+      </div>
+
+      <div class="schedule-card">
+        <div class="schedule-icon">🌐</div>
+        <h3 class="schedule-title">영어예배부</h3>
+        <p class="schedule-time">주일 오후 1:20</p>
+        <p class="schedule-location">벧엘성전 [4F]</p>
+      </div>
+
+      <div class="schedule-card">
+        <div class="schedule-icon">🎤</div>
+        <h3 class="schedule-title">청년부</h3>
+        <p class="schedule-time">주일 오후 1:00</p>
+        <p class="schedule-location">예루살렘성전 [3F]</p>
+        <p class="schedule-location" style="font-size: 0.8125rem; margin-top: 0.5rem;">화요기도 오후 8:00 / 수요예배 오후 8:30</p>
+      </div>
+
+      <div class="schedule-card">
+        <div class="schedule-icon">👨‍👩‍👧‍👦</div>
+        <h3 class="schedule-title">젊은부부</h3>
+        <p class="schedule-time">주일 오후 2:40</p>
+        <p class="schedule-location">사랑성전 [1F]</p>
+      </div>
+    </div>
+
+    <!-- 온라인 예배 -->
+    <div class="intro-card" style="background: var(--church-bg-light); border: 1px solid var(--church-border); border-radius: 8px; padding: 3rem; margin-bottom: 4rem;">
+      <h2 style="font-size: 2rem; font-weight: 700; color: var(--church-primary); margin-bottom: 1.5rem;">온라인 예배</h2>
+      <p style="font-size: 1.0625rem; line-height: 1.8; margin-bottom: 1rem;">
+        성복교회는 온라인 예배를 통해 언제 어디서나 함께 예배할 수 있습니다.
+        YouTube 채널을 통해 실시간 방송되며, 다시보기도 가능합니다.
+      </p>
+      <div class="youtube-live-wrapper" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
+        <iframe
+          style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 8px;"
+          src="https://www.youtube.com/embed/NpjUJd1EoJI?si=6L8PFNUxr-Q"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen>
+        </iframe>
+      </div>
+      <div style="display: flex; gap: 1rem; margin-top: 1.5rem; justify-content: center;">
+        <a href="https://www.youtube.com/watch?v=NpjUJd1EoJI" target="_blank" style="display: inline-block; padding: 0.75rem 2rem; background: var(--church-primary); color: white; text-decoration: none; border-radius: 4px; font-weight: 600; transition: all 0.3s ease;">
+          YouTube 채널 바로가기
+        </a>
+      </div>
+    </div>
+
+    <!-- 주일 설교 -->
+    <div class="sermon-list-section">
+      <h2>최근 설교 말씀</h2>
+      <div class="sermon-grid">
+        <div class="sermon-card">
+          <div class="sermon-thumbnail">
+            📖
+            <div class="sermon-play-btn">▶</div>
+          </div>
+          <div class="sermon-content">
+            <p class="sermon-date">2024.03.17</p>
+            <h3 class="sermon-title">선한 목자의 음성을 따르라</h3>
+            <p class="sermon-pastor">김성복 담임목사</p>
+            <p class="sermon-verse">요한복음 10:11-18</p>
+          </div>
+        </div>
+
+        <div class="sermon-card">
+          <div class="sermon-thumbnail" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+            ✝️
+            <div class="sermon-play-btn">▶</div>
+          </div>
+          <div class="sermon-content">
+            <p class="sermon-date">2024.03.10</p>
+            <h3 class="sermon-title">부활의 소망으로 살아가라</h3>
+            <p class="sermon-pastor">김성복 담임목사</p>
+            <p class="sermon-verse">고린도전서 15:51-58</p>
+          </div>
+        </div>
+
+        <div class="sermon-card">
+          <div class="sermon-thumbnail" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+            🙏
+            <div class="sermon-play-btn">▶</div>
+          </div>
+          <div class="sermon-content">
+            <p class="sermon-date">2024.03.03</p>
+            <h3 class="sermon-title">기도하는 삶</h3>
+            <p class="sermon-pastor">김성복 담임목사</p>
+            <p class="sermon-verse">누가복음 11:1-13</p>
+          </div>
+        </div>
+
+        <div class="sermon-card">
+          <div class="sermon-thumbnail" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+            ❤️
+            <div class="sermon-play-btn">▶</div>
+          </div>
+          <div class="sermon-content">
+            <p class="sermon-date">2024.02.25</p>
+            <h3 class="sermon-title">서로 사랑하라</h3>
+            <p class="sermon-pastor">김성복 담임목사</p>
+            <p class="sermon-verse">요한복음 13:34-35</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: 3rem;">
+        <a href="#" style="display: inline-block; padding: 1rem 3rem; border: 2px solid var(--church-primary); color: var(--church-primary); text-decoration: none; border-radius: 4px; font-weight: 600; transition: all 0.3s ease;">
+          설교 말씀 더보기
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-content">
+        <div class="footer-about">
+          <h3>성복교회</h3>
+          <p>주소: 서울특별시 강남구 테헤란로 123</p>
+          <p>전화: 02-1234-5678</p>
+          <p>팩스: 02-1234-5679</p>
+          <p>이메일: info@sungbok.church</p>
+        </div>
+        <div class="footer-links">
+          <h4>바로가기</h4>
+          <ul>
+            <li><a href="church-intro.html">교회소개</a></li>
+            <li><a href="worship.html">예배안내</a></li>
+            <li><a href="ministries.html">다음세대</a></li>
+            <li><a href="news.html">교회소식</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>관련 사이트</h4>
+          <ul>
+            <li><a href="#">장로회신학대학교</a></li>
+            <li><a href="#">한국기독교총연합회</a></li>
+            <li><a href="#">세계선교회</a></li>
+            <li><a href="#">기독교방송</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 성복교회. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

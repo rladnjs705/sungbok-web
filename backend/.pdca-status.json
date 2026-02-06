@@ -1,0 +1,78 @@
+{
+  "mockup": {
+    "phase": "act",
+    "feature": "Phase 3 Mockup & Prototype",
+    "startedAt": "2026-02-04T13:51:00Z",
+    "updatedAt": "2026-02-04T16:00:00Z",
+    "matchRate": 95,
+    "iterationCount": 1,
+    "tasks": {
+      "plan": "completed",
+      "design": "completed",
+      "do": "completed",
+      "check": "completed",
+      "act": "completed"
+    },
+    "documents": {
+      "plan": "docs/01-plan/features/mockup.plan.md",
+      "design": "docs/02-design/features/mockup.design.md",
+      "implementation": "docs/03-implementation/mockup-implementation-guide.md",
+      "analysis": "docs/03-analysis/mockup.analysis.md",
+      "iteration": "docs/03-analysis/mockup.iteration-1.md"
+    },
+    "implementation": {
+      "status": "Week 1-4 완료",
+      "filesCreated": 48,
+      "css": 7,
+      "js": 6,
+      "html": 30,
+      "assets": 5,
+      "progress": {
+        "foundation": "완료 (CSS/JS 기반)",
+        "corePages": "완료 (홈, 공지, 설교)",
+        "allPages": "완료 (30개 전체 페이지)",
+        "assets": "완료 (디렉토리 구조)"
+      }
+    },
+    "analysis": {
+      "matchRate": 95,
+      "cssFiles": "100% (7/7)",
+      "jsFiles": "100% (6/6)",
+      "designSystem": "100% (61/61)",
+      "components": "97% (28/29)",
+      "htmlPages": "100% (30/30)",
+      "responsiveDesign": "100% (5/5)",
+      "accessibility": "91% (10/11)",
+      "jsFunctionality": "100% (12/12)",
+      "gaps": {
+        "critical": "모두 해결",
+        "high": "모두 해결",
+        "medium": "모두 해결"
+      },
+      "recommendation": "PDCA 완료 보고서 생성 준비 완료"
+    },
+    "iteration": {
+      "cycle": 1,
+      "maxIterations": 5,
+      "targetReached": true,
+      "improvements": {
+        "htmlPages": "+27 pages (3→30)",
+        "cssVariables": "+5 variables (완료)",
+        "assetsStructure": "생성 완료"
+      },
+      "matchRateGain": 24,
+      "status": "SUCCESS"
+    }
+  },
+  "church": {
+    "phase": "archived",
+    "feature": "Phase 4 Backend API",
+    "startedAt": "2026-02-03T00:00:00Z",
+    "completedAt": "2026-02-04T13:40:00Z",
+    "archivedAt": "2026-02-04T13:44:00Z",
+    "matchRate": 96,
+    "qaScore": 86,
+    "status": "Production Ready",
+    "archivedTo": "docs/archive/2026-02/church/"
+  }
+}

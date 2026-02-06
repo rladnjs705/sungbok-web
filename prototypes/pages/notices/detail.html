@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>주일예배 시간 변경 안내 - 교회 소식 - 성복교회</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/reset.css">
+  <link rel="stylesheet" href="/css/variables.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/navigation.css">
+  <link rel="stylesheet" href="/css/pages.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+  <style>
+    .notice-detail {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .notice-detail-header {
+      padding: var(--space-8) 0;
+      border-bottom: 2px solid var(--color-border);
+      margin-bottom: var(--space-8);
+    }
+
+    .notice-detail-title {
+      font-size: var(--text-4xl);
+      font-weight: var(--font-bold);
+      color: var(--color-text-primary);
+      margin-bottom: var(--space-4);
+      line-height: var(--leading-tight);
+    }
+
+    .notice-detail-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-4);
+      align-items: center;
+      color: var(--color-text-tertiary);
+      font-size: var(--text-sm);
+    }
+
+    .notice-detail-meta .badge {
+      margin-right: var(--space-2);
+    }
+
+    .notice-detail-content {
+      font-size: var(--text-lg);
+      line-height: var(--leading-relaxed);
+      color: var(--color-text-secondary);
+      margin-bottom: var(--space-12);
+    }
+
+    .notice-detail-content p {
+      margin-bottom: var(--space-6);
+    }
+
+    .notice-detail-content h2 {
+      font-size: var(--text-2xl);
+      font-weight: var(--font-semibold);
+      color: var(--color-text-primary);
+      margin-top: var(--space-10);
+      margin-bottom: var(--space-4);
+    }
+
+    .notice-detail-content ul,
+    .notice-detail-content ol {
+      margin-bottom: var(--space-6);
+      padding-left: var(--space-8);
+    }
+
+    .notice-detail-content li {
+      margin-bottom: var(--space-3);
+    }
+
+    .notice-highlight {
+      background: var(--color-gray-50);
+      border-left: 3px solid var(--color-secondary-500);
+      padding: var(--space-6);
+      margin: var(--space-8) 0;
+      border-radius: var(--radius-md);
+    }
+
+    .notice-highlight-title {
+      font-size: var(--text-lg);
+      font-weight: var(--font-semibold);
+      color: var(--color-text-primary);
+      margin-bottom: var(--space-2);
+    }
+
+    .notice-attachments {
+      background: var(--color-bg-secondary);
+      padding: var(--space-6);
+      border-radius: var(--radius-lg);
+      margin-bottom: var(--space-8);
+    }
+
+    .notice-attachments-title {
+      font-size: var(--text-lg);
+      font-weight: var(--font-semibold);
+      color: var(--color-text-primary);
+      margin-bottom: var(--space-4);
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+    }
+
+    .attachment-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-3) var(--space-4);
+      background: white;
+      border-radius: var(--radius-md);
+      margin-bottom: var(--space-2);
+      transition: all 0.2s;
+    }
+
+    .attachment-item:hover {
+      background: var(--color-primary-50);
+      transform: translateX(4px);
+    }
+
+    .attachment-info {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+
+    .attachment-icon {
+      width: 32px;
+      height: 32px;
+      background: var(--color-gray-100);
+      color: var(--color-text-secondary);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--text-sm);
+      font-weight: var(--font-bold);
+    }
+
+    .attachment-name {
+      font-size: var(--text-base);
+      color: var(--color-text-primary);
+    }
+
+    .attachment-size {
+      font-size: var(--text-sm);
+      color: var(--color-text-tertiary);
+    }
+
+    .notice-actions {
+      display: flex;
+      justify-content: flex-end;
+      padding: var(--space-8) 0;
+      margin-bottom: var(--space-8);
+    }
+
+    .notice-navigation {
+      border-top: 1px solid var(--color-border);
+      padding-top: var(--space-8);
+    }
+
+    .notice-nav-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--space-4);
+      margin-bottom: var(--space-2);
+      border-radius: var(--radius-md);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .notice-nav-item:hover {
+      background: var(--color-bg-secondary);
+    }
+
+    .notice-nav-label {
+      font-size: var(--text-sm);
+      color: var(--color-text-tertiary);
+      margin-bottom: var(--space-1);
+    }
+
+    .notice-nav-title {
+      font-size: var(--text-base);
+      color: var(--color-text-primary);
+      font-weight: var(--font-medium);
+    }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">본문으로 건너뛰기</a>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container navbar-container">
+      <a href="/" class="navbar-logo">
+        <span>성복교회</span>
+      </a>
+      <ul class="navbar-menu">
+        <li><a href="/pages/notices/list.html" class="navbar-link">교회 소식</a></li>
+        <li><a href="/pages/sermons/list.html" class="navbar-link">설교 말씀</a></li>
+        <li><a href="/pages/worship/schedule.html" class="navbar-link">예배 안내</a></li>
+        <li><a href="/pages/galleries/image-list.html" class="navbar-link">갤러리</a></li>
+        <li><a href="/pages/about/church.html" class="navbar-link">교회 소개</a></li>
+      </ul>
+      <button class="navbar-toggle" aria-label="메뉴 열기">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu">
+    <div class="mobile-menu-header">
+      <span>성복교회</span>
+      <button class="mobile-menu-close">×</button>
+    </div>
+    <nav class="mobile-menu-nav">
+      <a href="/pages/notices/list.html">교회 소식</a>
+      <a href="/pages/sermons/list.html">설교 말씀</a>
+      <a href="/pages/worship/schedule.html">예배 안내</a>
+      <a href="/pages/galleries/image-list.html">갤러리</a>
+      <a href="/pages/about/church.html">교회 소개</a>
+    </nav>
+  </div>
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="container">
+      <nav class="breadcrumb">
+        <a href="/">홈</a>
+        <span>/</span>
+        <a href="/pages/notices/list.html">교회 소식</a>
+        <span>/</span>
+        <span>주일예배 시간 변경 안내</span>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <main id="main-content" class="page-content">
+    <div class="container">
+      <article class="notice-detail">
+        <!-- Notice Header -->
+        <header class="notice-detail-header">
+          <h1 class="notice-detail-title">주일예배 시간 변경 안내</h1>
+          <div class="notice-detail-meta">
+            <span class="badge badge-warning">중요</span>
+            <span>📅 2026년 2월 4일</span>
+            <span>👁 조회 245</span>
+            <span>✍️ 담당자: 행정팀</span>
+          </div>
+        </header>
+
+        <!-- Notice Content -->
+        <div class="notice-detail-content">
+          <p>사랑하는 성도 여러분께 말씀드립니다.</p>
+
+          <p>2월 둘째 주부터 주일예배 시간이 변경됩니다. 교회 성장과 더 나은 예배 환경을 위해 많은 기도와 논의 끝에 결정하게 되었습니다.</p>
+
+          <div class="notice-highlight">
+            <div class="notice-highlight-title">📌 중요 변경사항</div>
+            <p style="margin: 0;"><strong>변경 시행일:</strong> 2026년 2월 11일 (둘째 주 주일)부터</p>
+          </div>
+
+          <h2>변경 내용</h2>
+          <p>주일예배 시간이 다음과 같이 변경됩니다:</p>
+
+          <table style="width: 100%; border-collapse: collapse; margin: var(--space-6) 0;">
+            <thead>
+              <tr style="background: var(--color-bg-secondary);">
+                <th style="padding: var(--space-4); text-align: left; border: 1px solid var(--color-border);">구분</th>
+                <th style="padding: var(--space-4); text-align: left; border: 1px solid var(--color-border);">기존 시간</th>
+                <th style="padding: var(--space-4); text-align: left; border: 1px solid var(--color-border);">변경 시간</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="padding: var(--space-4); border: 1px solid var(--color-border);"><strong>1부 예배</strong></td>
+                <td style="padding: var(--space-4); border: 1px solid var(--color-border);">오전 9:00</td>
+                <td style="padding: var(--space-4); border: 1px solid var(--color-border); color: var(--color-secondary-600); font-weight: var(--font-semibold);">오전 9:30</td>
+              </tr>
+              <tr style="background: var(--color-bg-secondary);">
+                <td style="padding: var(--space-4); border: 1px solid var(--color-border);"><strong>2부 예배</strong></td>
+                <td style="padding: var(--space-4); border: 1px solid var(--color-border);">오전 10:30</td>
+                <td style="padding: var(--space-4); border: 1px solid var(--color-border); color: var(--color-secondary-600); font-weight: var(--font-semibold);">오전 11:00</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h2>변경 이유</h2>
+          <ul>
+            <li><strong>출석 성도 증가:</strong> 최근 출석 성도가 증가하여 예배당 수용 인원을 고려한 시간 조정이 필요합니다.</li>
+            <li><strong>교통 편의성:</strong> 대중교통 이용 성도들의 접근성을 높이기 위함입니다.</li>
+            <li><strong>주차 공간 확보:</strong> 두 예배 시간의 간격을 조정하여 주차 공간을 효율적으로 활용합니다.</li>
+            <li><strong>예배 준비 시간:</strong> 사역자들이 보다 충분한 준비 시간을 가질 수 있습니다.</li>
+          </ul>
+
+          <h2>안내 사항</h2>
+          <ol>
+            <li><strong>첫 주 적응 기간:</strong> 2월 11일(첫 변경 주일)에는 안내 봉사자를 추가 배치합니다.</li>
+            <li><strong>주일학교:</strong> 주일학교 시간은 변경 없이 기존과 동일합니다.</li>
+            <li><strong>교통 안내:</strong> 변경된 시간대의 셔틀버스 운행 시간표는 별도 공지됩니다.</li>
+            <li><strong>문의사항:</strong> 궁금하신 사항은 교회 사무실(02-1234-5678)로 연락 주시기 바랍니다.</li>
+          </ol>
+
+          <div class="notice-highlight">
+            <div class="notice-highlight-title">🙏 기도 부탁</div>
+            <p style="margin: 0;">새로운 예배 시간으로의 전환이 순조롭게 이루어질 수 있도록 성도 여러분의 많은 협조와 기도 부탁드립니다.</p>
+          </div>
+
+          <p>하나님의 은혜가 여러분과 함께 하시기를 기도합니다.</p>
+          <p style="text-align: right; margin-top: var(--space-8);">
+            <strong>성복교회 담임목사 김○○</strong><br>
+            <strong>행정팀 일동</strong>
+          </p>
+        </div>
+
+        <!-- Attachments -->
+        <div class="notice-attachments">
+          <div class="notice-attachments-title">
+            <span>📎</span>
+            <span>첨부파일</span>
+          </div>
+          <div class="attachment-item">
+            <div class="attachment-info">
+              <div class="attachment-icon">PDF</div>
+              <div>
+                <div class="attachment-name">예배시간_변경_안내문.pdf</div>
+                <div class="attachment-size">245 KB</div>
+              </div>
+            </div>
+            <button class="btn btn-sm btn-outline">다운로드</button>
+          </div>
+          <div class="attachment-item">
+            <div class="attachment-info">
+              <div class="attachment-icon">IMG</div>
+              <div>
+                <div class="attachment-name">셔틀버스_시간표.jpg</div>
+                <div class="attachment-size">1.2 MB</div>
+              </div>
+            </div>
+            <button class="btn btn-sm btn-outline">다운로드</button>
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="notice-actions">
+          <a href="/pages/notices/list.html" class="btn btn-primary">목록으로</a>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="notice-navigation">
+          <a href="#" class="notice-nav-item">
+            <div>
+              <div class="notice-nav-label">이전 글</div>
+              <div class="notice-nav-title">새벽기도회 일정 안내</div>
+            </div>
+            <span>←</span>
+          </a>
+          <a href="#" class="notice-nav-item">
+            <div>
+              <div class="notice-nav-label">다음 글</div>
+              <div class="notice-nav-title">2월 전교인 수련회 안내</div>
+            </div>
+            <span>→</span>
+          </a>
+        </nav>
+      </article>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>성복교회</h3>
+          <p>주소: 서울시 성북구 성북동 123-45</p>
+          <p>전화: 02-1234-5678</p>
+          <p>이메일: info@sungbok.church</p>
+        </div>
+        <div class="footer-section">
+          <h4>바로가기</h4>
+          <ul>
+            <li><a href="/pages/about/church.html">교회 소개</a></li>
+            <li><a href="/pages/about/pastors.html">목회자 소개</a></li>
+            <li><a href="/pages/about/ministries.html">사역 안내</a></li>
+            <li><a href="/pages/about/bulletins.html">주보 다운로드</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>소셜 미디어</h4>
+          <div class="footer-social">
+            <a href="#" aria-label="YouTube">▶</a>
+            <a href="#" aria-label="Facebook">f</a>
+            <a href="#" aria-label="Instagram">📷</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 성복교회. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="/js/utils.js"></script>
+  <script src="/js/navigation.js"></script>
+</body>
+</html>

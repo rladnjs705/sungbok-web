@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>캄보디아 선교 - 성복교회</title>
+  <link rel="stylesheet" href="../css/hero-modern.css">
+  <style>
+    .breadcrumb {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 2rem;
+      font-size: 0.875rem;
+      color: var(--church-text-light);
+    }
+    .breadcrumb a {
+      color: var(--church-primary);
+      text-decoration: none;
+    }
+    .mission-hero {
+      background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
+      padding: 4rem 2rem;
+      text-align: center;
+      color: white;
+    }
+    .mission-hero h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    .mission-hero .country-flag {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+    }
+    .mission-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+    .mission-card {
+      background: white;
+      border: 1px solid var(--church-border);
+      border-radius: 8px;
+      padding: 3rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+    .mission-card h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--church-primary);
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid var(--church-border);
+    }
+    .mission-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+    .stat-box {
+      text-align: center;
+      padding: 2rem;
+      background: var(--church-bg-light);
+      border-radius: 8px;
+    }
+    .stat-number {
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--church-primary);
+      margin-bottom: 0.5rem;
+    }
+    .stat-label {
+      font-size: 1rem;
+      color: var(--church-text-light);
+    }
+    .missionary-profile {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      background: var(--church-bg-light);
+      padding: 2rem;
+      border-radius: 8px;
+      margin: 2rem 0;
+    }
+    .missionary-photo {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid white;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    .back-button {
+      text-align: center;
+      margin-top: 4rem;
+    }
+    .back-button a {
+      display: inline-block;
+      padding: 1rem 3rem;
+      background: var(--church-primary);
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+    @media (max-width: 768px) {
+      .mission-stats {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-container">
+      <a href="../index.html" class="logo">
+        <img src="../images/main_logo.png" alt="성복교회" class="logo-image">
+      </a>
+      <nav class="main-nav">
+        <a href="../church-intro.html" class="nav-link">교회소개</a>
+        <a href="../worship.html" class="nav-link">예배안내</a>
+        <a href="../ministries.html" class="nav-link">다음세대</a>
+        <a href="../news.html" class="nav-link">교회소식</a>
+        <a href="../mission.html" class="nav-link">선교·사역</a>
+      </nav>
+      <div class="header-actions">
+        <a href="#" class="btn-login">로그인</a>
+        <a href="#" class="btn-register">회원가입</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    <a href="../index.html">홈</a> &gt;
+    <a href="../mission.html">선교·사역</a> &gt;
+    <strong>캄보디아 선교</strong>
+  </div>
+
+  <!-- Mission Hero -->
+  <section class="mission-hero">
+    <div class="country-flag">🇰🇭</div>
+    <h1>캄보디아 선교</h1>
+    <p style="font-size: 1.25rem; opacity: 0.95;">Cambodia Mission Field</p>
+  </section>
+
+  <!-- Mission Content -->
+  <div class="mission-container">
+    <!-- 선교 현황 -->
+    <div class="mission-card">
+      <h2>선교 현황</h2>
+      <div class="mission-stats">
+        <div class="stat-box">
+          <div class="stat-number">3</div>
+          <div class="stat-label">파송 선교사</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">5</div>
+          <div class="stat-label">협력 교회</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">12</div>
+          <div class="stat-label">사역 연수</div>
+        </div>
+      </div>
+      <p style="font-size: 1.125rem; line-height: 1.8; margin-top: 2rem;">
+        성복교회는 2012년부터 캄보디아에 선교사를 파송하여
+        현지 교회 개척, 교육 사역, 의료 봉사 등 다양한 사역을 펼치고 있습니다.
+        특히 프놈펜과 씨엠립 지역을 중심으로 복음을 전하고 있으며,
+        현지인 목회자 양성에도 힘쓰고 있습니다.
+      </p>
+    </div>
+
+    <!-- 파송 선교사 -->
+    <div class="mission-card">
+      <h2>파송 선교사</h2>
+      <div class="missionary-profile">
+        <div style="flex: 1;">
+          <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem;">김선교 · 이사랑 선교사 부부</h3>
+          <p style="font-size: 1rem; color: var(--church-text-light); margin-bottom: 1rem;">프놈펜 지역 담당</p>
+          <p style="font-size: 1rem; line-height: 1.7;">
+            2012년부터 캄보디아 프놈펜에서 교회 개척 사역을 하고 있습니다.
+            현재 3개 교회를 개척하여 약 200명의 성도들과 함께 예배하고 있으며,
+            신학교를 운영하여 현지 목회자를 양성하고 있습니다.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 주요 사역 -->
+    <div class="mission-card">
+      <h2>주요 사역</h2>
+      <div style="display: grid; gap: 2rem;">
+        <div>
+          <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem; color: var(--church-primary);">
+            🏛️ 교회 개척 및 목회자 양성
+          </h3>
+          <p style="font-size: 1rem; line-height: 1.7;">
+            프놈펜과 씨엠립 지역에 교회를 개척하고, 현지 목회자를 양성하여
+            자립 교회를 세우는 데 힘쓰고 있습니다.
+          </p>
+        </div>
+
+        <div>
+          <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem; color: var(--church-primary);">
+            📚 교육 사역
+          </h3>
+          <p style="font-size: 1rem; line-height: 1.7;">
+            빈민 지역 아이들을 위한 공부방을 운영하고 있으며,
+            한국어 교육과 컴퓨터 교육을 통해 미래를 준비하도록 돕고 있습니다.
+          </p>
+        </div>
+
+        <div>
+          <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem; color: var(--church-primary);">
+            ⚕️ 의료 봉사
+          </h3>
+          <p style="font-size: 1rem; line-height: 1.7;">
+            연 2회 의료 봉사팀을 파송하여 무료 진료와 약품 제공,
+            건강 교육을 실시하고 있습니다.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 후원 안내 -->
+    <div class="mission-card">
+      <h2>후원 안내</h2>
+      <p style="font-size: 1.125rem; line-height: 1.8; margin-bottom: 2rem;">
+        캄보디아 선교를 위한 여러분의 기도와 후원을 부탁드립니다.
+      </p>
+      <div style="background: var(--church-bg-light); padding: 2rem; border-radius: 8px;">
+        <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem;">후원 계좌</h3>
+        <p style="font-size: 1.125rem; margin-bottom: 0.5rem;">
+          <strong>국민은행</strong> 123-456-789012
+        </p>
+        <p style="font-size: 1rem; color: var(--church-text-light);">
+          예금주: 성복교회 (캄보디아 선교)
+        </p>
+      </div>
+    </div>
+
+    <div class="back-button">
+      <a href="../mission.html">선교·사역 목록으로</a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-content">
+        <div class="footer-about">
+          <h3>성복교회</h3>
+          <p>전화: 02-1234-5678</p>
+          <p>이메일: info@sungbok.church</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 성복교회. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

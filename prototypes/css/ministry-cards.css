@@ -1,0 +1,368 @@
+/* =========================================
+   Ministry Cards Page
+   Phase 3 Mockup - HTML/CSS/JS Only
+   Design Tone: 고유성/개성 (각 부서별)
+   ========================================= */
+
+/* Page Variables */
+:root {
+  --page-bg: #f8fafc;
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+
+  /* 부서별 고유 색상 */
+  --sunday-school: #f472b6; /* Pink 400 */
+  --youth: #06b6d4; /* Cyan 500 */
+  --adult: #059669; /* Emerald 600 */
+  --worship: #8b5cf6; /* Violet 500 */
+  --mission: #f97316; /* Orange 500 */
+  --prayer: #3b82f6; /* Blue 500 */
+}
+
+/* Page Layout */
+.ministry-page {
+  min-height: 100vh;
+  background: var(--page-bg);
+  padding: 2rem 0;
+}
+
+/* Hero Section */
+.ministry-hero {
+  text-align: center;
+  padding: 4rem 2rem;
+  margin-bottom: 3rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.ministry-hero h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  margin-bottom: 1rem;
+  animation: fade-in-up 0.8s ease-out;
+}
+
+.ministry-hero p {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  opacity: 0.9;
+  animation: fade-in-up 0.8s ease-out 0.2s both;
+}
+
+/* Container */
+.ministry-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Ministry Grid */
+.ministry-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+/* Ministry Card Base */
+.ministry-card {
+  position: relative;
+  background: white;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  animation: fade-in-up 0.5s ease-out both;
+}
+
+.ministry-card:nth-child(1) { animation-delay: 0s; }
+.ministry-card:nth-child(2) { animation-delay: 0.1s; }
+.ministry-card:nth-child(3) { animation-delay: 0.2s; }
+.ministry-card:nth-child(4) { animation-delay: 0.3s; }
+.ministry-card:nth-child(5) { animation-delay: 0.4s; }
+.ministry-card:nth-child(6) { animation-delay: 0.5s; }
+
+.ministry-card:hover {
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+/* Card Header with unique colors */
+.ministry-card-header {
+  position: relative;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  overflow: hidden;
+}
+
+/* Pattern Backgrounds */
+.ministry-card-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.1;
+  background-size: 40px 40px;
+}
+
+/* Sunday School - Playful dots pattern */
+.ministry-card.sunday-school .ministry-card-header {
+  background: linear-gradient(135deg, var(--sunday-school), #ec4899);
+}
+
+.ministry-card.sunday-school .ministry-card-header::before {
+  background-image: radial-gradient(circle, white 1px, transparent 1px);
+}
+
+/* Youth - Modern stripes */
+.ministry-card.youth .ministry-card-header {
+  background: linear-gradient(135deg, var(--youth), #0891b2);
+}
+
+.ministry-card.youth .ministry-card-header::before {
+  background-image: repeating-linear-gradient(
+    45deg,
+    white,
+    white 10px,
+    transparent 10px,
+    transparent 20px
+  );
+}
+
+/* Adult - Classic grid */
+.ministry-card.adult .ministry-card-header {
+  background: linear-gradient(135deg, var(--adult), #047857);
+}
+
+.ministry-card.adult .ministry-card-header::before {
+  background-image:
+    linear-gradient(white 1px, transparent 1px),
+    linear-gradient(90deg, white 1px, transparent 1px);
+}
+
+/* Worship - Wavy pattern */
+.ministry-card.worship .ministry-card-header {
+  background: linear-gradient(135deg, var(--worship), #7c3aed);
+}
+
+.ministry-card.worship .ministry-card-header::before {
+  background-image: repeating-radial-gradient(
+    circle at 0 0,
+    transparent 0,
+    white 10px,
+    transparent 20px
+  );
+}
+
+/* Mission - Diagonal pattern */
+.ministry-card.mission .ministry-card-header {
+  background: linear-gradient(135deg, var(--mission), #ea580c);
+}
+
+.ministry-card.mission .ministry-card-header::before {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    white,
+    white 5px,
+    transparent 5px,
+    transparent 10px
+  );
+}
+
+/* Prayer - Circular pattern */
+.ministry-card.prayer .ministry-card-header {
+  background: linear-gradient(135deg, var(--prayer), #2563eb);
+}
+
+.ministry-card.prayer .ministry-card-header::before {
+  background-image: radial-gradient(circle, white 2px, transparent 2px);
+  background-size: 30px 30px;
+}
+
+/* Icon Container */
+.ministry-card-icon {
+  position: relative;
+  z-index: 1;
+  width: 5rem;
+  height: 5rem;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  font-size: 2.5rem;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+}
+
+.ministry-card:hover .ministry-card-icon {
+  transform: scale(1.1) rotate(5deg);
+}
+
+/* Title */
+.ministry-card-title {
+  position: relative;
+  z-index: 1;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: white;
+  text-align: center;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Card Body */
+.ministry-card-body {
+  padding: 2rem;
+}
+
+.ministry-card-description {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+}
+
+/* Stats */
+.ministry-card-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.ministry-card-stat {
+  text-align: center;
+}
+
+.ministry-card-stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.ministry-card-stat-label {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Activities */
+.ministry-card-activities {
+  margin-bottom: 1.5rem;
+}
+
+.ministry-card-activities h4 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.ministry-card-activities ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ministry-card-activities li {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  padding: 0.5rem 0;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.ministry-card-activities li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+/* Color-coded checkmarks */
+.ministry-card.sunday-school .ministry-card-activities li::before { color: var(--sunday-school); }
+.ministry-card.youth .ministry-card-activities li::before { color: var(--youth); }
+.ministry-card.adult .ministry-card-activities li::before { color: var(--adult); }
+.ministry-card.worship .ministry-card-activities li::before { color: var(--worship); }
+.ministry-card.mission .ministry-card-activities li::before { color: var(--mission); }
+.ministry-card.prayer .ministry-card-activities li::before { color: var(--prayer); }
+
+/* CTA Button */
+.ministry-card-cta {
+  width: 100%;
+  padding: 0.875rem 1.5rem;
+  border: none;
+  border-radius: 0.75rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.ministry-card.sunday-school .ministry-card-cta { background: linear-gradient(to right, var(--sunday-school), #ec4899); }
+.ministry-card.youth .ministry-card-cta { background: linear-gradient(to right, var(--youth), #0891b2); }
+.ministry-card.adult .ministry-card-cta { background: linear-gradient(to right, var(--adult), #047857); }
+.ministry-card.worship .ministry-card-cta { background: linear-gradient(to right, var(--worship), #7c3aed); }
+.ministry-card.mission .ministry-card-cta { background: linear-gradient(to right, var(--mission), #ea580c); }
+.ministry-card.prayer .ministry-card-cta { background: linear-gradient(to right, var(--prayer), #2563eb); }
+
+.ministry-card-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.ministry-card-cta svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+/* Animations */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .ministry-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .ministry-hero {
+    padding: 3rem 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .ministry-container {
+    padding: 0 1rem;
+  }
+
+  .ministry-card-stats {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+}
