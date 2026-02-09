@@ -15,6 +15,14 @@ services:
       - postgres_data:/var/lib/postgresql
     networks:
       - sungbok-network
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 2G
+        reservations:
+          cpus: '1.0'
+          memory: 1G
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 10s
@@ -30,6 +38,14 @@ services:
       - "6379:6379"
     networks:
       - sungbok-network
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M
+        reservations:
+          cpus: '0.5'
+          memory: 256M
     healthcheck:
       test: ["CMD-SHELL", "valkey-cli ping | grep PONG"]
       interval: 10s
@@ -69,19 +85,116 @@ services:
       LOGGING_LEVEL_ROOT: INFO
       LOGGING_LEVEL_COM_SUNGBOK_CHURCH: DEBUG
       LOGGING_PATTERN_CONSOLE: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
-    ports:
-      - "8080:8080"
+
+      # Server Port
+      SERVER_PORT: 8081
     networks:
       - sungbok-network
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 2560M  # JVM Xmx 2g + overhead 512M
+        reservations:
+          cpus: '1.0'
+          memory: 1280M
     healthcheck:
-      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8080/actuator/health"]
-      interval: 30s
-      timeout: 10s
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8081/actuator/health"]
+      interval: 10s  # 30s → 10s (Failover 시간 단축)
+      timeout: 5s    # 10s → 5s
       retries: 3
       start_period: 60s
 
+  frontend:
+    image: node:24-alpine
+    container_name: sungbok-frontend
+    working_dir: /app
+    volumes:
+      - ../../frontend:/app
+      - /app/node_modules
+      - /app/.next
+    environment:
+      NEXT_PUBLIC_API_URL: http://backend:8081/api
+      NODE_ENV: development
+      PORT: 3001
+    command: sh -c "npm install -g pnpm && pnpm install && pnpm dev"
+    networks:
+      - sungbok-network
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M
+        reservations:
+          cpus: '0.5'
+          memory: 256M
+    depends_on:
+      - backend
+
+  nginx:
+    image: nginx:alpine
+    container_name: sungbok-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./nginx/ssl:/etc/nginx/ssl:ro
+    networks:
+      - sungbok-network
+    depends_on:
+      - backend
+      - frontend
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M
+        reservations:
+          cpus: '0.25'
+          memory: 128M
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  jenkins:
+    image: jenkins/jenkins:lts-jdk25
+    container_name: sungbok-jenkins
+    user: root
+    ports:
+      - "8082:8080"
+      - "50000:50000"
+    volumes:
+      - jenkins_data:/var/jenkins_home
+      - ../../:/workspace
+      - ../../jenkins-config/jenkins.yaml:/var/jenkins_home/casc_configs/jenkins.yaml
+    environment:
+      - CASC_JENKINS_CONFIG=/var/jenkins_home/casc_configs/jenkins.yaml
+      - JAVA_OPTS=-Djenkins.install.runSetupWizard=false -Dhudson.security.csrf.DefaultCrumbIssuer.EXCLUDE_SESSION_ID=true
+      - JENKINS_URL=http://localhost:8082
+    networks:
+      - sungbok-network
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 2G
+        reservations:
+          cpus: '1.0'
+          memory: 1G
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8080/login || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 120s
+
 volumes:
   postgres_data:
+  jenkins_data:
 
 networks:
   sungbok-network:
