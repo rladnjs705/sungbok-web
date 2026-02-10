@@ -1,7 +1,12 @@
 package com.sungbok.church.service;
 
+import com.sungbok.church.domain.enums.WorshipType;
+import org.springframework.data.domain.PageRequest;
+
 import com.sungbok.church.domain.entity.Sermon;
 import com.sungbok.church.domain.repository.SermonRepository;
+import com.sungbok.church.dto.projection.SermonProjectionDto;
+import com.sungbok.church.exception.ResourceNotFoundException;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -32,12 +37,19 @@ public class SermonService {
     }
 
     /**
+     * 공개된 설교 목록 조회 (DTO Projection, QueryDSL - LazyInitializationException 방지)
+     */
+    public Page<SermonProjectionDto> getPublishedSermonsProjectionDto(Pageable pageable) {
+        return sermonRepository.findPublishedSermons(pageable);
+    }
+
+    /**
      * 설교 ID로 조회 및 조회수 증가
      */
     @Transactional
     public Sermon getSermonById(Long id) {
         Sermon sermon = sermonRepository.findById(id)
-            .orElseThrow(() -> new IllegalArgumentException("설교를 찾을 수 없습니다: " + id));
+            .orElseThrow(() -> new ResourceNotFoundException("설교를 찾을 수 없습니다: " + id));
 
         // 조회수 증가
         sermonRepository.incrementViewCount(id);
@@ -53,6 +65,13 @@ public class SermonService {
      */
     public Page<Sermon> getSermonsByPreacher(String preacher, Pageable pageable) {
         return sermonRepository.findByPreacherAndIsPublishedTrue(preacher, pageable);
+    }
+
+    /**
+     * 설교자별 설교 조회 (Projection, QueryDSL)
+     */
+    public Page<SermonProjectionDto> getSermonsByPreacherProjection(String preacher, Pageable pageable) {
+        return sermonRepository.findByPreacher(preacher, pageable);
     }
 
     /**
@@ -76,10 +95,24 @@ public class SermonService {
     }
 
     /**
+     * 추천 설교 목록 (Projection, QueryDSL)
+     */
+    public List<SermonProjectionDto> getFeaturedSermonsProjection() {
+        return sermonRepository.findFeatured();
+    }
+
+    /**
      * 최신 설교 N개 조회
      */
     public List<Sermon> getLatestSermons() {
         return sermonRepository.findTop10ByIsPublishedTrueOrderBySermonDateDesc();
+    }
+
+    /**
+     * 최신 설교 N개 조회 (Projection, QueryDSL)
+     */
+    public List<SermonProjectionDto> getLatestSermonsProjection() {
+        return sermonRepository.findLatest();
     }
 
     /**
@@ -112,7 +145,7 @@ public class SermonService {
     @Transactional
     public Sermon updateSermon(Long id, Sermon updatedSermon) {
         Sermon sermon = sermonRepository.findById(id)
-            .orElseThrow(() -> new IllegalArgumentException("설교를 찾을 수 없습니다: " + id));
+            .orElseThrow(() -> new ResourceNotFoundException("설교를 찾을 수 없습니다: " + id));
 
         sermon.setTitle(updatedSermon.getTitle());
         sermon.setPreacher(updatedSermon.getPreacher());
@@ -135,9 +168,27 @@ public class SermonService {
     @Transactional
     public void deleteSermon(Long id) {
         if (!sermonRepository.existsById(id)) {
-            throw new IllegalArgumentException("설교를 찾을 수 없습니다: " + id);
+            throw new ResourceNotFoundException("설교를 찾을 수 없습니다: " + id);
         }
         sermonRepository.deleteById(id);
+    }
+
+    /**
+     * 예배 유형별 최신 설교 조회
+     */
+    public List<Sermon> getLatestSermonsByWorshipType(WorshipType worshipType, int limit) {
+        Page<Sermon> page = sermonRepository.findByWorshipTypeAndIsPublishedTrueOrderBySermonDateDesc(
+            worshipType,
+            PageRequest.of(0, limit)
+        );
+        return page.getContent();
+    }
+
+    /**
+     * 예배 유형별 최신 설교 조회 (Projection, QueryDSL)
+     */
+    public List<SermonProjectionDto> getLatestSermonsByWorshipTypeProjection(WorshipType worshipType, int limit) {
+        return sermonRepository.findByWorshipType(worshipType, limit);
     }
 
     /**

@@ -1,5 +1,7 @@
 package com.sungbok.church.controller;
 
+import com.sungbok.church.domain.enums.WorshipType;
+
 import com.sungbok.church.domain.entity.Sermon;
 import com.sungbok.church.domain.entity.Worship;
 import com.sungbok.church.domain.repository.WorshipRepository;
@@ -42,8 +44,8 @@ public class SermonController {
     @GetMapping
     public ResponseEntity<Page<SermonResponse>> getPublishedSermons(
             @PageableDefault(size = 20, sort = "sermonDate", direction = Sort.Direction.DESC) Pageable pageable) {
-        Page<SermonResponse> sermons = sermonService.getPublishedSermons(pageable)
-            .map(SermonResponse::from);
+        Page<SermonResponse> sermons = sermonService.getPublishedSermonsProjectionDto(pageable)
+            .map(SermonResponse::fromProjectionDto);
         return ResponseEntity.ok(sermons);
     }
 
@@ -63,8 +65,8 @@ public class SermonController {
     public ResponseEntity<Page<SermonResponse>> getSermonsByPreacher(
             @PathVariable String preacher,
             @PageableDefault(size = 20) Pageable pageable) {
-        Page<SermonResponse> sermons = sermonService.getSermonsByPreacher(preacher, pageable)
-            .map(SermonResponse::from);
+        Page<SermonResponse> sermons = sermonService.getSermonsByPreacherProjection(preacher, pageable)
+            .map(SermonResponse::fromProjectionDto);
         return ResponseEntity.ok(sermons);
     }
 
@@ -86,8 +88,8 @@ public class SermonController {
      */
     @GetMapping("/featured")
     public ResponseEntity<List<SermonResponse>> getFeaturedSermons() {
-        List<SermonResponse> sermons = sermonService.getFeaturedSermons().stream()
-            .map(SermonResponse::from)
+        List<SermonResponse> sermons = sermonService.getFeaturedSermonsProjection().stream()
+            .map(SermonResponse::fromProjectionDto)
             .collect(Collectors.toList());
         return ResponseEntity.ok(sermons);
     }
@@ -97,8 +99,8 @@ public class SermonController {
      */
     @GetMapping("/latest")
     public ResponseEntity<List<SermonResponse>> getLatestSermons() {
-        List<SermonResponse> sermons = sermonService.getLatestSermons().stream()
-            .map(SermonResponse::from)
+        List<SermonResponse> sermons = sermonService.getLatestSermonsProjection().stream()
+            .map(SermonResponse::fromProjectionDto)
             .collect(Collectors.toList());
         return ResponseEntity.ok(sermons);
     }
@@ -124,6 +126,23 @@ public class SermonController {
             @PageableDefault(size = 20) Pageable pageable) {
         Page<SermonResponse> sermons = sermonService.searchByTag(tag, pageable)
             .map(SermonResponse::from);
+        return ResponseEntity.ok(sermons);
+    }
+
+    /**
+     * 예배 유형별 최신 설교 조회
+     * GET /api/sermons/worship-type/{worshipType}/latest?size=1
+     */
+    @GetMapping("/worship-type/{worshipType}/latest")
+    public ResponseEntity<List<SermonResponse>> getLatestSermonsByWorshipType(
+        @PathVariable WorshipType worshipType,
+        @RequestParam(defaultValue = "1") int size
+    ) {
+        List<SermonResponse> sermons = sermonService
+            .getLatestSermonsByWorshipTypeProjection(worshipType, size)
+            .stream()
+            .map(SermonResponse::fromProjectionDto)
+            .collect(Collectors.toList());
         return ResponseEntity.ok(sermons);
     }
 

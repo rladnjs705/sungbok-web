@@ -1,6 +1,8 @@
 package com.sungbok.church.domain.repository;
 
 import com.sungbok.church.domain.entity.Sermon;
+import com.sungbok.church.domain.enums.WorshipType;
+import com.sungbok.church.domain.repository.custom.SermonRepositoryCustom;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.EntityGraph;
@@ -17,9 +19,10 @@ import java.util.Optional;
 /**
  * Sermon Repository
  * Context7 네이밍 규칙 적용
+ * QueryDSL Custom Repository 패턴 적용
  */
 @Repository
-public interface SermonRepository extends JpaRepository<Sermon, Long> {
+public interface SermonRepository extends JpaRepository<Sermon, Long>, SermonRepositoryCustom {
 
     /**
      * ID로 조회 (Worship 포함)
@@ -31,17 +34,23 @@ public interface SermonRepository extends JpaRepository<Sermon, Long> {
 
     /**
      * 공개된 설교 목록 조회 (최신순, 페이징)
+     * @deprecated Use {@link SermonRepositoryCustom#findPublishedSermons(Pageable)} instead
      */
+    @Deprecated
     Page<Sermon> findByIsPublishedTrueOrderBySermonDateDesc(Pageable pageable);
 
     /**
      * 설교자별 설교 목록 조회
+     * @deprecated Use {@link SermonRepositoryCustom#findByPreacher(String, Pageable)} instead
      */
+    @Deprecated
     Page<Sermon> findByPreacherAndIsPublishedTrue(String preacher, Pageable pageable);
 
     /**
      * 날짜 범위로 설교 조회
+     * @deprecated Use {@link SermonRepositoryCustom#findByDateRange(LocalDate, LocalDate, Pageable)} instead
      */
+    @Deprecated
     Page<Sermon> findBySermonDateBetweenAndIsPublishedTrue(
         LocalDate startDate,
         LocalDate endDate,
@@ -55,12 +64,16 @@ public interface SermonRepository extends JpaRepository<Sermon, Long> {
 
     /**
      * 추천 설교 목록 조회
+     * @deprecated Use {@link SermonRepositoryCustom#findFeatured()} instead
      */
+    @Deprecated
     List<Sermon> findByIsFeaturedTrueAndIsPublishedTrueOrderBySermonDateDesc();
 
     /**
      * 최신 설교 N개 조회
+     * @deprecated Use {@link SermonRepositoryCustom#findLatest()} instead
      */
+    @Deprecated
     List<Sermon> findTop10ByIsPublishedTrueOrderBySermonDateDesc();
 
     /**
@@ -90,6 +103,19 @@ public interface SermonRepository extends JpaRepository<Sermon, Long> {
      * 설교 개수 조회
      */
     long countByIsPublishedTrue();
+
+
+    /**
+     * 예배 유형별 최신 설교 조회
+     * @deprecated Use {@link SermonRepositoryCustom#findByWorshipType(WorshipType, int)} instead
+     */
+    @Deprecated
+    @EntityGraph(attributePaths = {"worship"})
+    @Query("SELECT s FROM Sermon s JOIN s.worship w WHERE w.type = :worshipType AND s.isPublished = true ORDER BY s.sermonDate DESC")
+    Page<Sermon> findByWorshipTypeAndIsPublishedTrueOrderBySermonDateDesc(
+        @Param("worshipType") WorshipType worshipType,
+        Pageable pageable
+    );
 
     /**
      * 설교자별 설교 개수

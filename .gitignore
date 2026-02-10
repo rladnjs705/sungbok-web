@@ -37,3 +37,5 @@ docker-compose.override.yml
 
 # bkit
 .bkit-memory.json
+.pnpm-store/
+frontend/.pnpm-store/
