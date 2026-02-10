@@ -73,7 +73,10 @@ public class GalleryImageRepositoryCustomImpl implements GalleryImageRepositoryC
             ))
             .from(galleryImage)
             .leftJoin(galleryImage.gallery, gallery)
-            .orderBy(galleryImage.createdAt.desc())
+            .orderBy(
+                galleryImage.createdAt.desc(),
+                galleryImage.id.desc()  // 2차 정렬 기준 추가 (동일 시간 처리)
+            )
             .limit(limit)
             .fetch();
     }
