@@ -2,6 +2,7 @@ package com.sungbok.church.domain.repository;
 
 import com.sungbok.church.domain.entity.YouTubeLive;
 import com.sungbok.church.domain.enums.LiveStatus;
+import com.sungbok.church.domain.repository.custom.YouTubeLiveRepositoryCustom;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -13,9 +14,14 @@ import java.util.Optional;
 /**
  * YouTubeLive Repository
  * Context7 네이밍 규칙 적용
+ *
+ * QueryDSL Custom Repository 통합:
+ * - YouTubeLiveRepositoryCustom 상속으로 QueryDSL 쿼리 메서드 사용 가능
+ * - 명시적 LEFT JOIN으로 LazyInitializationException 방지
+ * - DTO Projection으로 N+1 쿼리 최적화
  */
 @Repository
-public interface YouTubeLiveRepository extends JpaRepository<YouTubeLive, Long> {
+public interface YouTubeLiveRepository extends JpaRepository<YouTubeLive, Long>, YouTubeLiveRepositoryCustom {
 
     /**
      * ID로 조회 (Worship 포함)
