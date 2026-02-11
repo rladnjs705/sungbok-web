@@ -15,6 +15,15 @@ target/
 .env
 .env*.local
 
+# Security - SSL/TLS Certificates and Keys
+*.pem
+*.key
+*.crt
+*.cert
+*.p12
+*.jks
+backend/podman/nginx/ssl/*
+
 # IDE
 .vscode/
 .idea/
