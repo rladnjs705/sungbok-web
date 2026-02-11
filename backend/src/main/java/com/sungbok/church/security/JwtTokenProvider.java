@@ -10,7 +10,8 @@ import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.stream.Collectors;
 
 /**
@@ -45,14 +46,19 @@ public class JwtTokenProvider {
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.joining(","));
 
-        Date now = new Date();
-        Date validity = new Date(now.getTime() + validityInMilliseconds);
+        // UTC 기준 시간 사용 (timezone 문제 방지)
+        LocalDateTime now = LocalDateTime.now(ZoneId.of("UTC"));
+        long issueEpoch = now.atZone(ZoneId.of("UTC")).toEpochSecond();
+
+        // plusMillis가 없어서 나노초로 변환
+        LocalDateTime expiryTime = now.plusNanos(validityInMilliseconds * 1_000_000);
+        long expiryEpoch = expiryTime.atZone(ZoneId.of("UTC")).toEpochSecond();
 
         return Jwts.builder()
                 .subject(username)
                 .claim("auth", authorities)
-                .issuedAt(now)
-                .expiration(validity)
+                .claim("iat", issueEpoch)    // epoch seconds 직접 설정
+                .claim("exp", expiryEpoch)   // epoch seconds 직접 설정
                 .signWith(secretKey)
                 .compact();
     }
