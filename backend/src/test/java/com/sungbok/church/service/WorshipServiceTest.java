@@ -1,6 +1,7 @@
 package com.sungbok.church.service;
 
 import com.sungbok.church.domain.entity.Worship;
+import com.sungbok.church.exception.ResourceNotFoundException;
 import com.sungbok.church.domain.enums.WorshipType;
 import com.sungbok.church.domain.repository.WorshipRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -202,7 +203,7 @@ class WorshipServiceTest {
 
         // when & then
         assertThatThrownBy(() -> worshipService.createWorship(testWorship))
-                .isInstanceOf(IllegalArgumentException.class)
+                .isInstanceOf(ResourceNotFoundException.class)
                 .hasMessageContaining("이미 존재하는 예배입니다");
 
         verify(worshipRepository, times(1)).existsByTypeAndDayOfWeek(
@@ -250,7 +251,7 @@ class WorshipServiceTest {
 
         // when & then
         assertThatThrownBy(() -> worshipService.updateWorship(worshipId, testWorship))
-                .isInstanceOf(IllegalArgumentException.class)
+                .isInstanceOf(ResourceNotFoundException.class)
                 .hasMessageContaining("예배를 찾을 수 없습니다");
 
         verify(worshipRepository, times(1)).findById(worshipId);
@@ -349,7 +350,7 @@ class WorshipServiceTest {
 
         // when & then
         assertThatThrownBy(() -> worshipService.deleteWorship(worshipId))
-                .isInstanceOf(IllegalArgumentException.class)
+                .isInstanceOf(ResourceNotFoundException.class)
                 .hasMessageContaining("예배를 찾을 수 없습니다");
 
         verify(worshipRepository, times(1)).existsById(worshipId);

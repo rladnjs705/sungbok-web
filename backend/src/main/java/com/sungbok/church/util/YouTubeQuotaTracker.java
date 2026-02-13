@@ -2,7 +2,6 @@ package com.sungbok.church.util;
 
 import com.sungbok.church.config.YouTubeConfig;
 import com.sungbok.church.exception.YouTubeApiException;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -156,25 +155,19 @@ public class YouTubeQuotaTracker {
     }
 
     /**
-     * 할당량 상태 정보
+     * 할당량 상태 정보 (Java 16+ record)
      */
-    @Getter
-    public static class QuotaStatus {
-        private final int currentUsage;
-        private final int remainingQuota;
-        private final int dailyLimit;
-        private final double usagePercentage;
-        private final String status; // OK, WARNING, CRITICAL, EXHAUSTED
-        private final LocalDateTime timestamp;
-
+    public record QuotaStatus(
+        int currentUsage,
+        int remainingQuota,
+        int dailyLimit,
+        double usagePercentage,
+        String status, // OK, WARNING, CRITICAL, EXHAUSTED
+        LocalDateTime timestamp
+    ) {
         public QuotaStatus(int currentUsage, int remainingQuota, int dailyLimit,
                           double usagePercentage, String status) {
-            this.currentUsage = currentUsage;
-            this.remainingQuota = remainingQuota;
-            this.dailyLimit = dailyLimit;
-            this.usagePercentage = usagePercentage;
-            this.status = status;
-            this.timestamp = LocalDateTime.now();
+            this(currentUsage, remainingQuota, dailyLimit, usagePercentage, status, LocalDateTime.now());
         }
     }
 

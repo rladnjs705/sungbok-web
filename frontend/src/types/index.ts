@@ -33,3 +33,17 @@ export interface ApiResponse<T> {
   message?: string;
   error?: string;
 }
+
+// Re-export all domain types
+export * from './notice';
+export * from './sermon';
+export * from './ministry';
+export * from './youtube-live';
+export * from './event';
+export * from './gallery';
+export * from './testimony';
+export * from './prayer-request';
+export * from './video-gallery';
+export * from './bulletin';
+export * from './worship';
+export * from './upload';

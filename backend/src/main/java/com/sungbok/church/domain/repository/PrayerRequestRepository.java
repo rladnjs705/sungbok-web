@@ -17,7 +17,7 @@ import java.util.List;
  * Context7 네이밍 규칙 적용
  */
 @Repository
-public interface PrayerRequestRepository extends JpaRepository<PrayerRequest, Long> {
+public interface PrayerRequestRepository extends JpaRepository<PrayerRequest, Long>, com.sungbok.church.domain.repository.custom.PrayerRequestRepositoryCustom {
 
     /**
      * 승인된 기도요청 목록 조회 (최신순, 페이징)
@@ -54,13 +54,6 @@ public interface PrayerRequestRepository extends JpaRepository<PrayerRequest, Lo
      * 제목으로 검색
      */
     Page<PrayerRequest> findByTitleContainingAndIsApprovedTrue(String keyword, Pageable pageable);
-
-    /**
-     * 기도수 증가
-     */
-    @Modifying
-    @Query("UPDATE PrayerRequest p SET p.prayerCount = p.prayerCount + 1 WHERE p.id = :id")
-    void incrementPrayerCount(@Param("id") Long id);
 
     /**
      * 상태별 기도요청 개수

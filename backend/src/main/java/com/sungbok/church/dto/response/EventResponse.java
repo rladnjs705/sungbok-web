@@ -1,6 +1,7 @@
 package com.sungbok.church.dto.response;
 
 import com.sungbok.church.domain.entity.Event;
+import com.sungbok.church.dto.projection.EventProjectionDto;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -56,6 +57,28 @@ public class EventResponse {
             .isOngoing(isOngoing)
             .createdAt(event.getCreatedAt())
             .updatedAt(event.getUpdatedAt())
+            .build();
+    }
+
+    /**
+     * Projection DTO -> Response DTO 변환
+     */
+    public static EventResponse from(EventProjectionDto dto) {
+        return EventResponse.builder()
+            .id(dto.getId())
+            .title(dto.getTitle())
+            .description(dto.getDescription())
+            .location(dto.getLocation())
+            .startDate(dto.getStartDate())
+            .endDate(dto.getEndDate())
+            .registrationRequired(dto.getRegistrationRequired())
+            .maxParticipants(dto.getMaxParticipants())
+            .currentParticipants(dto.getCurrentParticipants())
+            .isPublished(dto.getIsPublished())
+            .isFull(dto.isFull())
+            .isOngoing(dto.isOngoing())
+            .createdAt(dto.getCreatedAt())
+            .updatedAt(dto.getUpdatedAt())
             .build();
     }
 }

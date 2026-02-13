@@ -1,29 +1,31 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Unbounded, Cormorant_Garamond, Lora } from "next/font/google";
+import { Cormorant_Garamond, Lora } from "next/font/google";
+import localFont from "next/font/local";
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { QueryProvider } from '@/providers/QueryProvider';
 import { ThemeProvider } from '@/providers/ThemeProvider';
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+// Paperlogy - Main Korean font (Thin ~ Black)
+const paperlogy = localFont({
+  src: [
+    { path: "../../public/fonts/paperlogy/Paperlogy-1Thin.ttf", weight: "100", style: "normal" },
+    { path: "../../public/fonts/paperlogy/Paperlogy-2ExtraLight.ttf", weight: "200", style: "normal" },
+    { path: "../../public/fonts/paperlogy/Paperlogy-3Light.ttf", weight: "300", style: "normal" },
+    { path: "../../public/fonts/paperlogy/Paperlogy-4Regular.ttf", weight: "400", style: "normal" },
+    { path: "../../public/fonts/paperlogy/Paperlogy-5Medium.ttf", weight: "500", style: "normal" },
+    { path: "../../public/fonts/paperlogy/Paperlogy-6SemiBold.ttf", weight: "600", style: "normal" },
+    { path: "../../public/fonts/paperlogy/Paperlogy-7Bold.ttf", weight: "700", style: "normal" },
+    { path: "../../public/fonts/paperlogy/Paperlogy-8ExtraBold.ttf", weight: "800", style: "normal" },
+    { path: "../../public/fonts/paperlogy/Paperlogy-9Black.ttf", weight: "900", style: "normal" },
+  ],
+  variable: "--font-paperlogy",
+  display: "swap",
+  preload: true,
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-// Display font for hero titles (modern, geometric)
-const unbounded = Unbounded({
-  variable: "--font-display",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
-});
-
-// Serif font for about/intro sections (elegant, trustworthy)
+// Serif font for about/intro sections (elegant, trustworthy) - 유지
 const cormorantGaramond = Cormorant_Garamond({
   variable: "--font-serif",
   subsets: ["latin"],
@@ -31,7 +33,7 @@ const cormorantGaramond = Cormorant_Garamond({
   style: ["normal", "italic"],
 });
 
-// Serif body font for long-form content
+// Serif body font for long-form content - 유지
 const lora = Lora({
   variable: "--font-serif-body",
   subsets: ["latin"],
@@ -59,17 +61,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" suppressHydrationWarning>
-      <head>
-        {/* Pretendard Variable Font (Korean body font) */}
-        <link
-          rel="stylesheet"
-          as="style"
-          crossOrigin="anonymous"
-          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
-        />
-      </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${unbounded.variable} ${cormorantGaramond.variable} ${lora.variable} font-sans antialiased`}
+        className={`${paperlogy.variable} ${cormorantGaramond.variable} ${lora.variable} font-sans antialiased`}
       >
         <ThemeProvider>
           <QueryProvider>

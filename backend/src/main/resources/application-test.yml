@@ -1,0 +1,41 @@
+# 테스트 환경 설정
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: 
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+  cache:
+    type: none  # 캐시 완전 비활성화
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      # Lettuce 비활성화
+      lettuce:
+        pool:
+          max-active: 0
+
+jwt:
+  secret: dGVzdC1zZWNyZXQta2V5LXRoYXQtaXMtbG9uZy1lbm91Z2gtZm9yLWp3dC1zaWduaW5nLTEyMzQ1Njc4OQ==
+  expiration: 86400000
+
+r2:
+  endpoint: https://ae0ae9316f064cf9a5a10592af41411f.r2.cloudflarestorage.com
+  access-key: 4979f67ac8f333a643115e1b471ccc64
+  secret-key: b997a9df3211f67d16668e0a5c5bb0bcb02f3ba1b6f90c86c51f8e7b94b5f750
+  bucket: sungbok-church-files
+  public-url: https://pub-ae0ae9316f064cf9a5a10592af41411f.r2.dev
+
+server:
+  port: 8081
+
+logging:
+  level:
+    com.sungbok.church: INFO
+    org.springframework.web: INFO

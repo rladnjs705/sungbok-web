@@ -2,11 +2,9 @@ package com.sungbok.church.client;
 
 import com.sungbok.church.config.YouTubeConfig;
 import com.sungbok.church.dto.youtube.*;
-import com.sungbok.church.exception.YouTubeApiException;
 import com.sungbok.church.util.YouTubeQuotaTracker;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -19,20 +17,18 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * YouTube API Client
  * YouTube Data API v3와 통신하는 클라이언트
  *
- * API 할당량 (Quota):
- * - search.list: 100 units
- * - videos.list: 1 unit
- * - channels.list: 1 unit
- * - playlistItems.list: 1 unit
- *
- * Phase 4 최적화:
- * - Quota tracking with YouTubeQuotaTracker
- * - Caching with Spring Cache (Caffeine)
+ * Resilience 개선 (2026-02-11):
+ * - API 키 invalid 시 graceful degradation (빈 결과 반환)
+ * - API 키 상태 캐싱 (1시간)
+ * - 예외 로깅 후 계속 진행
+ * - @Cacheable 제거: 예외 발생 시 캐시 프록시 문제 방지
  */
 @Component
 @RequiredArgsConstructor
@@ -48,22 +44,72 @@ public class YouTubeApiClient {
     private static final String CHANNELS_ENDPOINT = "/channels";
     private static final String PLAYLIST_ITEMS_ENDPOINT = "/playlistItems";
 
+    // API 키 상태 캐싱 (1시간)
+    private static final long API_KEY_CACHE_MILLIS = 60 * 60 * 1000;
+    private final AtomicLong lastApiKeyCheck = new AtomicLong(0);
+    private final AtomicBoolean isApiKeyValid = new AtomicBoolean(true);
+
     /**
-     * 1. 최신 영상 조회
-     *
-     * @param maxResults 최대 결과 수 (기본: 50)
-     * @return 영상 목록
-     * @throws YouTubeApiException API 호출 실패 시
+     * API 키 유효성 체크 (캐싱)
+     */
+    private boolean isApiKeyValid() {
+        long now = System.currentTimeMillis();
+        long lastCheck = lastApiKeyCheck.get();
+
+        if (now - lastCheck < API_KEY_CACHE_MILLIS) {
+            return isApiKeyValid.get();
+        }
+
+        try {
+            String testUrl = buildUrl(CHANNELS_ENDPOINT)
+                .queryParam("part", "id")
+                .queryParam("id", youTubeConfig.getApi().getChannelId())
+                .toUriString();
+
+            restTemplate.exchange(
+                testUrl,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<YouTubeApiResponse<YouTubeChannelDto>>() {}
+            );
+
+            isApiKeyValid.set(true);
+            lastApiKeyCheck.set(now);
+            return true;
+
+        } catch (HttpClientErrorException.BadRequest | HttpClientErrorException.Unauthorized | 
+                 HttpClientErrorException.Forbidden e) {
+            log.error("YouTube API Key is invalid or expired. All API calls will return empty results for 1 hour.");
+            isApiKeyValid.set(false);
+            lastApiKeyCheck.set(now);
+            return false;
+        } catch (Exception e) {
+            log.warn("Failed to check YouTube API key status: {}", e.getMessage());
+            return isApiKeyValid.get();
+        }
+    }
+
+    private boolean shouldSkipApiCall() {
+        if (!isApiKeyValid()) {
+            log.debug("Skipping YouTube API call - API key is invalid (cached)");
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 최신 영상 조회 - 예외 발생 시 빈 리스트 반환
      */
     public List<YouTubeVideoDto> fetchLatestVideos(Integer maxResults) {
         log.debug("Fetching latest videos from channel: {}", youTubeConfig.getApi().getChannelId());
 
-        // Quota check: search.list (100 units) + videos.list (1 unit)
-        int estimatedCost = YouTubeQuotaTracker.SEARCH_COST + YouTubeQuotaTracker.VIDEO_COST;
-        quotaTracker.checkQuota(estimatedCost);
+        if (shouldSkipApiCall()) {
+            return Collections.emptyList();
+        }
 
         try {
-            // Step 1: search.list로 최신 영상 ID 조회
+            int estimatedCost = YouTubeQuotaTracker.SEARCH_COST + YouTubeQuotaTracker.VIDEO_COST;
+            quotaTracker.checkQuota(estimatedCost);
             quotaTracker.recordUsage(YouTubeQuotaTracker.SEARCH_COST);
 
             String searchUrl = buildUrl(SEARCH_ENDPOINT)
@@ -87,7 +133,6 @@ public class YouTubeApiClient {
                 return Collections.emptyList();
             }
 
-            // Step 2: videos.list로 상세 정보 조회
             List<String> videoIds = searchResult.getItems().stream()
                 .map(video -> video.getId())
                 .filter(id -> id != null && !id.isEmpty())
@@ -99,64 +144,66 @@ public class YouTubeApiClient {
 
             return fetchVideoDetailsByIds(videoIds);
 
-        } catch (HttpClientErrorException.Unauthorized e) {
-            log.error("Invalid YouTube API Key", e);
-            throw YouTubeApiException.invalidApiKey("Invalid YouTube API Key: " + e.getMessage());
+        } catch (HttpClientErrorException.BadRequest | HttpClientErrorException.Unauthorized | 
+                 HttpClientErrorException.Forbidden e) {
+            log.error("YouTube API Key is invalid ({}). Marking as invalid for 1 hour.", e.getStatusCode());
+            isApiKeyValid.set(false);
+            lastApiKeyCheck.set(System.currentTimeMillis());
+            return Collections.emptyList();
         } catch (HttpClientErrorException.TooManyRequests e) {
-            log.error("YouTube API quota exceeded", e);
-            throw YouTubeApiException.quotaExceeded("YouTube API quota exceeded: " + e.getMessage());
+            log.error("YouTube API quota exceeded. Returning empty results.");
+            return Collections.emptyList();
         } catch (HttpClientErrorException | HttpServerErrorException e) {
-            log.error("YouTube API error: status={}, body={}", e.getStatusCode(), e.getResponseBodyAsString(), e);
-            throw new YouTubeApiException("YouTube API error: " + e.getMessage(), e);
+            log.error("YouTube API error: status={}, body={}", e.getStatusCode(), e.getResponseBodyAsString());
+            return Collections.emptyList();
         } catch (ResourceAccessException e) {
-            log.error("YouTube API timeout or network error", e);
-            throw YouTubeApiException.timeout("YouTube API timeout: " + e.getMessage(), e);
+            log.error("YouTube API timeout or network error: {}", e.getMessage());
+            return Collections.emptyList();
         } catch (Exception e) {
-            log.error("Unexpected error fetching latest videos", e);
-            throw new YouTubeApiException("Unexpected error: " + e.getMessage(), e);
+            log.error("Unexpected error fetching latest videos: {}", e.getMessage());
+            return Collections.emptyList();
         }
     }
 
     /**
-     * 2. 영상 상세 정보 조회 (단일)
-     *
-     * @param videoId YouTube Video ID
-     * @return 영상 상세 정보
-     * @throws YouTubeApiException API 호출 실패 시
+     * 영상 상세 정보 조회 (단일) - 예외 발생 시 null 반환
      */
     public YouTubeVideoDto fetchVideoDetails(String videoId) {
         log.debug("Fetching video details for: {}", videoId);
 
-        List<YouTubeVideoDto> videos = fetchVideoDetailsByIds(List.of(videoId));
-        if (videos.isEmpty()) {
-            throw YouTubeApiException.notFound("Video not found: " + videoId);
+        if (shouldSkipApiCall()) {
+            return null;
         }
-        return videos.get(0);
+
+        try {
+            List<YouTubeVideoDto> videos = fetchVideoDetailsByIds(List.of(videoId));
+            return videos.isEmpty() ? null : videos.get(0);
+        } catch (Exception e) {
+            log.error("Error fetching video details for {}: {}", videoId, e.getMessage());
+            return null;
+        }
     }
 
     /**
-     * 3. 라이브 방송 목록 조회
-     * 캐싱: 1분 (youtubeLive 캐시)
-     *
-     * @return 라이브 방송 목록 (현재 진행 중 + 예정)
-     * @throws YouTubeApiException API 호출 실패 시
+     * 라이브 방송 목록 조회 - 예외 발생 시 빈 리스트 반환
+     * @Cacheable 제거: 캐시 프록시가 예외를 감싸서 던지는 문제 방지
      */
-    @Cacheable(value = "youtubeLive", key = "'liveStreams'")
     public List<YouTubeVideoDto> fetchLiveStreams() {
         log.debug("Fetching live streams from channel: {}", youTubeConfig.getApi().getChannelId());
 
-        // Quota check: search.list (100 units) + videos.list (1 unit)
-        int estimatedCost = YouTubeQuotaTracker.SEARCH_COST + YouTubeQuotaTracker.VIDEO_COST;
-        quotaTracker.checkQuota(estimatedCost);
+        if (shouldSkipApiCall()) {
+            return Collections.emptyList();
+        }
 
         try {
-            // search.list로 라이브 방송 조회
+            int estimatedCost = YouTubeQuotaTracker.SEARCH_COST + YouTubeQuotaTracker.VIDEO_COST;
+            quotaTracker.checkQuota(estimatedCost);
             quotaTracker.recordUsage(YouTubeQuotaTracker.SEARCH_COST);
 
             String searchUrl = buildUrl(SEARCH_ENDPOINT)
                 .queryParam("part", "snippet")
                 .queryParam("channelId", youTubeConfig.getApi().getChannelId())
-                .queryParam("eventType", "live")  // 현재 라이브
+                .queryParam("eventType", "live")
                 .queryParam("type", "video")
                 .queryParam("maxResults", 25)
                 .toUriString();
@@ -174,7 +221,6 @@ public class YouTubeApiClient {
                 return Collections.emptyList();
             }
 
-            // 상세 정보 조회
             List<String> videoIds = result.getItems().stream()
                 .map(YouTubeVideoDto::getId)
                 .filter(id -> id != null && !id.isEmpty())
@@ -182,25 +228,33 @@ public class YouTubeApiClient {
 
             return fetchVideoDetailsByIds(videoIds);
 
+        } catch (HttpClientErrorException.BadRequest | HttpClientErrorException.Unauthorized | 
+                 HttpClientErrorException.Forbidden e) {
+            log.error("YouTube API Key is invalid ({}). Marking as invalid for 1 hour.", e.getStatusCode());
+            isApiKeyValid.set(false);
+            lastApiKeyCheck.set(System.currentTimeMillis());
+            return Collections.emptyList();
         } catch (HttpClientErrorException | HttpServerErrorException e) {
-            log.error("Error fetching live streams: {}", e.getMessage(), e);
-            throw new YouTubeApiException("Error fetching live streams: " + e.getMessage(), e);
+            log.error("Error fetching live streams: {}", e.getMessage());
+            return Collections.emptyList();
         } catch (ResourceAccessException e) {
-            log.error("Network error fetching live streams", e);
-            throw YouTubeApiException.timeout("Network error: " + e.getMessage(), e);
+            log.error("Network error fetching live streams: {}", e.getMessage());
+            return Collections.emptyList();
+        } catch (Exception e) {
+            log.error("Unexpected error fetching live streams: {}", e.getMessage());
+            return Collections.emptyList();
         }
     }
 
     /**
-     * 4. 재생목록 영상 조회
-     *
-     * @param playlistId YouTube Playlist ID
-     * @param maxResults 최대 결과 수
-     * @return 재생목록 영상 목록
-     * @throws YouTubeApiException API 호출 실패 시
+     * 재생목록 영상 조회 - 예외 발생 시 빈 리스트 반환
      */
     public List<YouTubePlaylistItemDto> fetchPlaylistItems(String playlistId, Integer maxResults) {
         log.debug("Fetching playlist items for: {}", playlistId);
+
+        if (shouldSkipApiCall()) {
+            return Collections.emptyList();
+        }
 
         try {
             String url = buildUrl(PLAYLIST_ITEMS_ENDPOINT)
@@ -225,30 +279,37 @@ public class YouTubeApiClient {
             log.info("Fetched {} items from playlist: {}", result.getItemCount(), playlistId);
             return result.getItems();
 
+        } catch (HttpClientErrorException.BadRequest | HttpClientErrorException.Unauthorized | 
+                 HttpClientErrorException.Forbidden e) {
+            log.error("YouTube API Key is invalid ({}). Marking as invalid for 1 hour.", e.getStatusCode());
+            isApiKeyValid.set(false);
+            lastApiKeyCheck.set(System.currentTimeMillis());
+            return Collections.emptyList();
         } catch (HttpClientErrorException | HttpServerErrorException e) {
-            log.error("Error fetching playlist items: {}", e.getMessage(), e);
-            throw new YouTubeApiException("Error fetching playlist: " + e.getMessage(), e);
+            log.error("Error fetching playlist items: {}", e.getMessage());
+            return Collections.emptyList();
         } catch (ResourceAccessException e) {
-            log.error("Network error fetching playlist", e);
-            throw YouTubeApiException.timeout("Network error: " + e.getMessage(), e);
+            log.error("Network error fetching playlist: {}", e.getMessage());
+            return Collections.emptyList();
+        } catch (Exception e) {
+            log.error("Unexpected error fetching playlist items: {}", e.getMessage());
+            return Collections.emptyList();
         }
     }
 
     /**
-     * 5. 채널 정보 조회
-     * 캐싱: 24시간 (youtubeChannel 캐시)
-     *
-     * @return 채널 정보
-     * @throws YouTubeApiException API 호출 실패 시
+     * 채널 정보 조회 - 예외 발생 시 null 반환
+     * @Cacheable 제거
      */
-    @Cacheable(value = "youtubeChannel", key = "'channelInfo'")
     public YouTubeChannelDto fetchChannelInfo() {
         log.debug("Fetching channel info for: {}", youTubeConfig.getApi().getChannelId());
 
-        // Quota check: channels.list (1 unit)
-        quotaTracker.checkQuota(YouTubeQuotaTracker.CHANNEL_COST);
+        if (shouldSkipApiCall()) {
+            return null;
+        }
 
         try {
+            quotaTracker.checkQuota(YouTubeQuotaTracker.CHANNEL_COST);
             quotaTracker.recordUsage(YouTubeQuotaTracker.CHANNEL_COST);
 
             String url = buildUrl(CHANNELS_ENDPOINT)
@@ -265,34 +326,40 @@ public class YouTubeApiClient {
 
             YouTubeApiResponse<YouTubeChannelDto> result = response.getBody();
             if (result == null || !result.hasItems()) {
-                throw YouTubeApiException.notFound("Channel not found: " + youTubeConfig.getApi().getChannelId());
+                log.warn("Channel not found: {}", youTubeConfig.getApi().getChannelId());
+                return null;
             }
 
             YouTubeChannelDto channel = result.getItems().get(0);
             log.info("Fetched channel info: {}", channel.getSnippet().getTitle());
             return channel;
 
+        } catch (HttpClientErrorException.BadRequest | HttpClientErrorException.Unauthorized | 
+                 HttpClientErrorException.Forbidden e) {
+            log.error("YouTube API Key is invalid ({}). Marking as invalid for 1 hour.", e.getStatusCode());
+            isApiKeyValid.set(false);
+            lastApiKeyCheck.set(System.currentTimeMillis());
+            return null;
         } catch (HttpClientErrorException | HttpServerErrorException e) {
-            log.error("Error fetching channel info: {}", e.getMessage(), e);
-            throw new YouTubeApiException("Error fetching channel: " + e.getMessage(), e);
+            log.error("Error fetching channel info: {}", e.getMessage());
+            return null;
         } catch (ResourceAccessException e) {
-            log.error("Network error fetching channel", e);
-            throw YouTubeApiException.timeout("Network error: " + e.getMessage(), e);
+            log.error("Network error fetching channel: {}", e.getMessage());
+            return null;
+        } catch (Exception e) {
+            log.error("Unexpected error fetching channel info: {}", e.getMessage());
+            return null;
         }
     }
 
-    // ===== Private Helper Methods =====
+    // Private Helper Methods
 
-    /**
-     * 여러 Video ID로 상세 정보 조회 (Batch)
-     */
     private List<YouTubeVideoDto> fetchVideoDetailsByIds(List<String> videoIds) {
         if (videoIds == null || videoIds.isEmpty()) {
             return Collections.emptyList();
         }
 
         try {
-            // Record quota: videos.list costs 1 unit per call (not per video)
             quotaTracker.recordUsage(YouTubeQuotaTracker.VIDEO_COST);
 
             String url = buildUrl(VIDEOS_ENDPOINT)
@@ -315,15 +382,18 @@ public class YouTubeApiClient {
             log.debug("Fetched {} video details", result.getItemCount());
             return result.getItems();
 
+        } catch (HttpClientErrorException.BadRequest | HttpClientErrorException.Unauthorized | 
+                 HttpClientErrorException.Forbidden e) {
+            log.error("YouTube API Key is invalid ({}).", e.getStatusCode());
+            isApiKeyValid.set(false);
+            lastApiKeyCheck.set(System.currentTimeMillis());
+            return Collections.emptyList();
         } catch (Exception e) {
-            log.error("Error fetching video details by IDs", e);
-            throw new YouTubeApiException("Error fetching video details: " + e.getMessage(), e);
+            log.error("Error fetching video details by IDs: {}", e.getMessage());
+            return Collections.emptyList();
         }
     }
 
-    /**
-     * API URL 빌더
-     */
     private UriComponentsBuilder buildUrl(String endpoint) {
         return UriComponentsBuilder
             .fromUriString(youTubeConfig.getApi().getBaseUrl() + endpoint)

@@ -2,6 +2,7 @@ package com.sungbok.church.domain.repository;
 
 import com.sungbok.church.domain.entity.Notice;
 import com.sungbok.church.domain.enums.NoticeCategory;
+import com.sungbok.church.domain.repository.custom.NoticeRepositoryCustom;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -17,7 +18,7 @@ import java.util.List;
  * Context7 네이밍 규칙 적용
  */
 @Repository
-public interface NoticeRepository extends JpaRepository<Notice, Long> {
+public interface NoticeRepository extends JpaRepository<Notice, Long>, NoticeRepositoryCustom {
 
     /**
      * 공지사항 목록 조회 (최신순, 페이징)
@@ -40,12 +41,6 @@ public interface NoticeRepository extends JpaRepository<Notice, Long> {
     Page<Notice> findByTitleContainingOrderByPublishedAtDesc(String keyword, Pageable pageable);
 
     /**
-     * 제목 또는 내용 검색
-     */
-    @Query("SELECT n FROM Notice n WHERE n.title LIKE %:keyword% OR n.content LIKE %:keyword% ORDER BY n.publishedAt DESC")
-    Page<Notice> searchByKeyword(@Param("keyword") String keyword, Pageable pageable);
-
-    /**
      * 조회수 증가
      */
     @Modifying
@@ -56,4 +51,15 @@ public interface NoticeRepository extends JpaRepository<Notice, Long> {
      * 카테고리별 공지사항 개수
      */
     long countByCategory(NoticeCategory category);
+
+    /**
+     * 관련 소식 조회 (같은 카테고리, 현재 ID 제외, 랜덤 N개)
+     * Native Query 사용 - PostgreSQL의 RANDOM() 함수 활용
+     */
+    @Query(value = "SELECT * FROM notice WHERE category = :category AND id != :excludeId ORDER BY RANDOM() LIMIT :limit", nativeQuery = true)
+    List<Notice> findRandomByCategoryExcludingId(
+        @Param("category") NoticeCategory category,
+        @Param("excludeId") Long excludeId,
+        @Param("limit") int limit
+    );
 }

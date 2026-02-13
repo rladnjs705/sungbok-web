@@ -1,6 +1,7 @@
 package com.sungbok.church.service;
 
 import com.sungbok.church.domain.entity.Bulletin;
+import com.sungbok.church.exception.ResourceNotFoundException;
 import com.sungbok.church.domain.repository.BulletinRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -104,7 +105,7 @@ class BulletinServiceTest {
 
         // when & then
         assertThatThrownBy(() -> bulletinService.getBulletinById(bulletinId))
-                .isInstanceOf(IllegalArgumentException.class)
+                .isInstanceOf(ResourceNotFoundException.class)
                 .hasMessageContaining("주보를 찾을 수 없습니다");
 
         verify(bulletinRepository, times(1)).findById(bulletinId);
@@ -192,7 +193,7 @@ class BulletinServiceTest {
         Long bulletinId = 1L;
         given(bulletinRepository.findById(bulletinId))
                 .willReturn(Optional.of(testBulletin));
-        doNothing().when(bulletinRepository).incrementDownloadCount(bulletinId);
+        given(bulletinRepository.incrementDownloadCount(bulletinId)).willReturn(1L);
 
         // when
         Bulletin result = bulletinService.downloadBulletin(bulletinId);
@@ -234,7 +235,7 @@ class BulletinServiceTest {
 
         // when & then
         assertThatThrownBy(() -> bulletinService.createBulletin(testBulletin))
-                .isInstanceOf(IllegalArgumentException.class)
+                .isInstanceOf(ResourceNotFoundException.class)
                 .hasMessageContaining("해당 날짜의 주보가 이미 존재합니다");
 
         verify(bulletinRepository, times(1)).existsByBulletinDate(testBulletin.getBulletinDate());
@@ -328,7 +329,7 @@ class BulletinServiceTest {
 
         // when & then
         assertThatThrownBy(() -> bulletinService.deleteBulletin(bulletinId))
-                .isInstanceOf(IllegalArgumentException.class)
+                .isInstanceOf(ResourceNotFoundException.class)
                 .hasMessageContaining("주보를 찾을 수 없습니다");
 
         verify(bulletinRepository, times(1)).existsById(bulletinId);

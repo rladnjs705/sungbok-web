@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  jenkins:
+    image: jenkins/jenkins:lts-jdk21
+    container_name: jenkins-sungbok
+    user: root
+    ports:
+      - "8082:8080"
+      - "50000:50000"
+    volumes:
+      # Jenkins home directory
+      - jenkins_home:/var/jenkins_home
+
+      # Mount project directory
+      - /Users/jaewon/Documents/sungbok-web:/workspace
+
+      # Mount JCasC configuration
+      - ./jenkins-config/jenkins.yaml:/var/jenkins_home/casc_configs/jenkins.yaml
+
+      # Docker socket for Podman/Docker integration
+      - /var/run/docker.sock:/var/run/docker.sock
+
+    environment:
+      # Configuration as Code
+      - CASC_JENKINS_CONFIG=/var/jenkins_home/casc_configs/jenkins.yaml
+
+      # Disable setup wizard
+      - JAVA_OPTS=-Djenkins.install.runSetupWizard=false -Dhudson.security.csrf.DefaultCrumbIssuer.EXCLUDE_SESSION_ID=true
+
+      # Jenkins URL
+      - JENKINS_URL=http://localhost:8082
+
+    restart: unless-stopped
+
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8080/login || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 120s
+
+volumes:
+  jenkins_home:
+    name: jenkins_home_sungbok

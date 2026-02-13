@@ -1,6 +1,7 @@
 package com.sungbok.church.service;
 
 import com.sungbok.church.domain.entity.VideoGallery;
+import com.sungbok.church.exception.ResourceNotFoundException;
 import com.sungbok.church.domain.repository.VideoGalleryRepository;
 import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;

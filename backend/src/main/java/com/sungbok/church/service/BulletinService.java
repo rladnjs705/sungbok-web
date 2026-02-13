@@ -1,7 +1,9 @@
 package com.sungbok.church.service;
 
 import com.sungbok.church.domain.entity.Bulletin;
+import com.sungbok.church.exception.ResourceNotFoundException;
 import com.sungbok.church.domain.repository.BulletinRepository;
+import com.sungbok.church.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -34,7 +36,7 @@ public class BulletinService {
      */
     public Bulletin getBulletinById(Long id) {
         return bulletinRepository.findById(id)
-            .orElseThrow(() -> new IllegalArgumentException("주보를 찾을 수 없습니다: " + id));
+            .orElseThrow(() -> new ResourceNotFoundException("주보를 찾을 수 없습니다: " + id));
     }
 
     /**
@@ -42,7 +44,7 @@ public class BulletinService {
      */
     public Bulletin getBulletinByDate(LocalDate bulletinDate) {
         return bulletinRepository.findByBulletinDate(bulletinDate)
-            .orElseThrow(() -> new IllegalArgumentException(
+            .orElseThrow(() -> new ResourceNotFoundException(
                 "해당 날짜의 주보를 찾을 수 없습니다: " + bulletinDate
             ));
     }
@@ -124,7 +126,7 @@ public class BulletinService {
     @Transactional
     public void deleteBulletin(Long id) {
         if (!bulletinRepository.existsById(id)) {
-            throw new IllegalArgumentException("주보를 찾을 수 없습니다: " + id);
+            throw new ResourceNotFoundException("주보를 찾을 수 없습니다: " + id);
         }
         bulletinRepository.deleteById(id);
     }
@@ -134,7 +136,7 @@ public class BulletinService {
      */
     private void validateBulletinDateUniqueness(LocalDate bulletinDate) {
         if (bulletinRepository.existsByBulletinDate(bulletinDate)) {
-            throw new IllegalArgumentException("해당 날짜의 주보가 이미 존재합니다: " + bulletinDate);
+            throw new ResourceNotFoundException("해당 날짜의 주보가 이미 존재합니다: " + bulletinDate);
         }
     }
 

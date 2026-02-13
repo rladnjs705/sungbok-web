@@ -1,0 +1,39 @@
+FROM bellsoft/liberica-openjdk-alpine:25 AS builder
+
+WORKDIR /app
+
+# Copy Gradle wrapper and build files
+COPY gradlew .
+COPY gradle gradle
+COPY build.gradle .
+COPY settings.gradle .
+
+# Copy source code
+COPY src ./src
+
+# Build application
+RUN chmod +x gradlew && \
+    ./gradlew clean build -x test --no-daemon
+
+FROM bellsoft/liberica-openjdk-alpine:25
+
+WORKDIR /app
+
+# Copy JAR from builder
+COPY --from=builder /app/build/libs/*.jar app.jar
+
+EXPOSE 8081
+
+# Enable JSON logging for Zero Script QA
+ENV SPRING_PROFILES_ACTIVE=prod
+ENV LOGGING_PATTERN_CONSOLE="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
+
+ENTRYPOINT ["java", \
+    "-Xms1g", \
+    "-Xmx2g", \
+    "-XX:+UseG1GC", \
+    "-XX:MaxGCPauseMillis=200", \
+    "-XX:+HeapDumpOnOutOfMemoryError", \
+    "-XX:HeapDumpPath=/logs/heapdump.hprof", \
+    "-Dserver.port=8081", \
+    "-jar", "app.jar"]

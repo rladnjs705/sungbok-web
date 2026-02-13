@@ -36,8 +36,8 @@ public class YouTubeQuotaController {
     public ResponseEntity<YouTubeQuotaTracker.QuotaStatus> getQuotaStatus() {
         YouTubeQuotaTracker.QuotaStatus status = quotaTracker.getQuotaStatus();
         log.info("Quota status requested: {}/{} units ({}%)",
-            status.getCurrentUsage(), status.getDailyLimit(),
-            String.format("%.2f", status.getUsagePercentage()));
+            status.currentUsage(), status.dailyLimit(),
+            String.format("%.2f", status.usagePercentage()));
         return ResponseEntity.ok(status);
     }
 
@@ -49,15 +49,15 @@ public class YouTubeQuotaController {
         YouTubeQuotaTracker.QuotaStatus status = quotaTracker.getQuotaStatus();
 
         Map<String, Object> details = new HashMap<>();
-        details.put("currentUsage", status.getCurrentUsage());
-        details.put("remainingQuota", status.getRemainingQuota());
-        details.put("dailyLimit", status.getDailyLimit());
-        details.put("usagePercentage", String.format("%.2f%%", status.getUsagePercentage()));
-        details.put("status", status.getStatus());
-        details.put("timestamp", status.getTimestamp());
+        details.put("currentUsage", status.currentUsage());
+        details.put("remainingQuota", status.remainingQuota());
+        details.put("dailyLimit", status.dailyLimit());
+        details.put("usagePercentage", String.format("%.2f%%", status.usagePercentage()));
+        details.put("status", status.status());
+        details.put("timestamp", status.timestamp());
 
         // 상태별 색상 코드
-        details.put("color", switch (status.getStatus()) {
+        details.put("color", switch (status.status()) {
             case "OK" -> "green";
             case "WARNING" -> "yellow";
             case "CRITICAL" -> "orange";
@@ -83,21 +83,21 @@ public class YouTubeQuotaController {
         long hoursRemaining = 24 - currentHour;
 
         // 시간당 평균 사용량
-        double hourlyAverage = currentHour > 0 ? (double) status.getCurrentUsage() / currentHour : 0;
+        double hourlyAverage = currentHour > 0 ? (double) status.currentUsage() / currentHour : 0;
 
         // 예상 총 사용량
-        int projectedTotal = (int) (status.getCurrentUsage() + (hourlyAverage * hoursRemaining));
+        int projectedTotal = (int) (status.currentUsage() + (hourlyAverage * hoursRemaining));
 
         Map<String, Object> forecast = new HashMap<>();
-        forecast.put("currentUsage", status.getCurrentUsage());
+        forecast.put("currentUsage", status.currentUsage());
         forecast.put("hourlyAverage", String.format("%.2f units/hour", hourlyAverage));
         forecast.put("hoursRemaining", hoursRemaining);
         forecast.put("projectedTotal", projectedTotal);
         forecast.put("projectedPercentage", String.format("%.2f%%",
-            (double) projectedTotal / status.getDailyLimit() * 100));
-        forecast.put("willExceedLimit", projectedTotal > status.getDailyLimit());
+            (double) projectedTotal / status.dailyLimit() * 100));
+        forecast.put("willExceedLimit", projectedTotal > status.dailyLimit());
 
-        if (projectedTotal > status.getDailyLimit()) {
+        if (projectedTotal > status.dailyLimit()) {
             forecast.put("warning", "⚠️ 현재 사용률로는 일일 할당량을 초과할 것으로 예상됩니다!");
         } else {
             forecast.put("message", "✅ 현재 사용률로는 할당량 내에서 운영 가능합니다.");

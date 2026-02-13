@@ -2,6 +2,7 @@ package com.sungbok.church.service;
 
 import com.sungbok.church.domain.entity.Hymn;
 import com.sungbok.church.domain.repository.HymnRepository;
+import com.sungbok.church.dto.projection.HymnProjectionDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -46,7 +47,7 @@ public class HymnService {
     /**
      * 제목 또는 가사로 검색
      */
-    public Page<Hymn> searchByKeyword(String keyword, Pageable pageable) {
+    public Page<HymnProjectionDto> searchByKeyword(String keyword, Pageable pageable) {
         return hymnRepository.searchByKeyword(keyword, pageable);
     }
 

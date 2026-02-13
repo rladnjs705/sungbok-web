@@ -1,7 +1,9 @@
 package com.sungbok.church.service;
 
 import com.sungbok.church.domain.entity.Sermon;
+import com.sungbok.church.exception.ResourceNotFoundException;
 import com.sungbok.church.domain.entity.Worship;
+import com.sungbok.church.exception.ResourceNotFoundException;
 import com.sungbok.church.domain.enums.WorshipType;
 import com.sungbok.church.domain.repository.SermonRepository;
 import jakarta.persistence.EntityManager;
@@ -115,7 +117,7 @@ class SermonServiceTest {
 
         // when & then
         assertThatThrownBy(() -> sermonService.getSermonById(sermonId))
-                .isInstanceOf(IllegalArgumentException.class)
+                .isInstanceOf(ResourceNotFoundException.class)
                 .hasMessageContaining("설교를 찾을 수 없습니다");
 
         verify(sermonRepository, times(1)).findById(sermonId);
@@ -193,7 +195,7 @@ class SermonServiceTest {
 
         // when & then
         assertThatThrownBy(() -> sermonService.deleteSermon(sermonId))
-                .isInstanceOf(IllegalArgumentException.class)
+                .isInstanceOf(ResourceNotFoundException.class)
                 .hasMessageContaining("설교를 찾을 수 없습니다");
 
         verify(sermonRepository, times(1)).existsById(sermonId);

@@ -15,14 +15,6 @@ services:
       - postgres_data:/var/lib/postgresql
     networks:
       - sungbok-network
-    deploy:
-      resources:
-        limits:
-          cpus: '2.0'
-          memory: 2G
-        reservations:
-          cpus: '1.0'
-          memory: 1G
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 10s
@@ -38,14 +30,6 @@ services:
       - "6379:6379"
     networks:
       - sungbok-network
-    deploy:
-      resources:
-        limits:
-          cpus: '1.0'
-          memory: 512M
-        reservations:
-          cpus: '0.5'
-          memory: 256M
     healthcheck:
       test: ["CMD-SHELL", "valkey-cli ping | grep PONG"]
       interval: 10s
@@ -69,8 +53,16 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/sungbok_church
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
 
-      # JWT (32+ characters required)
-      JWT_SECRET: test-jwt-secret-key-for-development-minimum-32-characters-required
+      # JWT (Base64 encoded 256-bit key)
+      # openssl rand -base64 48
+      JWT_SECRET: dGVzdC1qd3Qtc2VjcmV0LWtleS1mb3ItZGV2ZWxvcG1lbnQtbWluaW11bS00OC1jaGFyYWN0ZXJzLWZvci1IUzI1Ni1hbGdvcml0aG0=
+
+      # Cloudflare R2 (File Storage)
+      R2_ENDPOINT: https://ae0ae9316f064cf9a5a10592af41411f.r2.cloudflarestorage.com
+      R2_ACCESS_KEY: 4979f67ac8f333a643115e1b471ccc64
+      R2_SECRET_KEY: b997a9df3211f67d16668e0a5c5bb0bcb02f3ba1b6f90c86c51f8e7b94b5f750
+      R2_BUCKET: sungbok-church-files
+      R2_PUBLIC_URL: https://pub-ae0ae9316f064cf9a5a10592af41411f.r2.dev
 
       # YouTube API (optional for testing)
       YOUTUBE_API_KEY: ${YOUTUBE_API_KEY:-dummy-api-key}
@@ -88,22 +80,24 @@ services:
 
       # Server Port
       SERVER_PORT: 8081
+    ports:
+      - "8081:8081"
     networks:
       - sungbok-network
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8081/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 60s
     deploy:
       resources:
         limits:
           cpus: '2.0'
-          memory: 2560M  # JVM Xmx 2g + overhead 512M
+          memory: 3G
         reservations:
           cpus: '1.0'
-          memory: 1280M
-    healthcheck:
-      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8081/actuator/health"]
-      interval: 10s  # 30s → 10s (Failover 시간 단축)
-      timeout: 5s    # 10s → 5s
-      retries: 3
-      start_period: 60s
+          memory: 2G
 
   frontend:
     image: node:24-alpine
@@ -118,16 +112,10 @@ services:
       NODE_ENV: development
       PORT: 3001
     command: sh -c "npm install -g pnpm && pnpm install && pnpm dev"
+    ports:
+      - "3001:3001"
     networks:
       - sungbok-network
-    deploy:
-      resources:
-        limits:
-          cpus: '1.0'
-          memory: 512M
-        reservations:
-          cpus: '0.5'
-          memory: 256M
     depends_on:
       - backend
 
@@ -146,16 +134,8 @@ services:
     depends_on:
       - backend
       - frontend
-    deploy:
-      resources:
-        limits:
-          cpus: '0.5'
-          memory: 256M
-        reservations:
-          cpus: '0.25'
-          memory: 128M
     healthcheck:
-      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/health"]
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://127.0.0.1/health"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -177,14 +157,6 @@ services:
       - JENKINS_URL=http://localhost:8082
     networks:
       - sungbok-network
-    deploy:
-      resources:
-        limits:
-          cpus: '2.0'
-          memory: 2G
-        reservations:
-          cpus: '1.0'
-          memory: 1G
     healthcheck:
       test: ["CMD-SHELL", "curl -f http://localhost:8080/login || exit 1"]
       interval: 30s
@@ -195,6 +167,7 @@ services:
 volumes:
   postgres_data:
   jenkins_data:
+  pnpm_store:
 
 networks:
   sungbok-network:

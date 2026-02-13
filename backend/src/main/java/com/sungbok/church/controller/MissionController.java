@@ -7,6 +7,8 @@ import com.sungbok.church.dto.response.MissionResponse;
 import com.sungbok.church.service.MinistryService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -64,10 +66,9 @@ public class MissionController {
      * 진행 중인 선교 조회
      */
     @GetMapping("/ongoing")
-    public ResponseEntity<List<MissionResponse>> getOngoingMissions() {
-        List<MissionResponse> missions = ministryService.getOngoingMissions().stream()
-            .map(MissionResponse::from)
-            .collect(Collectors.toList());
+    public ResponseEntity<Page<MissionResponse>> getOngoingMissions(Pageable pageable) {
+        Page<MissionResponse> missions = ministryService.getOngoingMissions(pageable)
+            .map(MissionResponse::from);
         return ResponseEntity.ok(missions);
     }
 
@@ -75,10 +76,9 @@ public class MissionController {
      * 종료된 선교 조회
      */
     @GetMapping("/completed")
-    public ResponseEntity<List<MissionResponse>> getCompletedMissions() {
-        List<MissionResponse> missions = ministryService.getCompletedMissions().stream()
-            .map(MissionResponse::from)
-            .collect(Collectors.toList());
+    public ResponseEntity<Page<MissionResponse>> getCompletedMissions(Pageable pageable) {
+        Page<MissionResponse> missions = ministryService.getCompletedMissions(pageable)
+            .map(MissionResponse::from);
         return ResponseEntity.ok(missions);
     }
 

@@ -1,0 +1,56 @@
+# Test Profile Configuration
+spring:
+  application:
+    name: sungbok-church-backend-test
+
+  datasource:
+    url: jdbc:h2:mem:testdb;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.H2Dialect
+    defer-datasource-initialization: true
+    open-in-view: false
+
+  h2:
+    console:
+      enabled: true
+
+  # Flyway 비활성화 (테스트는 JPA ddl-auto로 스키마 생성)
+  flyway:
+    enabled: false
+
+  # Redis 비활성화 (테스트는 캐시 불필요)
+  cache:
+    type: none
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+# JWT 테스트 설정
+jwt:
+  secret: test-secret-key-for-testing-purpose-only-min-256-bits-long-key
+  expiration: 3600000
+
+# YouTube API 테스트 설정
+youtube:
+  api:
+    key: test-youtube-api-key
+  channel:
+    id: test-channel-id
+
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    com.sungbok.church: DEBUG

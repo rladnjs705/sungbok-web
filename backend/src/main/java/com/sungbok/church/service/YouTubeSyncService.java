@@ -112,8 +112,9 @@ public class YouTubeSyncService {
             return syncedCount;
 
         } catch (Exception e) {
-            log.error("Fatal error during video sync", e);
-            throw new RuntimeException("Video sync failed: " + e.getMessage(), e);
+            log.error("Fatal error during video sync: {}", e.getMessage());
+            // 예외를 던지지 않고 0 반환 - 서비스 계속 진행
+            return 0;
         }
     }
 
@@ -177,8 +178,9 @@ public class YouTubeSyncService {
             return updatedCount;
 
         } catch (Exception e) {
-            log.error("Fatal error during live status update", e);
-            throw new RuntimeException("Live status update failed: " + e.getMessage(), e);
+            log.error("Fatal error during live status update: {}", e.getMessage());
+            // 예외를 던지지 않고 0 반환 - 서비스 계속 진행
+            return 0;
         }
     }
 
@@ -226,8 +228,9 @@ public class YouTubeSyncService {
             return syncedCount;
 
         } catch (Exception e) {
-            log.error("Fatal error during playlist sync", e);
-            throw new RuntimeException("Playlist sync failed: " + e.getMessage(), e);
+            log.error("Fatal error during playlist sync: {}", e.getMessage());
+            // 예외를 던지지 않고 0 반환 - 서비스 계속 진행
+            return 0;
         }
     }
 

@@ -45,7 +45,7 @@ sungbok-web/
 │   ├── src/
 │   │   ├── main/java/
 │   │   └── test/java/
-│   └── docker/           # Podman 설정
+│   └── podman/           # Podman 설정
 │
 └── docs/                 # PDCA 문서
     ├── 01-plan/
@@ -79,7 +79,7 @@ Frontend는 http://localhost:3000에서 실행됩니다.
 **Option 1: Podman Compose 사용 (권장)**
 
 ```bash
-cd backend/docker
+cd backend/podman
 podman-compose up
 ```
 

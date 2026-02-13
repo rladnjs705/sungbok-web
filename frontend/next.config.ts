@@ -6,10 +6,6 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 });
 
 const nextConfig: NextConfig = {
-  // ⚡️ Turbopack 명시적 활성화 (dev 모드에서 기본이지만 명시)
-  // experimental: {
-  //   turbo: {},
-  // },
 
   // 🚀 Partial Prerendering (PPR) - 정적 + 동적 혼합 렌더링
   // Next.js 16의 새로운 기능이지만, 현재 ISR과 충돌

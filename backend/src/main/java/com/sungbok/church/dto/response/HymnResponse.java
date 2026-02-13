@@ -1,6 +1,7 @@
 package com.sungbok.church.dto.response;
 
 import com.sungbok.church.domain.entity.Hymn;
+import com.sungbok.church.dto.projection.HymnProjectionDto;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -44,6 +45,25 @@ public class HymnResponse {
             .isPublished(hymn.getIsPublished())
             .createdAt(hymn.getCreatedAt())
             .updatedAt(hymn.getUpdatedAt())
+            .build();
+    }
+
+    /**
+     * ProjectionDto -> Response DTO 변환
+     */
+    public static HymnResponse from(HymnProjectionDto dto) {
+        return HymnResponse.builder()
+            .id(dto.getId())
+            .title(dto.getTitle())
+            .artist(dto.getArtist())
+            .youtubeVideoId(dto.getYoutubeVideoId())
+            .videoUrl(dto.getVideoUrl())
+            .thumbnailUrl(dto.getThumbnailUrl())
+            .performanceDate(dto.getPerformanceDate())
+            .viewCount(dto.getViewCount())
+            .isPublished(dto.getIsPublished())
+            .createdAt(dto.getCreatedAt())
+            .updatedAt(dto.getUpdatedAt())
             .build();
     }
 }

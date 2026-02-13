@@ -77,8 +77,9 @@ export const colors = {
 
 export const typography = {
   fontFamily: {
-    heading: '"Unbounded", ui-sans-serif, system-ui, sans-serif',
-    body: '"Pretendard Variable", ui-sans-serif, system-ui, sans-serif',
+    // Paperlogy as main Korean font
+    heading: 'var(--font-paperlogy), "Pretendard Variable", ui-sans-serif, system-ui, sans-serif',
+    body: 'var(--font-paperlogy), "Pretendard Variable", ui-sans-serif, system-ui, sans-serif',
     serif: '"Cormorant Garamond", ui-serif, Georgia, serif',
     serifBody: '"Lora", ui-serif, Georgia, serif',
     mono: '"JetBrains Mono", ui-monospace, monospace',

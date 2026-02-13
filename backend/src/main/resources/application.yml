@@ -1,6 +1,10 @@
 spring:
   application:
     name: sungbok-church-backend
+  
+  # OAuth 설정 import (application-oauth.yml)
+  config:
+    import: classpath:application-oauth.yml
 
   datasource:
     url: jdbc:postgresql://localhost:5432/sungbok_church
@@ -62,7 +66,9 @@ logging:
 
 # JWT Configuration
 jwt:
-  secret: ${JWT_SECRET}
+  # Base64 인코딩된 256비트 키 (운영 환경에서는 반드시 환경변수로 설정)
+  # openssl rand -base64 48
+  secret: ${JWT_SECRET:dGVtcC1qd3Qtc2VjcmV0LWtleS1mb3ItZGV2ZWxvcG1lbnQtbWluaW11bS00OC1jaGFyYWN0ZXJzLWFyZS1yZXF1aXJlZC1mb3ItSFMyNTY=}
   expiration: 86400000  # 24 hours in milliseconds
 
 # YouTube API Configuration
@@ -80,6 +86,18 @@ youtube:
   quota:
     daily-limit: 10000
     warning-threshold: 8000  # 80%
+
+# Cloudflare R2 Configuration (S3-compatible Storage)
+r2:
+  # R2 API Endpoint
+  # https://<account-id>.r2.cloudflarestorage.com
+  endpoint: ${R2_ENDPOINT:https://your-account.r2.cloudflarestorage.com}
+  access-key: ${R2_ACCESS_KEY:your-access-key}
+  secret-key: ${R2_SECRET_KEY:your-secret-key}
+  bucket: ${R2_BUCKET:sungbok-church-files}
+  # Public URL for file access (Custom domain or R2.dev subdomain)
+  # Example: https://cdn.sungbok.church OR https://pub-your-id.r2.dev
+  public-url: ${R2_PUBLIC_URL:https://pub-your-id.r2.dev}
 
 # SpringDoc OpenAPI Configuration
 springdoc:

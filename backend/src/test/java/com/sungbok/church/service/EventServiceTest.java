@@ -1,6 +1,8 @@
 package com.sungbok.church.service;
 
 import com.sungbok.church.domain.entity.Event;
+import com.sungbok.church.dto.projection.EventProjectionDto;
+import com.sungbok.church.exception.ResourceNotFoundException;
 import com.sungbok.church.domain.repository.EventRepository;
 import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
@@ -50,6 +52,7 @@ class EventServiceTest {
     private EventService eventService;
 
     private Event testEvent;
+    private EventProjectionDto testEventDto;
 
     @BeforeEach
     void setUp() {
@@ -68,6 +71,25 @@ class EventServiceTest {
                 .viewCount(0)
                 .isPublished(true)
                 .build();
+
+        testEventDto = new EventProjectionDto(
+                null, // id
+                "2024년 부활절 행사", // title
+                "부활절 예배 및 행사 안내", // description
+                "절기예배", // category
+                "교육부", // organizer
+                "https://example.com/poster.jpg", // posterImageUrl
+                "본당", // location
+                LocalDateTime.of(2024, 3, 31, 10, 0), // startDate
+                LocalDateTime.of(2024, 3, 31, 12, 0), // endDate
+                true, // registrationRequired
+                200, // maxParticipants
+                0, // currentParticipants
+                0, // viewCount
+                true, // isPublished
+                null, // createdAt
+                null // updatedAt
+        );
     }
 
     @Test
@@ -94,10 +116,10 @@ class EventServiceTest {
     void getOngoingEvents_Success() {
         // given
         given(eventRepository.findOngoingEvents(any(LocalDateTime.class)))
-                .willReturn(List.of(testEvent));
+                .willReturn(List.of(testEventDto));
 
         // when
-        List<Event> result = eventService.getOngoingEvents();
+        List<EventProjectionDto> result = eventService.getOngoingEvents();
 
         // then
         assertThat(result).isNotNull();
@@ -110,10 +132,10 @@ class EventServiceTest {
     void getUpcomingEvents_Success() {
         // given
         given(eventRepository.findUpcomingEvents(any(LocalDate.class)))
-                .willReturn(List.of(testEvent));
+                .willReturn(List.of(testEventDto));
 
         // when
-        List<Event> result = eventService.getUpcomingEvents();
+        List<EventProjectionDto> result = eventService.getUpcomingEvents();
 
         // then
         assertThat(result).isNotNull();
@@ -194,7 +216,7 @@ class EventServiceTest {
 
         // when & then
         assertThatThrownBy(() -> eventService.getEventById(eventId))
-                .isInstanceOf(IllegalArgumentException.class)
+                .isInstanceOf(ResourceNotFoundException.class)
                 .hasMessageContaining("행사를 찾을 수 없습니다");
 
         verify(eventRepository, times(1)).findById(eventId);
@@ -278,7 +300,7 @@ class EventServiceTest {
 
         // when & then
         assertThatThrownBy(() -> eventService.updateEvent(eventId, testEvent))
-                .isInstanceOf(IllegalArgumentException.class)
+                .isInstanceOf(ResourceNotFoundException.class)
                 .hasMessageContaining("행사를 찾을 수 없습니다");
 
         verify(eventRepository, times(1)).findById(eventId);
@@ -312,7 +334,7 @@ class EventServiceTest {
 
         // when & then
         assertThatThrownBy(() -> eventService.deleteEvent(eventId))
-                .isInstanceOf(IllegalArgumentException.class)
+                .isInstanceOf(ResourceNotFoundException.class)
                 .hasMessageContaining("행사를 찾을 수 없습니다");
 
         verify(eventRepository, times(1)).existsById(eventId);

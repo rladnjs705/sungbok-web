@@ -4,6 +4,23 @@ import { useForm } from '@tanstack/react-form';
 import { zodValidator } from '@tanstack/zod-form-adapter';
 import { z } from 'zod';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { api, ApiError } from '@/lib/api';
+
+interface RegisterRequest {
+  username: string;  // 백엔드는 username 필드 사용 (email과 동일하게 사용)
+  password: string;
+  name: string;
+  email: string;
+  phone?: string;
+}
+
+interface RegisterResponse {
+  success: boolean;
+  message: string;
+  email: string;
+  name: string;
+}
 
 const registerSchema = z.object({
   name: z.string().min(2, '이름은 최소 2자 이상이어야 합니다'),
@@ -27,6 +44,9 @@ const registerSchema = z.object({
 
 export function RegisterForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const router = useRouter();
 
   const form = useForm({
     defaultValues: {
@@ -41,24 +61,45 @@ export function RegisterForm() {
     },
     onSubmit: async ({ value }) => {
       setIsSubmitting(true);
+      setErrorMessage(null);
+      setSuccessMessage(null);
 
       try {
         // 비밀번호 확인 검증
         if (value.password !== value.passwordConfirm) {
-          alert('비밀번호가 일치하지 않습니다.');
+          setErrorMessage('비밀번호가 일치하지 않습니다.');
+          setIsSubmitting(false);
           return;
         }
 
-        // TODO: 실제 API 연동
-        console.log('Register attempt:', value);
+        // username은 email과 동일하게 사용 (백엔드 요구사항)
+        const response = await api.post<RegisterResponse>('/auth/register', {
+          username: value.email,
+          password: value.password,
+          name: value.name,
+          email: value.email,
+          phone: value.phone || undefined,
+        } as RegisterRequest);
 
-        // Simulate API call
-        await new Promise(resolve => setTimeout(resolve, 1000));
-
-        alert('회원가입 성공! (개발 중)');
+        setSuccessMessage('회원가입이 완료되었습니다! 로그인 페이지로 이동합니다...');
+        
+        // 2초 후 로그인 페이지로 이동
+        setTimeout(() => {
+          router.push('/login');
+        }, 2000);
       } catch (error) {
         console.error('Register error:', error);
-        alert('회원가입에 실패했습니다.');
+        if (error instanceof ApiError) {
+          if (error.status === 409) {
+            setErrorMessage('이미 등록된 이메일 주소입니다.');
+          } else if (error.status === 400) {
+            setErrorMessage('입력하신 정보를 다시 확인해주세요.');
+          } else {
+            setErrorMessage('회원가입에 실패했습니다. 잠시 후 다시 시도해주세요.');
+          }
+        } else {
+          setErrorMessage('네트워크 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+        }
       } finally {
         setIsSubmitting(false);
       }
@@ -331,6 +372,20 @@ export function RegisterForm() {
         </form.Field>
       </div>
 
+      {/* Error Message */}
+      {errorMessage && (
+        <div className="p-3 rounded-lg bg-red-50 border border-red-200">
+          <p className="text-sm text-red-600 text-center">{errorMessage}</p>
+        </div>
+      )}
+
+      {/* Success Message */}
+      {successMessage && (
+        <div className="p-3 rounded-lg bg-green-50 border border-green-200">
+          <p className="text-sm text-green-600 text-center">{successMessage}</p>
+        </div>
+      )}
+
       {/* Submit Button */}
       <form.Subscribe
         selector={(state) => [state.canSubmit, state.isSubmitting]}
@@ -338,7 +393,7 @@ export function RegisterForm() {
         {([canSubmit, isFormSubmitting]) => (
           <button
             type="submit"
-            disabled={!canSubmit || isSubmitting || isFormSubmitting}
+            disabled={!canSubmit || isSubmitting || isFormSubmitting || !!successMessage}
             className="w-full bg-primary-500 hover:bg-primary-600 disabled:bg-gray-400 disabled:cursor-not-allowed text-white font-bold py-3 rounded-lg transition-colors cursor-pointer"
           >
             {isSubmitting || isFormSubmitting ? '회원가입 중...' : '회원가입'}

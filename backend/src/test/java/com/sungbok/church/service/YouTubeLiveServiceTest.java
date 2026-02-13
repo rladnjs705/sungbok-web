@@ -1,6 +1,7 @@
 package com.sungbok.church.service;
 
 import com.sungbok.church.domain.entity.YouTubeLive;
+import com.sungbok.church.exception.ResourceNotFoundException;
 import com.sungbok.church.domain.enums.LiveStatus;
 import com.sungbok.church.domain.repository.YouTubeLiveRepository;
 import org.junit.jupiter.api.DisplayName;

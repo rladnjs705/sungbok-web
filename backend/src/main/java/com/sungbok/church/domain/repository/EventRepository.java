@@ -1,6 +1,7 @@
 package com.sungbok.church.domain.repository;
 
 import com.sungbok.church.domain.entity.Event;
+import com.sungbok.church.domain.repository.custom.EventRepositoryCustom;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,9 +17,11 @@ import java.util.List;
 /**
  * Event Repository
  * Context7 네이밍 규칙 적용
+ *
+ * Custom Repository 상속으로 QueryDSL 사용
  */
 @Repository
-public interface EventRepository extends JpaRepository<Event, Long> {
+public interface EventRepository extends JpaRepository<Event, Long>, EventRepositoryCustom {
 
     /**
      * 공개된 행사 목록 조회 (시작일 순, 페이징)
@@ -37,14 +40,6 @@ public interface EventRepository extends JpaRepository<Event, Long> {
         LocalDateTime currentDate,
         Pageable pageable
     );
-
-    /**
-     * 진행 중인 행사 목록 조회
-     */
-    @Query("SELECT e FROM Event e WHERE e.isPublished = true " +
-           "AND e.startDate <= :currentDate AND e.endDate >= :currentDate " +
-           "ORDER BY e.startDate ASC")
-    List<Event> findOngoingEvents(@Param("currentDate") LocalDateTime currentDate);
 
     /**
      * 종료된 행사 목록 조회
@@ -84,15 +79,6 @@ public interface EventRepository extends JpaRepository<Event, Long> {
     void decrementParticipants(@Param("id") Long id);
 
     /**
-     * 참가 가능한 행사 조회 (정원 미달)
-     */
-    @Query("SELECT e FROM Event e WHERE e.isPublished = true " +
-           "AND e.registrationRequired = true " +
-           "AND e.currentParticipants < e.maxParticipants " +
-           "ORDER BY e.startDate ASC")
-    List<Event> findAvailableEvents();
-
-    /**
      * 공개된 행사 개수
      */
     long countByIsPublishedTrue();
@@ -115,14 +101,6 @@ public interface EventRepository extends JpaRepository<Event, Long> {
         LocalDate endDate,
         Pageable pageable
     );
-
-    /**
-     * 다가오는 행사 조회 (LocalDate 버전)
-     */
-    @Query("SELECT e FROM Event e WHERE e.isPublished = true " +
-           "AND CAST(e.startDate AS date) >= :currentDate " +
-           "ORDER BY e.startDate ASC")
-    List<Event> findUpcomingEvents(@Param("currentDate") LocalDate currentDate);
 
     /**
      * 조회수 증가

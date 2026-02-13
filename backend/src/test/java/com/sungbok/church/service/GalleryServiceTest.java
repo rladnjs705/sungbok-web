@@ -1,7 +1,9 @@
 package com.sungbok.church.service;
 
 import com.sungbok.church.domain.entity.Gallery;
+import com.sungbok.church.exception.ResourceNotFoundException;
 import com.sungbok.church.domain.entity.GalleryImage;
+import com.sungbok.church.exception.ResourceNotFoundException;
 import com.sungbok.church.domain.repository.GalleryImageRepository;
 import com.sungbok.church.domain.repository.GalleryRepository;
 import jakarta.persistence.EntityManager;
@@ -102,7 +104,7 @@ class GalleryServiceTest {
 
         // when & then
         assertThatThrownBy(() -> galleryService.deleteGallery(galleryId))
-                .isInstanceOf(IllegalArgumentException.class)
+                .isInstanceOf(ResourceNotFoundException.class)
                 .hasMessageContaining("갤러리를 찾을 수 없습니다");
 
         verify(galleryRepository, never()).deleteById(anyLong());

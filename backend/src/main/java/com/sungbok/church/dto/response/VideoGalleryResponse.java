@@ -1,6 +1,7 @@
 package com.sungbok.church.dto.response;
 
 import com.sungbok.church.domain.entity.VideoGallery;
+import com.sungbok.church.dto.projection.VideoGalleryProjectionDto;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -46,6 +47,26 @@ public class VideoGalleryResponse {
             .isPublished(video.getIsPublished())
             .createdAt(video.getCreatedAt())
             .updatedAt(video.getUpdatedAt())
+            .build();
+    }
+
+    /**
+     * ProjectionDto -> Response DTO 변환
+     */
+    public static VideoGalleryResponse from(VideoGalleryProjectionDto dto) {
+        return VideoGalleryResponse.builder()
+            .id(dto.getId())
+            .title(dto.getTitle())
+            .description(dto.getDescription())
+            .youtubeVideoId(dto.getYoutubeVideoId())
+            .videoUrl(dto.getVideoUrl())
+            .thumbnailUrl(dto.getThumbnailUrl())
+            .eventDate(dto.getEventDate())
+            .category(dto.getCategory())
+            .viewCount(dto.getViewCount())
+            .isPublished(dto.getIsPublished())
+            .createdAt(dto.getCreatedAt())
+            .updatedAt(dto.getUpdatedAt())
             .build();
     }
 }

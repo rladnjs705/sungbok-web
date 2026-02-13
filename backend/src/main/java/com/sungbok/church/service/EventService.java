@@ -2,6 +2,8 @@ package com.sungbok.church.service;
 
 import com.sungbok.church.domain.entity.Event;
 import com.sungbok.church.domain.repository.EventRepository;
+import com.sungbok.church.dto.projection.EventProjectionDto;
+import com.sungbok.church.exception.ResourceNotFoundException;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -35,7 +37,7 @@ public class EventService {
     /**
      * 진행 중인 행사 조회
      */
-    public List<Event> getOngoingEvents() {
+    public List<EventProjectionDto> getOngoingEvents() {
         LocalDateTime now = LocalDateTime.now();
         return eventRepository.findOngoingEvents(now);
     }
@@ -43,7 +45,7 @@ public class EventService {
     /**
      * 예정된 행사 조회
      */
-    public List<Event> getUpcomingEvents() {
+    public List<EventProjectionDto> getUpcomingEvents() {
         LocalDate today = LocalDate.now();
         return eventRepository.findUpcomingEvents(today);
     }
@@ -74,7 +76,7 @@ public class EventService {
     @Transactional
     public Event getEventById(Long id) {
         Event event = eventRepository.findById(id)
-            .orElseThrow(() -> new IllegalArgumentException("행사를 찾을 수 없습니다: " + id));
+            .orElseThrow(() -> new ResourceNotFoundException("행사를 찾을 수 없습니다: " + id));
 
         eventRepository.incrementViewCount(id);
 
@@ -105,7 +107,7 @@ public class EventService {
     @Transactional
     public Event updateEvent(Long id, Event updatedEvent) {
         Event event = eventRepository.findById(id)
-            .orElseThrow(() -> new IllegalArgumentException("행사를 찾을 수 없습니다: " + id));
+            .orElseThrow(() -> new ResourceNotFoundException("행사를 찾을 수 없습니다: " + id));
 
         event.setTitle(updatedEvent.getTitle());
         event.setDescription(updatedEvent.getDescription());
@@ -128,7 +130,7 @@ public class EventService {
     @Transactional
     public void deleteEvent(Long id) {
         if (!eventRepository.existsById(id)) {
-            throw new IllegalArgumentException("행사를 찾을 수 없습니다: " + id);
+            throw new ResourceNotFoundException("행사를 찾을 수 없습니다: " + id);
         }
         eventRepository.deleteById(id);
     }

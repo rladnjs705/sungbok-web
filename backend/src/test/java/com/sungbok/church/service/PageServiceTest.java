@@ -1,6 +1,7 @@
 package com.sungbok.church.service;
 
 import com.sungbok.church.domain.entity.Page;
+import com.sungbok.church.exception.ResourceNotFoundException;
 import com.sungbok.church.domain.repository.PageRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -81,7 +82,7 @@ class PageServiceTest {
 
         // when & then
         assertThatThrownBy(() -> pageService.getPageBySlug(slug))
-                .isInstanceOf(IllegalArgumentException.class)
+                .isInstanceOf(ResourceNotFoundException.class)
                 .hasMessageContaining("페이지를 찾을 수 없습니다");
 
         verify(pageRepository, times(1)).findBySlug(slug);
@@ -132,7 +133,7 @@ class PageServiceTest {
 
         // when & then
         assertThatThrownBy(() -> pageService.createPage(testPage))
-                .isInstanceOf(IllegalArgumentException.class)
+                .isInstanceOf(ResourceNotFoundException.class)
                 .hasMessageContaining("이미 존재하는 Slug입니다");
 
         verify(pageRepository, times(1)).existsBySlug("about");
@@ -215,7 +216,7 @@ class PageServiceTest {
 
         // when & then
         assertThatThrownBy(() -> pageService.updatePage(pageId, updatedPage))
-                .isInstanceOf(IllegalArgumentException.class)
+                .isInstanceOf(ResourceNotFoundException.class)
                 .hasMessageContaining("이미 존재하는 Slug입니다");
 
         verify(pageRepository, times(1)).findById(pageId);
@@ -250,7 +251,7 @@ class PageServiceTest {
 
         // when & then
         assertThatThrownBy(() -> pageService.deletePage(pageId))
-                .isInstanceOf(IllegalArgumentException.class)
+                .isInstanceOf(ResourceNotFoundException.class)
                 .hasMessageContaining("페이지를 찾을 수 없습니다");
 
         verify(pageRepository, times(1)).existsById(pageId);

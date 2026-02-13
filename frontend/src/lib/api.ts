@@ -49,6 +49,7 @@ async function request<T>(
     const response = await fetch(url, {
       ...fetchOptions,
       headers,
+      credentials: 'include', // HttpOnly Cookie 전송을 위해 필수
     });
 
     if (!response.ok) {

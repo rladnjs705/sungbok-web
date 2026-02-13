@@ -1,8 +1,11 @@
 package com.sungbok.church.service;
 
 import com.sungbok.church.domain.entity.Worship;
+import com.sungbok.church.exception.ResourceNotFoundException;
 import com.sungbok.church.domain.enums.WorshipType;
+import com.sungbok.church.exception.ResourceNotFoundException;
 import com.sungbok.church.domain.repository.WorshipRepository;
+import com.sungbok.church.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -72,7 +75,7 @@ public class WorshipService {
     @Transactional
     public Worship updateWorship(Long id, Worship updatedWorship) {
         Worship worship = worshipRepository.findById(id)
-            .orElseThrow(() -> new IllegalArgumentException("예배를 찾을 수 없습니다: " + id));
+            .orElseThrow(() -> new ResourceNotFoundException("예배를 찾을 수 없습니다: " + id));
 
         worship.setTitle(updatedWorship.getTitle());
         worship.setType(updatedWorship.getType());
@@ -92,7 +95,7 @@ public class WorshipService {
     @Transactional
     public void toggleLiveStatus(Long id, boolean isLive) {
         Worship worship = worshipRepository.findById(id)
-            .orElseThrow(() -> new IllegalArgumentException("예배를 찾을 수 없습니다: " + id));
+            .orElseThrow(() -> new ResourceNotFoundException("예배를 찾을 수 없습니다: " + id));
 
         // 다른 예배의 라이브 상태 해제
         if (isLive) {
@@ -113,7 +116,7 @@ public class WorshipService {
     @Transactional
     public void deleteWorship(Long id) {
         if (!worshipRepository.existsById(id)) {
-            throw new IllegalArgumentException("예배를 찾을 수 없습니다: " + id);
+            throw new ResourceNotFoundException("예배를 찾을 수 없습니다: " + id);
         }
         worshipRepository.deleteById(id);
     }
@@ -123,7 +126,7 @@ public class WorshipService {
      */
     private void validateWorshipUniqueness(WorshipType type, DayOfWeek dayOfWeek) {
         if (worshipRepository.existsByTypeAndDayOfWeek(type, dayOfWeek)) {
-            throw new IllegalArgumentException(
+            throw new ResourceNotFoundException(
                 String.format("이미 존재하는 예배입니다: %s %s", dayOfWeek, type)
             );
         }

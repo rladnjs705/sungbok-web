@@ -2,6 +2,7 @@ package com.sungbok.church.dto.response;
 
 import com.sungbok.church.domain.entity.Mission;
 import com.sungbok.church.domain.enums.MissionType;
+import com.sungbok.church.dto.projection.MissionProjectionDto;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -60,6 +61,32 @@ public class MissionResponse {
             .isOngoing(isOngoing)
             .createdAt(mission.getCreatedAt())
             .updatedAt(mission.getUpdatedAt())
+            .build();
+    }
+
+    /**
+     * ProjectionDto -> Response DTO 변환
+     */
+    public static MissionResponse from(MissionProjectionDto dto) {
+        LocalDate now = LocalDate.now();
+        boolean isOngoing = dto.isOngoing(now);
+
+        return MissionResponse.builder()
+            .id(dto.getId())
+            .title(dto.getTitle())
+            .type(dto.getType())
+            .country(dto.getCountry())
+            .region(dto.getRegion())
+            .description(dto.getDescription())
+            .missionaryName(dto.getMissionaryName())
+            .startDate(dto.getStartDate())
+            .endDate(dto.getEndDate())
+            .supportAmount(dto.getSupportAmount())
+            .photoUrl(dto.getPhotoUrl())
+            .isActive(dto.getIsActive())
+            .isOngoing(isOngoing)
+            .createdAt(dto.getCreatedAt())
+            .updatedAt(dto.getUpdatedAt())
             .build();
     }
 }

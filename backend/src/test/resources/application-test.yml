@@ -1,0 +1,36 @@
+# 테스트 환경 설정
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  
+  # Redis 설정 (테스트용 embedded)
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+# JWT 설정 (테스트용) - Base64 인코딩된 48바이트 키
+jwt:
+  secret: dGVzdC1zZWNyZXQta2V5LXRoYXQtaXMtYXQtbGVhc3QtNDgtY2hhcmFjdGVycy1sb25nLWZvci1oczUxMi1hbGdvcml0aG0=
+  expiration: 3600000
+
+# 로깅 설정
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+
+# 파일 업로드 설정
+file:
+  upload:
+    max-size: 10MB

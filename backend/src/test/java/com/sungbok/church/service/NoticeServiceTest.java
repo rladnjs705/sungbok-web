@@ -1,6 +1,7 @@
 package com.sungbok.church.service;
 
 import com.sungbok.church.domain.entity.Notice;
+import com.sungbok.church.exception.ResourceNotFoundException;
 import com.sungbok.church.domain.enums.NoticeCategory;
 import com.sungbok.church.domain.repository.NoticeRepository;
 import jakarta.persistence.EntityManager;
@@ -116,7 +117,7 @@ class NoticeServiceTest {
 
         // when & then
         assertThatThrownBy(() -> noticeService.getNoticeById(noticeId))
-                .isInstanceOf(IllegalArgumentException.class)
+                .isInstanceOf(ResourceNotFoundException.class)
                 .hasMessageContaining("공지사항을 찾을 수 없습니다");
 
         verify(noticeRepository, times(1)).findById(noticeId);
@@ -176,7 +177,7 @@ class NoticeServiceTest {
 
         // when & then
         assertThatThrownBy(() -> noticeService.updateNotice(noticeId, testNotice))
-                .isInstanceOf(IllegalArgumentException.class)
+                .isInstanceOf(ResourceNotFoundException.class)
                 .hasMessageContaining("공지사항을 찾을 수 없습니다");
 
         verify(noticeRepository, times(1)).findById(noticeId);
@@ -210,7 +211,7 @@ class NoticeServiceTest {
 
         // when & then
         assertThatThrownBy(() -> noticeService.deleteNotice(noticeId))
-                .isInstanceOf(IllegalArgumentException.class)
+                .isInstanceOf(ResourceNotFoundException.class)
                 .hasMessageContaining("공지사항을 찾을 수 없습니다");
 
         verify(noticeRepository, times(1)).existsById(noticeId);

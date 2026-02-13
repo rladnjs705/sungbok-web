@@ -18,7 +18,7 @@ import java.util.Optional;
  * Context7 네이밍 규칙 적용
  */
 @Repository
-public interface BulletinRepository extends JpaRepository<Bulletin, Long> {
+public interface BulletinRepository extends JpaRepository<Bulletin, Long>, com.sungbok.church.domain.repository.custom.BulletinRepositoryCustom {
 
     /**
      * 공개된 주보 목록 조회 (최신순, 페이징)
@@ -48,13 +48,6 @@ public interface BulletinRepository extends JpaRepository<Bulletin, Long> {
      * 제목으로 검색
      */
     Page<Bulletin> findByTitleContainingAndIsPublishedTrue(String keyword, Pageable pageable);
-
-    /**
-     * 다운로드 수 증가
-     */
-    @Modifying
-    @Query("UPDATE Bulletin b SET b.downloadCount = b.downloadCount + 1 WHERE b.id = :id")
-    void incrementDownloadCount(@Param("id") Long id);
 
     /**
      * 주보 존재 여부 확인

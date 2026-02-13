@@ -2,6 +2,7 @@ package com.sungbok.church.service;
 
 import com.sungbok.church.domain.entity.VideoGallery;
 import com.sungbok.church.domain.repository.VideoGalleryRepository;
+import com.sungbok.church.dto.projection.VideoGalleryProjectionDto;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -86,7 +87,7 @@ public class VideoGalleryService {
     /**
      * 제목 또는 설명으로 검색
      */
-    public Page<VideoGallery> searchByKeyword(String keyword, Pageable pageable) {
+    public Page<VideoGalleryProjectionDto> searchByKeyword(String keyword, Pageable pageable) {
         return videoGalleryRepository.searchByKeyword(keyword, pageable);
     }
 

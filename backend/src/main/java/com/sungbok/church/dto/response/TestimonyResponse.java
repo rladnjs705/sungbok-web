@@ -1,6 +1,7 @@
 package com.sungbok.church.dto.response;
 
 import com.sungbok.church.domain.entity.Testimony;
+import com.sungbok.church.dto.projection.TestimonyProjectionDto;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -41,6 +42,24 @@ public class TestimonyResponse {
             .publishedAt(testimony.getPublishedAt())
             .createdAt(testimony.getCreatedAt())
             .updatedAt(testimony.getUpdatedAt())
+            .build();
+    }
+
+    /**
+     * ProjectionDto -> Response DTO 변환
+     */
+    public static TestimonyResponse from(TestimonyProjectionDto dto) {
+        return TestimonyResponse.builder()
+            .id(dto.getId())
+            .title(dto.getTitle())
+            .author(dto.getAuthor())
+            .content(dto.getContent())
+            .category(dto.getCategory())
+            .isApproved(dto.getIsApproved())
+            .viewCount(dto.getViewCount())
+            .publishedAt(dto.getPublishedAt())
+            .createdAt(dto.getCreatedAt())
+            .updatedAt(dto.getUpdatedAt())
             .build();
     }
 }

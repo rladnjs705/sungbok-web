@@ -2,6 +2,7 @@ package com.sungbok.church.service;
 
 import com.sungbok.church.domain.entity.Testimony;
 import com.sungbok.church.domain.repository.TestimonyRepository;
+import com.sungbok.church.dto.projection.TestimonyProjectionDto;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -89,7 +90,7 @@ public class TestimonyService {
     /**
      * 제목 또는 내용으로 검색
      */
-    public Page<Testimony> searchByKeyword(String keyword, Pageable pageable) {
+    public Page<TestimonyProjectionDto> searchByKeyword(String keyword, Pageable pageable) {
         return testimonyRepository.searchByKeyword(keyword, pageable);
     }
 

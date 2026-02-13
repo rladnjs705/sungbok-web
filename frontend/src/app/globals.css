@@ -71,9 +71,9 @@
   --color-info: var(--color-secondary-500);
 
   /* === TYPOGRAPHY === */
-  /* Font Families */
-  --font-heading: "Unbounded", ui-sans-serif, system-ui, sans-serif;
-  --font-body: "Pretendard Variable", ui-sans-serif, system-ui, sans-serif;
+  /* Font Families - Paperlogy as main Korean font */
+  --font-heading: var(--font-paperlogy), "Pretendard Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-paperlogy), "Pretendard Variable", ui-sans-serif, system-ui, sans-serif;
   --font-serif: "Cormorant Garamond", ui-serif, Georgia, serif;
   --font-serif-body: "Lora", ui-serif, Georgia, serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;

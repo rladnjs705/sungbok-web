@@ -1,9 +1,13 @@
 package com.sungbok.church.service;
 
 import com.sungbok.church.domain.entity.Gallery;
+import com.sungbok.church.exception.ResourceNotFoundException;
 import com.sungbok.church.domain.entity.GalleryImage;
+import com.sungbok.church.exception.ResourceNotFoundException;
 import com.sungbok.church.domain.repository.GalleryImageRepository;
+import com.sungbok.church.exception.ResourceNotFoundException;
 import com.sungbok.church.domain.repository.GalleryRepository;
+import com.sungbok.church.exception.ResourceNotFoundException;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -40,7 +44,7 @@ public class GalleryService {
     @Transactional
     public Gallery getGalleryById(Long id) {
         Gallery gallery = galleryRepository.findById(id)
-            .orElseThrow(() -> new IllegalArgumentException("갤러리를 찾을 수 없습니다: " + id));
+            .orElseThrow(() -> new ResourceNotFoundException("갤러리를 찾을 수 없습니다: " + id));
 
         // 조회수 증가
         galleryRepository.incrementViewCount(id);
@@ -106,7 +110,7 @@ public class GalleryService {
     @Transactional
     public GalleryImage addGalleryImage(Long galleryId, GalleryImage image) {
         Gallery gallery = galleryRepository.findById(galleryId)
-            .orElseThrow(() -> new IllegalArgumentException("갤러리를 찾을 수 없습니다: " + galleryId));
+            .orElseThrow(() -> new ResourceNotFoundException("갤러리를 찾을 수 없습니다: " + galleryId));
 
         image.setGallery(gallery);
         return galleryImageRepository.save(image);
@@ -118,7 +122,7 @@ public class GalleryService {
     @Transactional
     public Gallery updateGallery(Long id, Gallery updatedGallery) {
         Gallery gallery = galleryRepository.findById(id)
-            .orElseThrow(() -> new IllegalArgumentException("갤러리를 찾을 수 없습니다: " + id));
+            .orElseThrow(() -> new ResourceNotFoundException("갤러리를 찾을 수 없습니다: " + id));
 
         gallery.setTitle(updatedGallery.getTitle());
         gallery.setDescription(updatedGallery.getDescription());
@@ -135,7 +139,7 @@ public class GalleryService {
     @Transactional
     public void deleteGallery(Long id) {
         if (!galleryRepository.existsById(id)) {
-            throw new IllegalArgumentException("갤러리를 찾을 수 없습니다: " + id);
+            throw new ResourceNotFoundException("갤러리를 찾을 수 없습니다: " + id);
         }
         galleryImageRepository.deleteByGalleryId(id);
         galleryRepository.deleteById(id);
@@ -147,7 +151,7 @@ public class GalleryService {
     @Transactional
     public void deleteGalleryImage(Long imageId) {
         if (!galleryImageRepository.existsById(imageId)) {
-            throw new IllegalArgumentException("갤러리 이미지를 찾을 수 없습니다: " + imageId);
+            throw new ResourceNotFoundException("갤러리 이미지를 찾을 수 없습니다: " + imageId);
         }
         galleryImageRepository.deleteById(imageId);
     }

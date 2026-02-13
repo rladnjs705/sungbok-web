@@ -6,7 +6,10 @@ import com.sungbok.church.domain.enums.MinistryCategory;
 import com.sungbok.church.domain.enums.MissionType;
 import com.sungbok.church.domain.repository.MinistryRepository;
 import com.sungbok.church.domain.repository.MissionRepository;
+import com.sungbok.church.dto.projection.MissionProjectionDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -123,15 +126,15 @@ public class MinistryService {
     /**
      * 진행 중인 선교 조회
      */
-    public List<Mission> getOngoingMissions() {
-        return missionRepository.findOngoingMissions(LocalDate.now());
+    public Page<MissionProjectionDto> getOngoingMissions(Pageable pageable) {
+        return missionRepository.findOngoingMissions(LocalDate.now(), pageable);
     }
 
     /**
      * 종료된 선교 조회
      */
-    public List<Mission> getCompletedMissions() {
-        return missionRepository.findCompletedMissions(LocalDate.now());
+    public Page<MissionProjectionDto> getCompletedMissions(Pageable pageable) {
+        return missionRepository.findCompletedMissions(LocalDate.now(), pageable);
     }
 
     /**

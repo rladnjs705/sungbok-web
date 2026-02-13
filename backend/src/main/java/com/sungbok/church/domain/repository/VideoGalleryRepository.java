@@ -1,6 +1,7 @@
 package com.sungbok.church.domain.repository;
 
 import com.sungbok.church.domain.entity.VideoGallery;
+import com.sungbok.church.domain.repository.custom.VideoGalleryRepositoryCustom;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -18,7 +19,7 @@ import java.util.Optional;
  * Context7 네이밍 규칙 적용
  */
 @Repository
-public interface VideoGalleryRepository extends JpaRepository<VideoGallery, Long> {
+public interface VideoGalleryRepository extends JpaRepository<VideoGallery, Long>, VideoGalleryRepositoryCustom {
 
     /**
      * 공개된 영상 목록 조회 (최신순, 페이징)
@@ -73,12 +74,4 @@ public interface VideoGalleryRepository extends JpaRepository<VideoGallery, Long
      * 공개된 영상 개수
      */
     long countByIsPublishedTrue();
-
-    /**
-     * 키워드로 검색 (제목 + 설명)
-     */
-    @Query("SELECT v FROM VideoGallery v WHERE v.isPublished = true " +
-           "AND (v.title LIKE %:keyword% OR v.description LIKE %:keyword%) " +
-           "ORDER BY v.eventDate DESC")
-    Page<VideoGallery> searchByKeyword(@Param("keyword") String keyword, Pageable pageable);
 }

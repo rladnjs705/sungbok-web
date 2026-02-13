@@ -1,0 +1,28 @@
+# Jenkins Required Plugins
+# Context7 Best Practice: Pre-install plugins
+
+# Configuration as Code
+configuration-as-code:latest
+
+# Job DSL
+job-dsl:latest
+
+# Pipeline
+workflow-aggregator:latest
+pipeline-stage-view:latest
+
+# Git
+git:latest
+git-client:latest
+
+# Docker
+docker-workflow:latest
+
+# UI
+blueocean:latest
+
+# Credentials
+credentials-binding:latest
+
+# Timestamper
+timestamper:latest

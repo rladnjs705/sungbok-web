@@ -1,0 +1,63 @@
+# Jenkins Configuration as Code (JCasC)
+# Context7 Best Practice: Automated Jenkins Setup
+
+jenkins:
+  systemMessage: "🏛️ Sungbok Church CI/CD Server"
+  numExecutors: 2
+  mode: NORMAL
+
+  securityRealm:
+    local:
+      allowsSignup: false
+      users:
+        - id: "admin"
+          password: "admin123"
+          name: "Administrator"
+          description: "Jenkins Administrator"
+
+  authorizationStrategy:
+    loggedInUsersCanDoAnything:
+      allowAnonymousRead: false
+
+# Job DSL Configuration
+jobs:
+  - script: >
+      pipelineJob('sungbok-web') {
+        description('Sungbok Church Website CI/CD Pipeline')
+
+        parameters {
+          booleanParam('DEPLOY_BACKEND', true, 'Deploy Backend')
+          booleanParam('DEPLOY_FRONTEND', true, 'Deploy Frontend')
+          choiceParam('DEPLOY_MODE', ['full', 'backend-only', 'frontend-only'], 'Deployment Mode')
+        }
+
+        definition {
+          cpsScm {
+            scm {
+              git {
+                remote {
+                  url('file:///workspace')
+                }
+                branches('*/main', '*/master')
+              }
+            }
+            scriptPath('Jenkinsfile')
+          }
+        }
+
+        triggers {
+          scm('H/5 * * * *')
+        }
+      }
+
+# Security settings
+security:
+  globalJobDslSecurityConfiguration:
+    useScriptSecurity: false
+
+# Tool installations
+tool:
+  git:
+    installations:
+      - name: "Default"
+        home: "/usr/bin/git"

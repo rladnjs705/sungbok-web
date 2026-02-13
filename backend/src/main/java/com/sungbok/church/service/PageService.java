@@ -1,7 +1,9 @@
 package com.sungbok.church.service;
 
 import com.sungbok.church.domain.entity.Page;
+import com.sungbok.church.exception.ResourceNotFoundException;
 import com.sungbok.church.domain.repository.PageRepository;
+import com.sungbok.church.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,7 +26,7 @@ public class PageService {
      */
     public Page getPageBySlug(String slug) {
         return pageRepository.findBySlug(slug)
-            .orElseThrow(() -> new IllegalArgumentException("페이지를 찾을 수 없습니다: " + slug));
+            .orElseThrow(() -> new ResourceNotFoundException("페이지를 찾을 수 없습니다: " + slug));
     }
 
     /**
@@ -49,7 +51,7 @@ public class PageService {
     @Transactional
     public Page updatePage(Long id, Page updatedPage) {
         Page page = pageRepository.findById(id)
-            .orElseThrow(() -> new IllegalArgumentException("페이지를 찾을 수 없습니다: " + id));
+            .orElseThrow(() -> new ResourceNotFoundException("페이지를 찾을 수 없습니다: " + id));
 
         // Slug 변경 시 중복 체크
         if (!page.getSlug().equals(updatedPage.getSlug())) {
@@ -72,7 +74,7 @@ public class PageService {
     @Transactional
     public void deletePage(Long id) {
         if (!pageRepository.existsById(id)) {
-            throw new IllegalArgumentException("페이지를 찾을 수 없습니다: " + id);
+            throw new ResourceNotFoundException("페이지를 찾을 수 없습니다: " + id);
         }
         pageRepository.deleteById(id);
     }
@@ -82,7 +84,7 @@ public class PageService {
      */
     private void validateSlugUniqueness(String slug) {
         if (pageRepository.existsBySlug(slug)) {
-            throw new IllegalArgumentException("이미 존재하는 Slug입니다: " + slug);
+            throw new ResourceNotFoundException("이미 존재하는 Slug입니다: " + slug);
         }
     }
 }

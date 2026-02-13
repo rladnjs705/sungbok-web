@@ -1,6 +1,7 @@
 package com.sungbok.church.domain.repository;
 
 import com.sungbok.church.domain.entity.Testimony;
+import com.sungbok.church.domain.repository.custom.TestimonyRepositoryCustom;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,7 +17,7 @@ import java.util.List;
  * Context7 네이밍 규칙 적용
  */
 @Repository
-public interface TestimonyRepository extends JpaRepository<Testimony, Long> {
+public interface TestimonyRepository extends JpaRepository<Testimony, Long>, TestimonyRepositoryCustom {
 
     /**
      * 승인된 간증 목록 조회 (최신순, 페이징)
@@ -45,14 +46,6 @@ public interface TestimonyRepository extends JpaRepository<Testimony, Long> {
      * 제목으로 검색
      */
     Page<Testimony> findByTitleContainingAndIsApprovedTrue(String keyword, Pageable pageable);
-
-    /**
-     * 제목 또는 내용으로 검색
-     */
-    @Query("SELECT t FROM Testimony t WHERE t.isApproved = true AND " +
-           "(t.title LIKE %:keyword% OR t.content LIKE %:keyword%) " +
-           "ORDER BY t.publishedAt DESC")
-    Page<Testimony> searchByKeyword(@Param("keyword") String keyword, Pageable pageable);
 
     /**
      * 조회수 증가

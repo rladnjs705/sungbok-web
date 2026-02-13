@@ -1,6 +1,7 @@
 package com.sungbok.church.domain.repository;
 
 import com.sungbok.church.domain.entity.Hymn;
+import com.sungbok.church.domain.repository.custom.HymnRepositoryCustom;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,9 +17,11 @@ import java.util.Optional;
 /**
  * Hymn Repository
  * Context7 네이밍 규칙 적용
+ *
+ * Custom Repository 상속으로 QueryDSL 사용
  */
 @Repository
-public interface HymnRepository extends JpaRepository<Hymn, Long> {
+public interface HymnRepository extends JpaRepository<Hymn, Long>, HymnRepositoryCustom {
 
     /**
      * 공개된 찬양 목록 조회 (최신순, 페이징)
@@ -85,14 +88,6 @@ public interface HymnRepository extends JpaRepository<Hymn, Long> {
      * 가사로 검색
      */
     Page<Hymn> findByLyricsContaining(String keyword, Pageable pageable);
-
-    /**
-     * 키워드로 검색 (제목 + 가사 + 아티스트)
-     */
-    @Query("SELECT h FROM Hymn h WHERE h.isPublished = true " +
-           "AND (h.title LIKE %:keyword% OR h.lyrics LIKE %:keyword% OR h.artist LIKE %:keyword%) " +
-           "ORDER BY h.performanceDate DESC")
-    Page<Hymn> searchByKeyword(@Param("keyword") String keyword, Pageable pageable);
 
     /**
      * 인기 찬양 상위 20개

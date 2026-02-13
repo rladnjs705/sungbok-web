@@ -4,6 +4,21 @@ import { useForm } from '@tanstack/react-form';
 import { zodValidator } from '@tanstack/zod-form-adapter';
 import { z } from 'zod';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { api, ApiError } from '@/lib/api';
+import { useAuthStore } from '@/store/auth-store';
+
+interface LoginRequest {
+  username: string;  // 백엔드는 username 필드 사용
+  password: string;
+}
+
+interface LoginResponse {
+  success: boolean;
+  message: string;
+  email: string;
+  name: string;
+}
 
 const loginSchema = z.object({
   email: z.string().email('올바른 이메일 주소를 입력해주세요'),
@@ -13,6 +28,9 @@ const loginSchema = z.object({
 
 export function LoginForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const router = useRouter();
+  const login = useAuthStore((state) => state.login);
 
   const form = useForm({
     defaultValues: {
@@ -22,18 +40,39 @@ export function LoginForm() {
     },
     onSubmit: async ({ value }) => {
       setIsSubmitting(true);
+      setErrorMessage(null);
 
       try {
-        // TODO: 실제 API 연동
-        console.log('Login attempt:', value);
+        const response = await api.post<LoginResponse>('/auth/login', {
+          username: value.email,  // 백엔드는 username 필드 사용 (email과 동일)
+          password: value.password,
+        } as LoginRequest);
 
-        // Simulate API call
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        // 스토어에 사용자 정보 저장 (백엔드 응답에서 id는 없으므로 임시로 0)
+        login({
+          id: 0,  // 백엔드 응답에 없음
+          email: response.email,
+          name: response.name,
+          role: 'USER',  // 백엔드 응답에 없으면 기본값
+          createdAt: new Date().toISOString(),
+        });
 
-        alert('로그인 성공! (개발 중)');
+        // 로그인 성공 후 홈으로 이동
+        router.push('/');
+        router.refresh();
       } catch (error) {
         console.error('Login error:', error);
-        alert('로그인에 실패했습니다.');
+        if (error instanceof ApiError) {
+          if (error.status === 401) {
+            setErrorMessage('이메일 또는 비밀번호가 올바르지 않습니다.');
+          } else if (error.status === 403) {
+            setErrorMessage('계정이 비활성화되었습니다. 관리자에게 문의하세요.');
+          } else {
+            setErrorMessage('로그인에 실패했습니다. 잠시 후 다시 시도해주세요.');
+          }
+        } else {
+          setErrorMessage('네트워크 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+        }
       } finally {
         setIsSubmitting(false);
       }
@@ -149,6 +188,13 @@ export function LoginForm() {
           비밀번호 찾기
         </button>
       </div>
+
+      {/* Error Message */}
+      {errorMessage && (
+        <div className="p-3 rounded-lg bg-red-50 border border-red-200">
+          <p className="text-sm text-red-600 text-center">{errorMessage}</p>
+        </div>
+      )}
 
       {/* Submit Button */}
       <form.Subscribe

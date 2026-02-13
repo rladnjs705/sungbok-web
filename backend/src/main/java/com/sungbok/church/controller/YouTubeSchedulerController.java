@@ -1,5 +1,6 @@
 package com.sungbok.church.controller;
 
+import com.sungbok.church.scheduler.SmartYouTubeScheduler;
 import com.sungbok.church.scheduler.YouTubeScheduler;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,13 +12,13 @@ import java.util.Map;
 
 /**
  * YouTube Scheduler Controller
- * 스케줄 작업을 수동으로 트리거하기 위한 테스트 컨트롤러
+ * 스케줄 작업을 수동으로 트리거하기 위한 관리자 API
  *
  * 용도:
  * - 스케줄 시간을 기다리지 않고 즉시 실행
  * - 디버깅 및 테스트
  *
- * TODO: 프로덕션 환경에서는 관리자 권한 체크 필요
+ * Note: 프로덕션 환경에서는 관리자 권한 체크 필요
  */
 @RestController
 @RequestMapping("/api/admin/youtube-scheduler")
@@ -26,6 +27,7 @@ import java.util.Map;
 public class YouTubeSchedulerController {
 
     private final YouTubeScheduler youTubeScheduler;
+    private final SmartYouTubeScheduler smartYouTubeScheduler;
 
     /**
      * 라이브 스캔 수동 트리거
@@ -35,7 +37,7 @@ public class YouTubeSchedulerController {
         log.info("Manual trigger: Live stream scan");
 
         try {
-            youTubeScheduler.scanLiveStreams();
+            smartYouTubeScheduler.scanLiveStreams();
 
             Map<String, Object> response = new HashMap<>();
             response.put("success", true);
@@ -155,7 +157,7 @@ public class YouTubeSchedulerController {
 
         try {
             // 1. Live scan
-            youTubeScheduler.scanLiveStreams();
+            smartYouTubeScheduler.scanLiveStreams();
             results.put("scanLiveStreams", "SUCCESS");
 
         } catch (Exception e) {
@@ -209,7 +211,7 @@ public class YouTubeSchedulerController {
         response.put("success", true);
         response.put("message", "Scheduler is active");
         response.put("tasks", Map.of(
-            "scanLiveStreams", "Every 1 minute",
+            "scanLiveStreams", "Smart scheduling (5min during worship, 30min otherwise)",
             "syncLatestVideos", "Every hour (cron: 0 0 * * * *)",
             "syncPlaylists", "Every 6 hours (cron: 0 0 */6 * * *)",
             "cleanupInactiveLives", "Every 30 minutes (cron: 0 */30 * * * *)"

@@ -1,6 +1,7 @@
 package com.sungbok.church.service;
 
 import com.sungbok.church.domain.entity.YouTubePlaylist;
+import com.sungbok.church.exception.ResourceNotFoundException;
 import com.sungbok.church.domain.repository.YouTubePlaylistRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
